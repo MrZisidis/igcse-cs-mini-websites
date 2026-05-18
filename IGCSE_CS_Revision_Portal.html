@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearson Edexcel iGCSE CS Revision Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for high-quality mathematical rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- jsPDF Library for Client-Side PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .hidden-answer {
+            display: none;
+        }
+        .modal-overlay {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        .input-correct {
+            background-color: #d1fae5 !important;
+            border-color: #10b981 !important;
+            color: #065f46 !important;
+        }
+        .input-incorrect {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-950 font-sans leading-relaxed flex flex-col min-h-screen">
+
+    <!-- Top Navigation (Fully Responsive - Will not hide on small/narrow screens) -->
+    <nav class="bg-indigo-900 text-white sticky top-0 z-40 shadow-lg border-b border-indigo-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-500 p-2 rounded-lg text-white">
+                    <i class="fas fa-laptop-code text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight block">Pearson Edexcel iGCSE CS</span>
+                    <span class="text-xs text-indigo-300 font-medium">Syllabus Reference 4CP0</span>
+                </div>
+            </div>
+            <!-- Responsive Navigation Button Grid (Always visible) -->
+            <div class="flex flex-wrap justify-center gap-2 text-xs md:text-sm font-semibold">
+                <button id="nav-l1" onclick="showLesson('lesson1')" class="bg-indigo-850 px-3 py-2 rounded-lg hover:bg-indigo-800 transition duration-150 flex items-center space-x-1">
+                    <i class="fas fa-network-wired"></i> <span class="hidden sm:inline">Lesson 1:</span> <span>Systems</span>
+                </button>
+                <button id="nav-l2" onclick="showLesson('lesson2')" class="px-3 py-2 rounded-lg hover:bg-indigo-800 transition duration-150 flex items-center space-x-1">
+                    <i class="fas fa-calculator"></i> <span class="hidden sm:inline">Lesson 2:</span> <span>Data</span>
+                </button>
+                <button id="nav-l3" onclick="showLesson('lesson3')" class="px-3 py-2 rounded-lg hover:bg-indigo-800 transition duration-150 flex items-center space-x-1">
+                    <i class="fas fa-code-branch"></i> <span class="hidden sm:inline">Lesson 3:</span> <span>Logic</span>
+                </button>
+                <button id="nav-res" onclick="showLesson('resources')" class="px-3 py-2 rounded-lg hover:bg-indigo-800 transition duration-150 flex items-center space-x-1">
+                    <i class="fas fa-file-invoice"></i> <span>Resources & Tracker</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Hero Banner -->
+    <header class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-950 text-white py-16 px-6 text-center shadow-inner relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="bg-indigo-500/30 text-indigo-300 border border-indigo-500/50 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Pearson Edexcel iGCSE (9-1) Computer Science (4CP0)</span>
+            <h1 class="text-4xl md:text-5xl font-black mt-4 tracking-tight leading-tight">Interactive Revision Portal & Study Center</h1>
+            <p class="text-indigo-200 text-lg mt-3 font-medium max-w-2xl mx-auto">Master systems architecture, binary logic calculations, code debugging, and past paper mark schemes with interactive worksheets.</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full">
+        
+        <!-- LESSON 1: COMPUTER SYSTEMS & ARCHITECTURE -->
+        <section id="lesson1" class="lesson-content space-y-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-6 gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-indigo-100 text-indigo-700 p-4 rounded-2xl shadow-sm">
+                        <i class="fas fa-server text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900">Lesson 1: Computer Systems & Architecture</h2>
+                        <p class="text-slate-500 text-sm mt-1">Recommended Duration: 80 Minutes | Syllabus Focus: Central Processing Unit (CPU) & Memory Hierarchy</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theory Block 1.1: CPU Components and Registers -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">1.1</span>
+                    The Von Neumann CPU Architecture
+                </h3>
+                <p class="text-slate-600 mb-6">
+                    Under the Von Neumann architecture, both instructions and data are stored together in a single shared memory unit (RAM). The CPU fetches instructions, decodes them, and executes them in sequence. 
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">PC</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Program Counter</h4>
+                        <p class="text-xs text-slate-600">Holds the memory address of the next system instruction to be fetched from RAM. It automatically increments by 1 on every fetch phase.</p>
+                    </div>
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">MAR</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Memory Address Register</h4>
+                        <p class="text-xs text-slate-600">Stores the memory address of the data or instruction currently being read from or written to RAM.</p>
+                    </div>
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">MDR</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Memory Data Register</h4>
+                        <p class="text-xs text-slate-600">Acts as a temporary buffer holding the actual instruction, digital character, or value newly fetched from memory, or preparing to be saved back into memory.</p>
+                    </div>
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">CIR</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Current Instruction Register</h4>
+                        <p class="text-xs text-slate-600">Holds the active instruction currently undergoing decoding by the Control Unit (CU) before execution.</p>
+                    </div>
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">ACC</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Accumulator</h4>
+                        <p class="text-xs text-slate-600">Stores the intermediate mathematical calculations and logical comparisons computed inside the Arithmetic and Logic Unit (ALU).</p>
+                    </div>
+                    <div class="p-5 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <span class="font-bold text-indigo-800 text-xs block tracking-widest uppercase mb-1">CU & ALU</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2">Control Unit & Logic Unit</h4>
+                        <p class="text-xs text-slate-600">The <strong>CU</strong> generates clock synchronization pulses to sequence instructions. The <strong>ALU</strong> handles physical logical calculation execution steps.</p>
+                    </div>
+                </div>
+
+                <!-- Deep Dive: System Buses -->
+                <div class="bg-slate-900 text-slate-200 p-6 rounded-xl">
+                    <h4 class="text-lg font-bold text-indigo-300 mb-4"><i class="fas fa-project-diagram mr-2"></i> System Buses & Directionality</h4>
+                    <p class="text-xs text-slate-400 mb-4">A system bus is a set of parallel physical wires connecting the CPU to memory and input/output interfaces. Pearson Edexcel expects deep familiarity with these three buses:</p>
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-indigo-500 pl-4 py-1">
+                            <span class="font-bold text-white block">Address Bus: Unidirectional</span>
+                            <p class="text-xs text-slate-400">Can only send address codes out from the CPU to external memory locations. Memory never sends back addresses to the CPU.</p>
+                        </div>
+                        <div class="border-l-2 border-indigo-500 pl-4 py-1">
+                            <span class="font-bold text-white block">Data Bus: Bidirectional</span>
+                            <p class="text-xs text-slate-400">Carries instruction data, character representations, and operands back and forth between registers and RAM memory chips.</p>
+                        </div>
+                        <div class="border-l-2 border-indigo-500 pl-4 py-1">
+                            <span class="font-bold text-white block">Control Bus: Bidirectional</span>
+                            <p class="text-xs text-slate-400">Transmits control, clock pulses, read/write commands, and hardware interrupts between modules to avoid collision states.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FDE Sequence Diagram / Interactive Cycle Map -->
+            <div class="bg-indigo-950 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-2xl font-bold mb-6 flex items-center text-indigo-300">
+                    <i class="fas fa-sync-alt fa-spin mr-3"></i> 
+                    Chronological Sequence of the Fetch-Decode-Execute Cycle
+                </h3>
+                <p class="text-slate-300 text-sm mb-6">
+                    Review how register-level states update during execution. Knowing this step-by-step sequence is critical for scoring maximum marks on design/explain questions.
+                </p>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="step-card bg-indigo-900/60 p-5 rounded-xl border border-indigo-700">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">STAGE 1</span>
+                        <h4 class="font-bold text-white mb-2">PC $\rightarrow$ MAR</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">The memory address of the next planned instruction is copied from the <strong>PC</strong> into the <strong>MAR</strong> via the address bus.</p>
+                    </div>
+                    <div class="step-card bg-indigo-900/60 p-5 rounded-xl border border-indigo-700">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">STAGE 2</span>
+                        <h4 class="font-bold text-white mb-2">RAM $\rightarrow$ MDR</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">The CPU requests memory contents. The instruction at that address is sent across the bidirectional <strong>Data Bus</strong> and stored temporarily inside the <strong>MDR</strong>.</p>
+                    </div>
+                    <div class="step-card bg-indigo-900/60 p-5 rounded-xl border border-indigo-700">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">STAGE 3</span>
+                        <h4 class="font-bold text-white mb-2">MDR $\rightarrow$ CIR & Increment</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">The instruction moves from <strong>MDR</strong> to <strong>CIR</strong>. Concurrently, the <strong>PC</strong> increments by 1 to point safely to the next sequential location.</p>
+                    </div>
+                    <div class="step-card bg-indigo-900/60 p-5 rounded-xl border border-indigo-700">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">STAGE 4</span>
+                        <h4 class="font-bold text-white mb-2">Decode & Execute</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">The <strong>Control Unit</strong> decodes the instruction inside the CIR. The necessary signals are sent, and the <strong>ALU</strong> handles physical calculations or logical operations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theory Block 1.2: RAM, ROM & Secondary Storage Mechanics -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">1.2</span>
+                    The Memory Hierarchy: RAM, ROM, Secondary & Tertiary Storage
+                </h3>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Left Column: Primary Storage -->
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-lg text-indigo-700 mb-2"><i class="fas fa-microchip mr-2"></i> Primary Storage (RAM, ROM, and CPU Cache)</h4>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">RAM (Random Access Memory)</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Volatile primary storage with fast read/write speeds. It holds running programs and actively executing background OS code. Uses dynamic RAM (DRAM, cheaper, requires refreshing) and static RAM (SRAM, faster, used for high-speed CPU caches).
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">ROM (Read-Only Memory)</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Non-volatile primary storage. It holds startup boot software (BIOS/UEFI or basic firmware). Its contents are permanent and cannot be deleted or written to under typical operating conditions.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">Cache Memory</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Extremely high-speed static RAM built directly into the CPU chip. It stores frequently used instructions so the CPU doesn't have to wait for slower system RAM.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Secondary Storage -->
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-lg text-indigo-700 mb-2"><i class="fas fa-hdd mr-2"></i> Secondary Storage Media Mechanics</h4>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">Magnetic Media (HDD)</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Spins circular, rigid platters partitioned into tracks and sectors. An actuator arm positions an electromagnetic read/write head to map polarization directions as binary 1s/0s. Magnetic disks are highly susceptible to physical shocks and wear.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">Solid State Media (SSD)</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Non-volatile storage with no moving parts. Relies on NAND Flash memory arrays and floating gate transistors to capture electrons. Highly shock-resistant, low-power, lightweight, with fast boot speeds.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border">
+                            <span class="font-bold text-slate-900 block text-sm">Optical Storage (Blu-Ray/DVD/CD)</span>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Uses high-precision lasers to read pits and lands pressed into a circular disc as it rotates. Poor read/write speeds, highly prone to scratching, but extremely cheap to manufacture and distribute.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Comparison Table -->
+                <div class="mt-8 overflow-x-auto">
+                    <table class="w-full text-sm border-collapse text-left">
+                        <thead>
+                            <tr class="bg-indigo-900 text-white font-bold">
+                                <th class="p-3 rounded-tl-xl">Medium Type</th>
+                                <th class="p-3">Mechanical Parts?</th>
+                                <th class="p-3">Average Read Speed</th>
+                                <th class="p-3">Typical Cost per GB</th>
+                                <th class="p-3 rounded-tr-xl">Relative Durability</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-indigo-900">Magnetic (HDD)</td>
+                                <td class="p-3 text-red-600 font-medium">Yes (Spinning platters)</td>
+                                <td class="p-3">Slow (~150 MB/s)</td>
+                                <td class="p-3 text-green-600 font-bold">Very Low</td>
+                                <td class="p-3 text-amber-600">Low (Scratches/Shock)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-indigo-900">Solid State (SSD)</td>
+                                <td class="p-3 text-green-600">No (Electronic)</td>
+                                <td class="p-3">Very Fast (500-3500 MB/s)</td>
+                                <td class="p-3 text-amber-600">Medium to High</td>
+                                <td class="p-3 text-green-600 font-bold">High (No physical parts)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-indigo-900">Optical (Blu-Ray/DVD)</td>
+                                <td class="p-3 text-red-600 font-medium">Yes (Laser rotates disc)</td>
+                                <td class="p-3">Very Slow</td>
+                                <td class="p-3 text-green-600 font-bold">Extremely Low</td>
+                                <td class="p-3 text-red-600">Poor (Easily scratched)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Exam Questions Practice Block -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-black text-slate-900 flex items-center">
+                    <i class="fas fa-edit mr-3 text-orange-500"></i> Lesson 1 Exam Prep Worksheets
+                </h3>
+                
+                <!-- Q1 -->
+                <div class="glass-card p-6 rounded-xl border-l-8 border-indigo-500">
+                    <p class="font-bold text-slate-950 mb-2">Q1: Explain why a computer requires both RAM and ROM. (4 Marks)</p>
+                    <p class="text-xs text-slate-500 mb-4">Exam Tip: For an Edexcel 4-mark question, ensure clear logical expansion using correct terminology (volatile, non-volatile, read/write, read-only).</p>
+                    <button onclick="toggleAnswer('l1-ans1')" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-100 transition duration-150">Show Mark Scheme</button>
+                    <div id="l1-ans1" class="hidden-answer mt-4 p-5 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <ul class="list-disc ml-5 space-y-2 text-emerald-950 text-sm">
+                            <li><strong>RAM</strong> is volatile, meaning it loses all saved contents when power is turned off (1).</li>
+                            <li><strong>RAM</strong> holds dynamically executing apps, programs, and working data for CPU processing (1).</li>
+                            <li><strong>ROM</strong> is non-volatile, which means it permanently preserves data even without electric supply (1).</li>
+                            <li><strong>ROM</strong> stores basic bootstrap startup codes (BIOS/firmware) to load the operating system (1).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="glass-card p-6 rounded-xl border-l-8 border-indigo-500">
+                    <p class="font-bold text-slate-950 mb-2">Q2: A student suggests that the Address Bus must carry memory feedback parameters back to the CPU. Evaluate this claim. (2 Marks)</p>
+                    <button onclick="toggleAnswer('l1-ans2')" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-100 transition duration-150">Show Mark Scheme</button>
+                    <div id="l1-ans2" class="hidden-answer mt-4 p-5 bg-emerald-50 rounded-xl border border-emerald-200 text-sm text-emerald-950">
+                        <p class="font-bold">The claim is incorrect:</p>
+                        <ul class="list-disc ml-5 space-y-1 mt-2">
+                            <li>The Address Bus is strictly **unidirectional** (1).</li>
+                            <li>It can only send instructions/location codes from the CPU to the memory, never from memory to CPU (1).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 2: DATA REPRESENTATION & COMPUTATIONAL MODELS -->
+        <section id="lesson2" class="lesson-content space-y-12 hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-6 gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-indigo-100 text-indigo-700 p-4 rounded-2xl shadow-sm">
+                        <i class="fas fa-calculator text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900">Lesson 2: Data Representation & Modeling</h2>
+                        <p class="text-slate-500 text-sm mt-1">Recommended Duration: 80 Minutes | Syllabus Focus: Storage Units, Binary Calculations, Character Encoding, Simulations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Conversions and Two's Complement -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">2.1</span>
+                    Number Bases & Signed Negative Two's Complement
+                </h3>
+                
+                <p class="text-slate-600 mb-6">
+                    Computers process electrical states, necessitating binary representation. To handle negative numbers efficiently, modern systems use **Two's Complement** instead of simple sign-and-magnitude bits. This resolves structural issues like the "double zero" ($+0$ vs $-0$) anomaly.
+                </p>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Steps and grids -->
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+                        <h4 class="font-bold text-slate-900 text-lg mb-4 flex items-center">
+                            <i class="fas fa-sync text-indigo-500 mr-2"></i> Converting Denary to Two's Complement
+                        </h4>
+                        <p class="text-xs text-slate-600 mb-4">
+                            <strong>Standard method:</strong> To write a negative value like $-44$ into an 8-bit register:
+                        </p>
+                        <ol class="list-decimal ml-5 text-xs text-slate-600 space-y-2">
+                            <li>Write down the positive value in binary: $44 \rightarrow \text{00101100}$</li>
+                            <li>Flip all bits (complement) (NOT operation): $\text{11010011}$</li>
+                            <li>Add 1 to the result: $\text{11010011} + 1 = \text{11010100}$</li>
+                        </ol>
+                        
+                        <div class="mt-4 p-3 bg-indigo-50 text-indigo-900 rounded-lg text-xs font-mono">
+                            Validation Place Values: $-128, 64, 32, 16, 8, 4, 2, 1$<br>
+                            $-128 \times 1 + 64 \times 1 + 32 \times 0 + 16 \times 1 + 8 \times 0 + 4 \times 1 + 2 \times 0 + 1 \times 0 = -44$. Correct!
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+                        <h4 class="font-bold text-slate-900 text-lg mb-4 flex items-center">
+                            <i class="fas fa-arrows-alt-h text-indigo-500 mr-2"></i> Arithmetic Shifts & Overflow Errors
+                        </h4>
+                        <p class="text-xs text-slate-600 mb-2">
+                            Shifting bits mathematically multiplies or divides numbers quickly.
+                        </p>
+                        <ul class="list-disc ml-5 text-xs text-slate-600 space-y-2">
+                            <li><strong>Arithmetic Shift Left (×2):</strong> Shifts all bits left. A `0` is introduced at the right. The MSB (sign bit) is kept or updated correctly based on the operation.</li>
+                            <li><strong>Overflow Error:</strong> Occurs when the mathematical result of an addition or shift calculation is too large to fit in the register's maximum bit capacity (e.g., adding $+120$ and $+15$ inside an 8-bit register). The "extra" 9th bit is discarded, producing mathematically incorrect results.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image & Sound Calculations (Detailed Formula Cards) -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">2.2</span>
+                    File Size Calculation Expressions
+                </h3>
+                <p class="text-slate-600 mb-6">
+                    Pearson Edexcel assessment guidelines test your ability to construct mathematical expressions for file sizes using base-2 standard binary prefixes (KiB, MiB).
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Image sizes -->
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-indigo-700 mb-3">
+                            <i class="fas fa-image text-xl"></i>
+                            <h4 class="font-bold text-slate-900">Image File Size in Mebibytes (MiB)</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4">
+                            $$\text{Size} = \frac{\text{Width} \times \text{Height} \times \left(\frac{\text{Color Depth}}{8}\right)}{1024 \times 1024}$$
+                        </p>
+                        <div class="text-xs text-slate-500 space-y-1">
+                            <p><strong>Width & Height:</strong> Image size in pixels.</p>
+                            <p><strong>Color Depth:</strong> Number of bits allocated per pixel ($2^n = \text{colors}$).</p>
+                            <p><strong>Denominator:</strong> Divide by 8 (bits to bytes) and then by $1024 \times 1024$ (bytes to KiB to MiB).</p>
+                        </div>
+                    </div>
+
+                    <!-- Sound sizes -->
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-2 text-indigo-700 mb-3">
+                            <i class="fas fa-volume-up text-xl"></i>
+                            <h4 class="font-bold text-slate-900">Sound File Size in Mebibytes (MiB)</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4">
+                            $$\text{Size} = \frac{\text{Sample Rate (Hz)} \times \text{Resolution (bits)} \times \text{Duration (s)}}{8 \times 1024 \times 1024}$$
+                        </p>
+                        <div class="text-xs text-slate-500 space-y-1">
+                            <p><strong>Sample Rate:</strong> Number of digital samples recorded per second (measured in Hertz, Hz).</p>
+                            <p><strong>Sample Resolution:</strong> Number of bits per sample (bit depth).</p>
+                            <p><strong>Duration:</strong> Total duration of track in seconds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Encoding & Computational Modeling -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">2.3</span>
+                    Character Sets & Computational Models
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-indigo-800 mb-4"><i class="fas fa-font mr-2"></i> ASCII vs. Unicode Character Sets</h4>
+                        <p class="text-xs text-slate-600 mb-4">
+                            Computers do not store text directly; they map numbers to characters. A **Character Set** defines this matching table.
+                        </p>
+                        <ul class="space-y-3 text-xs text-slate-600">
+                            <li class="bg-slate-50 p-3 rounded-lg border">
+                                <strong>ASCII (7 or 8 bits):</strong> Restricts representation to 128 or 256 unique English characters. Saves storage space but cannot map non-English alphabets.
+                            </li>
+                            <li class="bg-slate-50 p-3 rounded-lg border">
+                                <strong>Unicode (Up to 32 bits):</strong> Universal encoding standard. Can represent all historical and active languages worldwide (including emojis). Requires more storage space per character.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-indigo-800 mb-4"><i class="fas fa-brain mr-2"></i> Computational Simulations & Models</h4>
+                        <p class="text-xs text-slate-600 mb-4">
+                            A computer simulation runs real-world math rules digitally to evaluate complex scenarios.
+                        </p>
+                        <ul class="space-y-3 text-xs text-slate-600">
+                            <li class="bg-slate-50 p-3 rounded-lg border">
+                                <strong>Key Benefits:</strong> Safer (testing aerodynamic crashes digitally), cheaper than constructing physical mockups, and faster (predicting years of weather in seconds).
+                            </li>
+                            <li class="bg-slate-50 p-3 rounded-lg border">
+                                <strong>Multi-Agent Model:</strong> Complex systems modeling where multiple autonomous computing nodes ("agents") communicate to test cooperative operations.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 2 Exam Prep Worksheets -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-black text-slate-900 flex items-center">
+                    <i class="fas fa-edit mr-3 text-orange-500"></i> Lesson 2 Exam Prep Worksheets
+                </h3>
+
+                <!-- Q1 Image calc -->
+                <div class="glass-card p-6 rounded-xl border-l-8 border-indigo-500">
+                    <p class="font-bold text-slate-950 mb-2">Q1: Create a mathematical expression calculating the exact file size in MiB of a 4K camera output capture: 3840 pixels wide by 2160 pixels high, capturing colors with 24-bit color depth. (3 Marks)</p>
+                    <button onclick="toggleAnswer('l2-ans1')" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-100 transition duration-150">Show Mark Scheme</button>
+                    <div id="l2-ans1" class="hidden-answer mt-4 p-5 bg-emerald-50 rounded-xl border border-emerald-200 text-sm font-mono text-emerald-950">
+                        <p class="font-sans font-bold mb-2">Expression components needed for 3 Marks:</p>
+                        $$\frac{3840 \times 2160 \times \left(\frac{24}{8}\right)}{1024 \times 1024}$$
+                        <ul class="list-disc ml-5 mt-2 font-sans space-y-1">
+                            <li>Numerator correctly lists resolution: $3840 \times 2160$ (1).</li>
+                            <li>Numerator correctly divides bit depth: $\frac{24}{8}$ (or simply $\times 3$) to convert to bytes (1).</li>
+                            <li>Denominator includes $1024 \times 1024$ (or $1024^2$ or $2^{20}$) to scale bytes to Mebibytes (1).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Q2 Two's complement -->
+                <div class="glass-card p-6 rounded-xl border-l-8 border-indigo-500">
+                    <p class="font-bold text-slate-950 mb-2">Q2: Convert the 8-bit Two's Complement binary value `1100 0011` into a denary integer. Show your work. (2 Marks)</p>
+                    <button onclick="toggleAnswer('l2-ans2')" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-100 transition duration-150">Show Mark Scheme</button>
+                    <div id="l2-ans2" class="hidden-answer mt-4 p-5 bg-emerald-50 rounded-xl border border-emerald-200 text-sm text-emerald-950">
+                        <p class="font-bold">Step-by-step conversion:</p>
+                        <p class="font-mono mt-1">Place values: -128, 64, 32, 16, 8, 4, 2, 1</p>
+                        <p class="font-mono">Sum = (-128 * 1) + (64 * 1) + (2 * 1) + (1 * 1) (1)</p>
+                        <p class="font-bold mt-2">Answer = -61 (1)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 3: ALGORITHMS, TRACE TABLES & LOGIC WORKSHEET -->
+        <section id="lesson3" class="lesson-content space-y-12 hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-6 gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-indigo-100 text-indigo-700 p-4 rounded-2xl shadow-sm">
+                        <i class="fas fa-code-branch text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900">Lesson 3: Algorithms, Logic & Code Debugging</h2>
+                        <p class="text-slate-500 text-sm mt-1">Interactive Syllabus Revisions Worksheet practice questions (May 2026 update)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q1 Algorithmic Tracing Block -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">3.1</span>
+                    Q1: Pseudocode Trace Tables
+                </h3>
+                <p class="text-slate-600 mb-4 text-sm">
+                    Analyze the following pseudocode validation algorithm designed to calculate the digit sum of an input and verify if its length meets structural requirements. Complete the interactive trace tables below.
+                </p>
+
+                <!-- Pseudocode representation box -->
+                <div class="bg-slate-900 text-indigo-300 p-6 rounded-xl font-mono text-xs leading-relaxed mb-8 shadow-inner overflow-x-auto">
+                    <p class="text-slate-500 mb-2"># Pseudocode Algorithm Specification</p>
+                    <p>01  RECEIVE code FROM KEYBOARD</p>
+                    <p>03  SET digitTotal TO 0</p>
+                    <p>04  SET position TO 1</p>
+                    <p>05  SET validLength TO TRUE</p>
+                    <p>07  WHILE code > 0</p>
+                    <p class="pl-4">08      SET digit TO code MOD 10</p>
+                    <p class="pl-4">09      SET digitTotal TO digitTotal + digit</p>
+                    <p class="pl-4">10      SET code TO code DIV 10</p>
+                    <p class="pl-4">11      SET position TO position + 1</p>
+                    <p>12  END WHILE</p>
+                    <p>14  IF position &lt;&gt; 5 THEN</p>
+                    <p class="pl-4">15      SET validLength TO FALSE</p>
+                    <p>16  END IF</p>
+                    <p>18  IF validLength = TRUE AND digitTotal MOD 3 = 0 THEN</p>
+                    <p class="pl-4">19      SEND "valid" TO DISPLAY</p>
+                    <p>20  ELSE</p>
+                    <p class="pl-4">21      SEND "invalid" TO DISPLAY</p>
+                    <p>22  END IF</p>
+                </div>
+
+                <!-- Interactive Trace Table 1: Input 1230 -->
+                <div class="space-y-4 mb-10">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-900 text-lg flex items-center">
+                            <i class="fas fa-table mr-2 text-indigo-600"></i> Trace Table A: Input 1230
+                        </h4>
+                        <button onclick="checkTraceTable('1230')" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded-lg font-bold hover:bg-indigo-700 transition">Check Table Answers</button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border">
+                        <table class="w-full text-center border-collapse text-xs min-w-[700px]">
+                            <thead>
+                                <tr class="bg-indigo-900 text-white font-bold">
+                                    <th class="p-3 border">Row</th>
+                                    <th class="p-3 border">code</th>
+                                    <th class="p-3 border">digit</th>
+                                    <th class="p-3 border">digitTotal</th>
+                                    <th class="p-3 border">position</th>
+                                    <th class="p-3 border">validLength</th>
+                                    <th class="p-3 border">digitTotal MOD 3</th>
+                                    <th class="p-3 border">Output</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 font-mono">
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">1</td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="t1-code-1" value="1230" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-digit-1" placeholder="-" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-total-1" value="0" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-pos-1" value="1" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-valid-1" value="TRUE" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border bg-slate-100"><input type="text" readonly class="w-full text-center bg-transparent"></td>
+                                    <td class="p-2 border bg-slate-100"><input type="text" readonly class="w-full text-center bg-transparent"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">2</td>
+                                    <td class="p-2 border"><input type="text" id="t1-code-2" placeholder="123" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-digit-2" placeholder="0" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-total-2" placeholder="0" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-pos-2" placeholder="2" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-valid-2" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">3</td>
+                                    <td class="p-2 border"><input type="text" id="t1-code-3" placeholder="12" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-digit-3" placeholder="3" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-total-3" placeholder="3" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-pos-3" placeholder="3" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-valid-3" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">4</td>
+                                    <td class="p-2 border"><input type="text" id="t1-code-4" placeholder="1" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-digit-4" placeholder="2" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-total-4" placeholder="5" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-pos-4" placeholder="4" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-valid-4" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">5</td>
+                                    <td class="p-2 border"><input type="text" id="t1-code-5" placeholder="0" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-digit-5" placeholder="1" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-total-5" placeholder="6" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-pos-5" placeholder="5" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-valid-5" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-mod-5" placeholder="0" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t1-out-5" placeholder="valid" class="w-full text-center focus:outline-none border-b font-bold text-indigo-700"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Interactive Trace Table 2: Input 7258 -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-900 text-lg flex items-center">
+                            <i class="fas fa-table mr-2 text-indigo-600"></i> Trace Table B: Input 7258
+                        </h4>
+                        <button onclick="checkTraceTable('7258')" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded-lg font-bold hover:bg-indigo-700 transition">Check Table Answers</button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border">
+                        <table class="w-full text-center border-collapse text-xs min-w-[700px]">
+                            <thead>
+                                <tr class="bg-indigo-900 text-white font-bold">
+                                    <th class="p-3 border">Row</th>
+                                    <th class="p-3 border">code</th>
+                                    <th class="p-3 border">digit</th>
+                                    <th class="p-3 border">digitTotal</th>
+                                    <th class="p-3 border">position</th>
+                                    <th class="p-3 border">validLength</th>
+                                    <th class="p-3 border">digitTotal MOD 3</th>
+                                    <th class="p-3 border">Output</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 font-mono">
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">1</td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="t2-code-1" value="7258" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-digit-1" placeholder="-" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-total-1" value="0" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-pos-1" value="1" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-valid-1" value="TRUE" readonly class="w-full text-center bg-transparent focus:outline-none"></td>
+                                    <td class="p-2 border bg-slate-100"><input type="text" readonly class="w-full text-center bg-transparent"></td>
+                                    <td class="p-2 border bg-slate-100"><input type="text" readonly class="w-full text-center bg-transparent"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">2</td>
+                                    <td class="p-2 border"><input type="text" id="t2-code-2" placeholder="725" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-digit-2" placeholder="8" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-total-2" placeholder="8" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-pos-2" placeholder="2" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-valid-2" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">3</td>
+                                    <td class="p-2 border"><input type="text" id="t2-code-3" placeholder="72" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-digit-3" placeholder="5" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-total-3" placeholder="13" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-pos-3" placeholder="3" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-valid-3" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">4</td>
+                                    <td class="p-2 border"><input type="text" id="t2-code-4" placeholder="7" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-digit-4" placeholder="2" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-total-4" placeholder="15" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-pos-4" placeholder="4" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-valid-4" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                    <td class="p-2 border bg-slate-100"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border bg-slate-100 font-bold">5</td>
+                                    <td class="p-2 border"><input type="text" id="t2-code-5" placeholder="0" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-digit-5" placeholder="7" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-total-5" placeholder="22" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-pos-5" placeholder="5" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-valid-5" placeholder="" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-mod-5" placeholder="1" class="w-full text-center focus:outline-none border-b"></td>
+                                    <td class="p-2 border"><input type="text" id="t2-out-5" placeholder="invalid" class="w-full text-center focus:outline-none border-b font-bold text-red-600"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q5 Logic Systems & Expressions Block -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">3.2</span>
+                    Q5: Smart Doorbell Logic System & Truth Tables
+                </h3>
+                
+                <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 mb-8">
+                    <h4 class="font-bold text-indigo-950 mb-2"><i class="fas fa-info-circle mr-2"></i> System Logical Specification</h4>
+                    <p class="text-xs text-indigo-900 leading-relaxed">
+                        A smart home sends a notification when motion is detected (<strong class="font-mono">M = 1</strong>) OR the doorbell button is pressed (<strong class="font-mono">B = 1</strong>), AND quiet mode is not turned on (<strong class="font-mono">Q = 0</strong>, meaning <strong class="font-mono">NOT Q = 1</strong>).
+                    </p>
+                    <p class="text-sm font-extrabold text-indigo-950 mt-4">Logic Expression: $$(M \text{ OR } B) \text{ AND NOT } Q$$</p>
+                </div>
+
+                <!-- Interactive Logic Truth Table -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-900 text-lg flex items-center">
+                            <i class="fas fa-list-ol mr-2 text-indigo-600"></i> Interactive Verification Truth Table
+                        </h4>
+                        <button onclick="checkTruthTable()" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded-lg font-bold hover:bg-indigo-700 transition">Verify Truth Table</button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border">
+                        <table class="w-full text-center border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-indigo-900 text-white font-bold">
+                                    <th class="p-3 border">M</th>
+                                    <th class="p-3 border">B</th>
+                                    <th class="p-3 border">Q</th>
+                                    <th class="p-3 border bg-indigo-800/40 text-slate-900">M OR B</th>
+                                    <th class="p-3 border bg-indigo-800/40 text-slate-900">NOT Q</th>
+                                    <th class="p-3 border bg-indigo-800 text-white font-bold">Notification (Output)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 font-mono">
+                                <tr>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-1" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-1" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-1" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1 font-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-2" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-2" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-2" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1 font-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-3" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-3" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-3" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1 font-bold text-indigo-700"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-4" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-4" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-4" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1 font-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-5" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-5" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-5" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1 font-bold text-indigo-700"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-6" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-6" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-6" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1 font-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">0</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-7" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-7" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-7" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1 font-bold text-indigo-700"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border">1</td>
+                                    <td class="p-2 border"><input type="text" id="gate-or-8" placeholder="1" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border"><input type="text" id="gate-not-8" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1"></td>
+                                    <td class="p-2 border bg-slate-50"><input type="text" id="gate-out-8" placeholder="0" class="w-16 text-center focus:outline-none border-b py-1 font-bold"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q6 Logic Systems & Programming Constructs Errors Block -->
+            <div class="glass-card p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm font-black mr-3">3.3</span>
+                    Q6: Programming Constructs & Code Errors
+                </h3>
+
+                <!-- Q6(a) equal operator -->
+                <div class="mb-10 space-y-4">
+                    <h4 class="font-bold text-slate-800 text-lg">Q6(a): Python Equivalence Operator</h4>
+                    <p class="text-xs text-slate-600">Identify the operator used to check if two values are equal in Python.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <button onclick="checkOpAnswer('A')" id="op-A" class="border p-4 rounded-xl text-center font-mono font-bold hover:bg-slate-50 transition">A.  =</button>
+                        <button onclick="checkOpAnswer('B')" id="op-B" class="border p-4 rounded-xl text-center font-mono font-bold hover:bg-slate-50 transition">B.  ==</button>
+                        <button onclick="checkOpAnswer('C')" id="op-C" class="border p-4 rounded-xl text-center font-mono font-bold hover:bg-slate-50 transition">C.  &lt;&gt;</button>
+                        <button onclick="checkOpAnswer('D')" id="op-D" class="border p-4 rounded-xl text-center font-mono font-bold hover:bg-slate-50 transition">D.  !=</button>
+                    </div>
+                    <div id="op-feedback" class="text-xs font-semibold hidden mt-2"></div>
+                </div>
+
+                <!-- Q6(b) Error identification -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-800 text-lg">Q6(b): Find and Fix the Three Programming Errors</h4>
+                    <p class="text-xs text-slate-600">
+                        The program below should check sensor values inside <code class="bg-slate-100 px-1 py-0.5 rounded font-mono text-xs">readings</code> and count high/low readings. However, it contains exactly **three syntax/logic errors**. Analyze the code and fix the lines below.
+                    </p>
+
+                    <div class="grid lg:grid-cols-2 gap-8 mt-4">
+                        <!-- Left: Buggy Python script -->
+                        <div class="bg-slate-900 text-indigo-300 p-6 rounded-xl font-mono text-xs leading-relaxed shadow-inner">
+                            <p class="text-slate-500 mb-2"># Buggy Sensor Analyzer Program</p>
+                            <p>01  readings = ["high", "low", "high", "normal", "low", "high", "low"]</p>
+                            <p>02  </p>
+                            <p>03  highCount = 0</p>
+                            <p>04  lowCount = 0</p>
+                            <p>05  </p>
+                            <p>06  for reading in readings:</p>
+                            <p class="text-red-300 bg-red-950/40 border-l-2 border-red-500 pl-2">07      if reading == "high"</p>
+                            <p class="pl-4">08          highCount = highCount + 1</p>
+                            <p class="text-red-300 bg-red-950/40 border-l-2 border-red-500 pl-2">09      elif reading = "low":</p>
+                            <p class="pl-4">10          lowCount = lowCount + 1</p>
+                            <p>11  </p>
+                            <p>12  print("High:", highCount)</p>
+                            <p class="text-red-300 bg-red-950/40 border-l-2 border-red-500 pl-2">13  print("Low:", LowCount)</p>
+                            <p>14  print("Total:", highCount + lowCount)</p>
+                        </div>
+
+                        <!-- Right: Interactive Fixes form -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
+                            <h5 class="font-bold text-slate-900 text-sm flex items-center"><i class="fas fa-hammer mr-2 text-indigo-600"></i> Code Repair Zone</h5>
+                            
+                            <!-- Bug 1 -->
+                            <div class="space-y-1">
+                                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Error 1 (Line 07): Syntax</label>
+                                <input type="text" id="bug-fix-1" placeholder='Write corrected code (e.g., if reading == "high":)' class="w-full border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+
+                            <!-- Bug 2 -->
+                            <div class="space-y-1">
+                                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Error 2 (Line 09): Logic Comparison</label>
+                                <input type="text" id="bug-fix-2" placeholder='Write corrected code (e.g., elif reading == "low":)' class="w-full border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+
+                            <!-- Bug 3 -->
+                            <div class="space-y-1">
+                                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Error 3 (Line 13): Variable Naming/Casing</label>
+                                <input type="text" id="bug-fix-3" placeholder='Write corrected code (e.g., print("Low:", lowCount))' class="w-full border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+
+                            <div class="pt-2 flex justify-between items-center">
+                                <button onclick="verifyRepairs()" class="bg-indigo-600 text-white text-xs px-5 py-2.5 rounded-lg font-bold hover:bg-indigo-700 transition">Verify Code Fixes</button>
+                                <button onclick="simulatePython()" id="run-py-btn" class="bg-slate-800 text-slate-200 text-xs px-4 py-2.5 rounded-lg font-mono hover:bg-slate-700 transition hidden"><i class="fas fa-play mr-1 text-green-400"></i> Run Fixed Code</button>
+                            </div>
+
+                            <div id="simulated-output" class="bg-black text-green-400 p-4 rounded-lg font-mono text-xs hidden shadow-inner border border-slate-700"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXAM RESOURCES SECTION & REVISION CHECKLIST -->
+        <section id="resources" class="lesson-content space-y-12 hidden">
+            <h2 class="text-3xl font-black text-slate-900 border-b pb-4"><i class="fas fa-file-invoice mr-3 text-indigo-700"></i> Teacher & Student Exam Resources</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Resource Card: Past Paper -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-file-pdf text-4xl text-red-500 mb-4"></i>
+                        <h3 class="font-bold text-lg mb-2">Edexcel Past Paper</h3>
+                        <p class="text-slate-600 text-sm mb-4">Official Pearson Edexcel iGCSE Computer Science Paper 1 featuring theory, data storage, and systems architecture questions.</p>
+                    </div>
+                    <button onclick="openPastPaper()" class="bg-indigo-600 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition w-full">
+                        <i class="fas fa-external-link-alt mr-2"></i> Open Past Paper
+                    </button>
+                </div>
+
+                <!-- Resource Card: Protected Mark Scheme -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-key text-4xl text-amber-500"></i>
+                            <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-bold"><i class="fas fa-lock mr-1"></i> Locked</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Edexcel Mark Scheme</h3>
+                        <p class="text-slate-600 text-sm mb-4">Complete solutions, grading criteria, and examiner steps for self-correction. Access is restricted by password protection.</p>
+                    </div>
+                    <button onclick="openPasswordModal()" class="bg-indigo-600 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition w-full">
+                        <i class="fas fa-unlock mr-2"></i> Unlock Mark Scheme
+                    </button>
+                </div>
+
+                <!-- Resource Card: Interactive Checklist Trigger -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-clipboard-check text-4xl text-emerald-500 mb-4"></i>
+                        <h3 class="font-bold text-lg mb-2">Interactive Syllabus Tracker</h3>
+                        <p class="text-slate-600 text-sm mb-4">Confirm you have revised all curriculum sections. Generate a personalized progress certificate.</p>
+                    </div>
+                    <button onclick="scrollToChecklist()" class="bg-indigo-600 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition w-full">
+                        <i class="fas fa-chevron-down mr-2"></i> Go to Checklist
+                    </button>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE REVISION CHECKLIST & PDF EXPORTER -->
+            <div id="checklist-section" class="glass-card p-8 rounded-2xl border border-slate-100 shadow-md">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900"><i class="fas fa-tasks mr-2 text-indigo-600"></i> Personal Edexcel Revision Checklist</h3>
+                        <p class="text-slate-500 text-sm mt-1">Track your progress and export a certified PDF as proof of study.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="studentName" class="font-bold text-sm text-slate-700">Student Name:</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name" class="border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <!-- Syllabus Checklist Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                    <!-- Unit 1 -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-indigo-900 border-b pb-2 mb-2"><i class="fas fa-network-wired mr-2"></i> Unit 1: Computer Systems</h4>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="RAM vs. ROM Functions">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">RAM vs. ROM Functions</span>
+                                <span class="text-xs text-slate-500">Volatile processes vs. BIOS bootstrap startup codes</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Von Neumann CPU Registers">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Von Neumann Registers</span>
+                                <span class="text-xs text-slate-500">PC, MAR, MDR, CIR, and ACC interactions</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="System Bus Properties">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">System Bus Properties</span>
+                                <span class="text-xs text-slate-500">Address Bus, Data Bus, and Control Bus behaviors</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Unit 2 -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-indigo-900 border-b pb-2 mb-2"><i class="fas fa-calculator mr-2"></i> Unit 2: Data & Modeling</h4>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Two's Complement Conversions">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Two's Complement</span>
+                                <span class="text-xs text-slate-500">Sign bits and decoding signed negative integer binaries</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Image & Sound Calculations">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">File Size Calculations</span>
+                                <span class="text-xs text-slate-500">Resolution, sampling rate, duration equations in MiB</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Simulations & Modeling">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Simulations & Modeling</span>
+                                <span class="text-xs text-slate-500">Evaluating risks, variables, and multi-agent model logic</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Unit 3 (New Worksheet Topics) -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-indigo-900 border-b pb-2 mb-2"><i class="fas fa-code-branch mr-2"></i> Unit 3: Algorithms & Logic</h4>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Pseudocode Trace Tables">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Algorithmic Tracing</span>
+                                <span class="text-xs text-slate-500">Tracing modulo and integer division loops row-by-row</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Smart Doorbell Logic gates">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Logic Gates & Truth Tables</span>
+                                <span class="text-xs text-slate-500">Analyzing complex logic rules and truth state tables</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg border hover:bg-indigo-50/20 cursor-pointer transition">
+                            <input type="checkbox" class="syllabus-checkbox mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="Syntax & Logic Errors Debugging">
+                            <div>
+                                <span class="font-semibold text-slate-900 block text-sm">Syntax & Logic Debugging</span>
+                                <span class="text-xs text-slate-500">Finding comparisons, structure and scoping bugs in code</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Export Actions -->
+                <div class="mt-8 border-t pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-slate-500 font-medium">Please ensure you enter your name and select the topics you have studied before exporting.</p>
+                    <button onclick="exportChecklistPDF()" class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 transition flex items-center space-x-2 shadow-md">
+                        <i class="fas fa-file-download"></i> <span>Export My PDF Certificate</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Modal: Password Entry Modal (Meets exact non-alert / iframe constraints) -->
+    <div id="password-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 modal-overlay" onclick="closePasswordModal()"></div>
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative z-10 shadow-2xl mx-4 border border-slate-200">
+            <div class="text-center mb-6">
+                <div class="bg-amber-100 text-amber-600 w-16 h-16 rounded-full inline-flex items-center justify-center text-2xl mb-4">
+                    <i class="fas fa-lock-open"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900">Unlock Mark Scheme</h3>
+                <p class="text-slate-500 text-sm mt-1">Please enter the correct revision access password to download the file.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Password</label>
+                    <input type="password" id="modal-password-input" placeholder="••••••••" class="w-full border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <div id="modal-error-msg" class="text-red-600 text-xs font-semibold hidden">
+                    <i class="fas fa-exclamation-circle mr-1"></i> Incorrect password. Please try again.
+                </div>
+                <div class="flex space-x-3 pt-2">
+                    <button onclick="closePasswordModal()" class="w-1/2 border border-slate-300 py-3 rounded-lg text-sm font-semibold hover:bg-slate-50 transition">Cancel</button>
+                    <button onclick="submitPassword()" class="w-1/2 bg-indigo-600 text-white py-3 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Unlock File</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal: Document Vault/Viewer Modal (Revealed after successful password validation) -->
+    <div id="vault-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 modal-overlay" onclick="closeVaultModal()"></div>
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-8 relative z-10 shadow-2xl mx-4 max-h-[90vh] overflow-y-auto border border-slate-200">
+            <div class="flex justify-between items-center border-b pb-4 mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-key text-2xl text-amber-500"></i>
+                    <h3 class="text-2xl font-black text-slate-900">Mark Scheme Unlocked</h3>
+                </div>
+                <button onclick="closeVaultModal()" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times text-xl"></i></button>
+            </div>
+
+            <div class="space-y-6">
+                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-950 text-sm">
+                    <strong>Access Authorized!</strong> You have successfully authenticated using the password <code class="font-mono font-bold bg-white/60 px-1 rounded">stcats2026</code>.
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-800 text-lg">Downloadable Solutions & Guidelines</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Below is a preview of the marking matrix matching current Edexcel Past Papers & Revisions Worksheet.
+                    </p>
+
+                    <div class="bg-slate-900 text-slate-200 p-5 rounded-lg font-mono text-xs space-y-4 overflow-y-auto max-h-[400px]">
+                        <p class="text-indigo-400 font-bold border-b border-slate-700 pb-2">Pearson Edexcel iGCSE CS Solutions Suite</p>
+                        
+                        <div>
+                            <p class="text-white font-bold">REVISIONS WORKSHEET ANSWERS:</p>
+                            <p class="text-slate-400 mt-1">1. Trace Table Input [1230]:</p>
+                            <p class="text-slate-300">
+                                Row 2: code=123, digit=0, total=0, pos=2, valid=TRUE<br>
+                                Row 3: code=12, digit=3, total=3, pos=3, valid=TRUE<br>
+                                Row 4: code=1, digit=2, total=5, pos=4, valid=TRUE<br>
+                                Row 5: code=0, digit=1, total=6, pos=5, valid=TRUE, mod3=0, Output="valid"
+                            </p>
+                            
+                            <p class="text-slate-400 mt-2">2. Logic Expression: (M OR B) AND NOT Q</p>
+                            <p class="text-slate-300">
+                                Row 1: 0, 0, 0 -> Output Notification: 0<br>
+                                Row 2: 0, 0, 1 -> Output Notification: 0<br>
+                                Row 3: 0, 1, 0 -> Output Notification: 1<br>
+                                Row 4: 0, 1, 1 -> Output Notification: 0<br>
+                                Row 5: 1, 0, 0 -> Output Notification: 1<br>
+                                Row 6: 1, 0, 1 -> Output Notification: 0<br>
+                                Row 7: 1, 1, 0 -> Output Notification: 1<br>
+                                Row 8: 1, 1, 1 -> Output Notification: 0
+                            </p>
+
+                            <p class="text-slate-400 mt-2">3. Python Program Errors (Q6):</p>
+                            <ul class="list-disc pl-4 text-slate-300 space-y-1">
+                                <li>Line 07: missing colon at the end. Correct: <code class="bg-slate-850 px-1 py-0.5 rounded text-indigo-300">if reading == "high":</code></li>
+                                <li>Line 09: single '=' used for value assignment instead of equivalence comparison. Correct: <code class="bg-slate-850 px-1 py-0.5 rounded text-indigo-300">elif reading == "low":</code></li>
+                                <li>Line 13: variable name is mislabeled as "LowCount" with capital 'L'. Correct: <code class="bg-slate-850 px-1 py-0.5 rounded text-indigo-300">print("Low:", lowCount)</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button onclick="closeVaultModal()" class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-indigo-700 transition">Close Vault</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-indigo-950 text-indigo-200 py-12 text-center mt-auto border-t border-indigo-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="mb-4 font-semibold text-white">Pearson Edexcel International GCSE (9-1) Computer Science Revision Suite</p>
+            <p class="text-sm text-indigo-300">This revision portal acts as a self-study teaching environment preparing students for official final papers.</p>
+            <div class="flex justify-center space-x-6 text-xl mt-6">
+                <i class="fab fa-github hover:text-white cursor-pointer transition"></i>
+                <i class="fas fa-graduation-cap hover:text-white cursor-pointer transition"></i>
+                <i class="fas fa-envelope hover:text-white cursor-pointer transition"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Control Code -->
+    <script>
+        // Tab system navigation logic
+        function showLesson(lessonId) {
+            document.querySelectorAll('.lesson-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(lessonId).classList.remove('hidden');
+
+            // Reset navigation button highlights
+            const navs = {
+                'lesson1': 'nav-l1',
+                'lesson2': 'nav-l2',
+                'lesson3': 'nav-l3',
+                'resources': 'nav-res'
+            };
+            Object.keys(navs).forEach(key => {
+                const btn = document.getElementById(navs[key]);
+                if (key === lessonId) {
+                    btn.classList.add('bg-indigo-850');
+                } else {
+                    btn.classList.remove('bg-indigo-850');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle answer visibility logic
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        }
+
+        // Action: Opens mock past paper directly on screen
+        function openPastPaper() {
+            window.open('https://mrzisidis.github.io/gcse-cs-mini-websites/networks-protocols-revision.html', '_blank');
+        }
+
+        // Scroll helper
+        function scrollToChecklist() {
+            document.getElementById('checklist-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- PASSWORD VAULT SYSTEM LOGIC ---
+        function openPasswordModal() {
+            const modal = document.getElementById('password-modal');
+            const input = document.getElementById('modal-password-input');
+            const errorMsg = document.getElementById('modal-error-msg');
+            input.value = '';
+            errorMsg.classList.add('hidden');
+            modal.classList.remove('hidden');
+        }
+
+        // Close Password Modal
+        function closePasswordModal() {
+            document.getElementById('password-modal').classList.add('hidden');
+        }
+
+        // Submit Password
+        function submitPassword() {
+            const input = document.getElementById('modal-password-input').value.trim();
+            const errorMsg = document.getElementById('modal-error-msg');
+            
+            if (input === 'stcats2026') {
+                closePasswordModal();
+                openVaultModal();
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // Open Vault
+        function openVaultModal() {
+            document.getElementById('vault-modal').classList.remove('hidden');
+        }
+
+        // Close Vault
+        function closeVaultModal() {
+            document.getElementById('vault-modal').classList.add('hidden');
+        }
+
+        // --- TRACE TABLES VALIDATION LOGIC ---
+        function checkTraceTable(type) {
+            if (type === '1230') {
+                // Answers values trace inputs for 1230
+                const validations = [
+                    { id: 't1-digit-1', val: '-' },
+                    { id: 't1-code-2', val: '123' }, { id: 't1-digit-2', val: '0' }, { id: 't1-total-2', val: '0' }, { id: 't1-pos-2', val: '2' }, { id: 't1-valid-2', val: 'TRUE' },
+                    { id: 't1-code-3', val: '12' }, { id: 't1-digit-3', val: '3' }, { id: 't1-total-3', val: '3' }, { id: 't1-pos-3', val: '3' }, { id: 't1-valid-3', val: 'TRUE' },
+                    { id: 't1-code-4', val: '1' }, { id: 't1-digit-4', val: '2' }, { id: 't1-total-4', val: '5' }, { id: 't1-pos-4', val: '4' }, { id: 't1-valid-4', val: 'TRUE' },
+                    { id: 't1-code-5', val: '0' }, { id: 't1-digit-5', val: '1' }, { id: 't1-total-5', val: '6' }, { id: 't1-pos-5', val: '5' }, { id: 't1-valid-5', val: 'TRUE' },
+                    { id: 't1-mod-5', val: '0' }, { id: 't1-out-5', val: 'valid' }
+                ];
+                validateInputs(validations);
+            } else if (type === '7258') {
+                // Answers values trace inputs for 7258
+                const validations = [
+                    { id: 't2-digit-1', val: '-' },
+                    { id: 't2-code-2', val: '725' }, { id: 't2-digit-2', val: '8' }, { id: 't2-total-2', val: '8' }, { id: 't2-pos-2', val: '2' }, { id: 't2-valid-2', val: 'TRUE' },
+                    { id: 't2-code-3', val: '72' }, { id: 't2-digit-3', val: '5' }, { id: 't2-total-3', val: '13' }, { id: 't2-pos-3', val: '3' }, { id: 't2-valid-3', val: 'TRUE' },
+                    { id: 't2-code-4', val: '7' }, { id: 't2-digit-4', val: '2' }, { id: 't2-total-4', val: '15' }, { id: 't2-pos-4', val: '4' }, { id: 't2-valid-4', val: 'TRUE' },
+                    { id: 't2-code-5', val: '0' }, { id: 't2-digit-5', val: '7' }, { id: 't2-total-5', val: '22' }, { id: 't2-pos-5', val: '5' }, { id: 't2-valid-5', val: 'TRUE' },
+                    { id: 't2-mod-5', val: '1' }, { id: 't2-out-5', val: 'invalid' }
+                ];
+                validateInputs(validations);
+            }
+        }
+
+        // Standard validator helper
+        function validateInputs(list) {
+            list.forEach(item => {
+                const element = document.getElementById(item.id);
+                if (element) {
+                    const studentValue = element.value.trim().toUpperCase();
+                    const correctValue = item.val.toUpperCase();
+                    
+                    if (studentValue === correctValue || (correctValue === '-' && studentValue === '')) {
+                        element.classList.remove('input-incorrect');
+                        element.classList.add('input-correct');
+                    } else {
+                        element.classList.remove('input-correct');
+                        element.classList.add('input-incorrect');
+                    }
+                }
+            });
+        }
+
+        // --- TRUTH STATE GATES CALCULATOR LOGIC ---
+        function checkTruthTable() {
+            const tableValids = [
+                // row 1: M=0 B=0 Q=0 -> OR=0, NOT=1, OUT=0
+                { id: 'gate-or-1', val: '0' }, { id: 'gate-not-1', val: '1' }, { id: 'gate-out-1', val: '0' },
+                // row 2: M=0 B=0 Q=1 -> OR=0, NOT=0, OUT=0
+                { id: 'gate-or-2', val: '0' }, { id: 'gate-not-2', val: '0' }, { id: 'gate-out-2', val: '0' },
+                // row 3: M=0 B=1 Q=0 -> OR=1, NOT=1, OUT=1
+                { id: 'gate-or-3', val: '1' }, { id: 'gate-not-3', val: '1' }, { id: 'gate-out-3', val: '1' },
+                // row 4: M=0 B=1 Q=1 -> OR=1, NOT=0, OUT=0
+                { id: 'gate-or-4', val: '1' }, { id: 'gate-not-4', val: '0' }, { id: 'gate-out-4', val: '0' },
+                // row 5: M=1 B=0 Q=0 -> OR=1, NOT=1, OUT=1
+                { id: 'gate-or-5', val: '1' }, { id: 'gate-not-5', val: '1' }, { id: 'gate-out-5', val: '1' },
+                // row 6: M=1 B=0 Q=1 -> OR=1, NOT=0, OUT=0
+                { id: 'gate-or-6', val: '1' }, { id: 'gate-not-6', val: '0' }, { id: 'gate-out-6', val: '0' },
+                // row 7: M=1 B=1 Q=0 -> OR=1, NOT=1, OUT=1
+                { id: 'gate-or-7', val: '1' }, { id: 'gate-not-7', val: '1' }, { id: 'gate-out-7', val: '1' },
+                // row 8: M=1 B=1 Q=1 -> OR=1, NOT=0, OUT=0
+                { id: 'gate-or-8', val: '1' }, { id: 'gate-not-8', val: '0' }, { id: 'gate-out-8', val: '0' },
+            ];
+            validateInputs(tableValids);
+        }
+
+        // --- Q6(a) OPTION CHECKER ---
+        function checkOpAnswer(option) {
+            const btns = ['A', 'B', 'C', 'D'];
+            btns.forEach(b => {
+                document.getElementById('op-' + b).className = "border p-4 rounded-xl text-center font-mono font-bold hover:bg-slate-50 transition";
+            });
+
+            const selectedBtn = document.getElementById('op-' + option);
+            const feedback = document.getElementById('op-feedback');
+            feedback.classList.remove('hidden');
+
+            if (option === 'B') {
+                selectedBtn.className = "border-2 border-emerald-500 bg-emerald-50 text-emerald-800 p-4 rounded-xl text-center font-mono font-bold transition";
+                feedback.className = "text-xs font-semibold text-emerald-700 mt-2";
+                feedback.innerHTML = '<i class="fas fa-check-circle"></i> Correct! The == equivalence operator is used for comparison in Python.';
+            } else {
+                selectedBtn.className = "border-2 border-red-500 bg-red-50 text-red-800 p-4 rounded-xl text-center font-mono font-bold transition";
+                feedback.className = "text-xs font-semibold text-red-700 mt-2";
+                feedback.innerHTML = '<i class="fas fa-times-circle"></i> Incorrect. Recall that single "=" is used for assignment, &lt;&gt; is obsolete/non-standard, and != represents unequal.';
+            }
+        }
+
+        // --- Q6(b) DEBUGGER REPAIRS CHECKER ---
+        let scriptFixed = false;
+
+        function verifyRepairs() {
+            const fix1 = document.getElementById('bug-fix-1').value.trim();
+            const fix2 = document.getElementById('bug-fix-2').value.trim();
+            const fix3 = document.getElementById('bug-fix-3').value.trim();
+
+            let matches = 0;
+
+            // Normalize checks for trailing whitespaces
+            if (fix1.replace(/\s+/g, '') === 'ifreading=="high":') {
+                document.getElementById('bug-fix-1').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-correct";
+                matches++;
+            } else {
+                document.getElementById('bug-fix-1').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-incorrect";
+            }
+
+            if (fix2.replace(/\s+/g, '') === 'elifreading=="low":') {
+                document.getElementById('bug-fix-2').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-correct";
+                matches++;
+            } else {
+                document.getElementById('bug-fix-2').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-incorrect";
+            }
+
+            if (fix3.replace(/\s+/g, '') === 'print("Low:",lowCount)' || fix3.replace(/\s+/g, '') === "print('Low:',lowCount)") {
+                document.getElementById('bug-fix-3').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-correct";
+                matches++;
+            } else {
+                document.getElementById('bug-fix-3').className = "w-full border rounded-lg px-3 py-2 text-xs focus:outline-none input-incorrect";
+            }
+
+            if (matches === 3) {
+                scriptFixed = true;
+                document.getElementById('run-py-btn').classList.remove('hidden');
+                document.getElementById('simulated-output').className = "bg-black text-emerald-400 p-4 rounded-lg font-mono text-xs shadow-inner border border-slate-700";
+                document.getElementById('simulated-output').classList.remove('hidden');
+                document.getElementById('simulated-output').innerHTML = '<i class="fas fa-check-circle"></i> Complete validation successful! Click "Run Fixed Code" to print final outcomes.';
+            } else {
+                scriptFixed = false;
+                document.getElementById('run-py-btn').classList.add('hidden');
+                document.getElementById('simulated-output').classList.add('hidden');
+            }
+        }
+
+        function simulatePython() {
+            if (!scriptFixed) return;
+            const outputArea = document.getElementById('simulated-output');
+            outputArea.classList.remove('hidden');
+            outputArea.innerHTML = `
+                <span class="text-slate-500">Executing code locally...</span><br>
+                <span>&gt;&gt;&gt; High: 3</span><br>
+                <span>&gt;&gt;&gt; Low: 3</span><br>
+                <span>&gt;&gt;&gt; Total: 6</span><br>
+                <span class="text-emerald-500 font-bold mt-2 block"><i class="fas fa-check-double"></i> Program finished executing with exit code 0.</span>
+            `;
+        }
+
+        // --- PDF COMPILER SYSTEM (Using jsPDF) ---
+        function exportChecklistPDF() {
+            const { jsPDF } = window.jspdf;
+            if (!jsPDF) {
+                alert("The PDF export module is currently initializing. Please try again in a few seconds.");
+                return;
+            }
+
+            const nameInput = document.getElementById('studentName').value.trim();
+            const studentName = nameInput ? nameInput : 'IGCSE Student';
+            
+            const checkboxes = document.querySelectorAll('.syllabus-checkbox');
+            let completedItems = [];
+            let incompleteItems = [];
+
+            checkboxes.forEach(box => {
+                if (box.checked) {
+                    completedItems.push(box.value);
+                } else {
+                    incompleteItems.push(box.value);
+                }
+            });
+
+            const totalCount = checkboxes.length;
+            const completedCount = completedItems.length;
+            const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
+            const doc = new jsPDF();
+            
+            // Background Theme Accents
+            doc.setFillColor(30, 41, 59); // Slate header color
+            doc.rect(0, 0, 210, 40, 'F');
+            
+            // Text branding on Header
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(20);
+            doc.text("Pearson Edexcel iGCSE CS Study Tracker", 15, 25);
+            
+            doc.setFontSize(9);
+            doc.setFont("Helvetica", "normal");
+            doc.text("Pearson Edexcel International GCSE (9-1) Syllabus Reference 4CP0", 15, 32);
+
+            // Details Group
+            doc.setTextColor(15, 23, 42);
+            doc.setFontSize(12);
+            doc.setFont("Helvetica", "bold");
+            doc.text("STUDENT REVISION REPORT & STATUS DIPLOMA", 15, 55);
+
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(10);
+            doc.text(`Student Name: ${studentName}`, 15, 65);
+            doc.text(`Completed Progress Percentage: ${percentage}%`, 15, 72);
+            doc.text(`Report Generation Timestamp: ${new Date().toLocaleDateString()}`, 15, 79);
+
+            // Draw Divider Line
+            doc.setDrawColor(226, 232, 240);
+            doc.line(15, 87, 195, 87);
+
+            // Listed progress content
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("Syllabus Mastered Sections List:", 15, 97);
+
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(10);
+            
+            let currentY = 107;
+            if (completedItems.length === 0) {
+                doc.setTextColor(153, 27, 27); // Dark red color
+                doc.text("- No topics checked off yet! Return to the checklist on the master suite.", 20, currentY);
+            } else {
+                doc.setTextColor(6, 95, 70); // Dark emerald green
+                completedItems.forEach((item, index) => {
+                    doc.text(`[X]  ${item}`, 20, currentY);
+                    currentY += 8;
+                });
+            }
+
+            // Incomplete details tracking
+            if (incompleteItems.length > 0) {
+                currentY += 5;
+                doc.setTextColor(15, 23, 42);
+                doc.setFont("Helvetica", "bold");
+                doc.text("Remaining Revision Sections:", 15, currentY);
+                currentY += 10;
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(10);
+                doc.setTextColor(217, 119, 6); // Amber dark
+                incompleteItems.forEach((item) => {
+                    doc.text(`[ ]  ${item}`, 20, currentY);
+                    currentY += 8;
+                });
+            }
+
+            // Standard stamp signature footer properties
+            currentY = Math.max(currentY + 15, 260);
+            doc.setDrawColor(226, 232, 240);
+            doc.line(15, currentY - 5, 195, currentY - 5);
+            
+            doc.setTextColor(100, 116, 139);
+            doc.setFontSize(9);
+            doc.setFont("Helvetica", "oblique");
+            doc.text("Document officially signed and certified by the Edexcel iGCSE CS Revision Suite.", 15, currentY);
+
+            // trigger client save download file action
+            const cleanFileName = studentName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            doc.save(`${cleanFileName}_edexcel_cs_checklist.pdf`);
+        }
+    </script>
+</body>
+</html>
