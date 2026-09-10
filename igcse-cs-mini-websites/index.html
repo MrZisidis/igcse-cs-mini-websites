@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>iGCSE CS Mini Websites • Pearson Edexcel</title>
+  <meta name="description" content="Tailored resources and revision materials for the Pearson Edexcel International GCSE (iGCSE) Computer Science specification." />
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Poppins font to match the Mr Zisidis hub style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-bold">
+        <a href="./" class="inline-flex items-center gap-2 text-slate-900 hover:text-indigo-600" aria-label="iGCSE CS home">
+          <span aria-hidden="true">🏠</span>
+          <span>iGCSE CS Mini Websites</span>
+        </a>
+      </h1>
+
+      <!-- Right-side nav -->
+      <nav class="hidden md:block">
+        <ul class="flex items-center gap-6">
+          <li><a href="https://mrzisidis.github.io/" class="text-slate-600 hover:text-indigo-600 font-semibold">CS Hub</a></li>
+          <li><a href="#revision" class="text-slate-600 hover:text-indigo-600 font-semibold">iGCSE Revision</a></li>
+          <li><a href="#shared-resources" class="text-slate-600 hover:text-indigo-600 font-semibold">Shared Resources</a></li>
+          <li>
+            <a href="https://github.com/MrZisidis"
+              class="inline-flex items-center text-slate-600 hover:text-indigo-600 font-semibold"
+              aria-label="View repository on GitHub" rel="noopener noreferrer" target="_blank">
+              <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                  -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64
+                  -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18
+                  1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55
+                  .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold rounded-full mb-4">
+        <span>🌍</span> Pearson Edexcel International GCSE (9-1)
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+        The International GCSE Launchpad 🚀
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+        Empowering global learners with specialized revision guides, practical problem-solving tools, and structured programming workouts.
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#revision"
+          class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg transition shadow-md">
+          Start iGCSE Revision
+        </a>
+        <a href="#shared-resources"
+          class="inline-flex items-center bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-lg transition">
+          View Shared Resources
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- iGCSE Core Info Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-indigo-950 text-white rounded-2xl p-6 md:p-10 shadow-xl overflow-hidden relative">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-indigo-800 rounded-full blur-3xl opacity-30"></div>
+      <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-violet-800 rounded-full blur-3xl opacity-30"></div>
+      
+      <div class="relative z-10">
+        <h3 class="text-2xl md:text-3xl font-bold mb-4">Understanding Pearson Edexcel iGCSE CS (4CP0)</h3>
+        <p class="text-indigo-200 max-w-4xl text-base md:text-lg mb-8">
+          The International GCSE (iGCSE) focuses on core mathematical reasoning and programming principles that transcend borders. It consists of two major pillars:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-indigo-900/40 border border-indigo-700/50 p-6 rounded-xl">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">📝</span>
+              <h4 class="text-xl font-semibold">Paper 1: Principles of Computer Science</h4>
+            </div>
+            <p class="text-sm text-indigo-200 mb-4">
+              Written theory examination focusing on architectural principles, security protocols, networks, and representing values globally.
+            </p>
+            <ul class="text-xs text-indigo-300 space-y-2 list-disc pl-4">
+              <li>Binary, Hexadecimal, Unicode representation</li>
+              <li>CPU architecture & von Neumann components</li>
+              <li>Network structures, TCP/IP, and internet security</li>
+              <li>Environmental, ethical, and legal impacts</li>
+            </ul>
+          </div>
+
+          <div class="bg-indigo-900/40 border border-indigo-700/50 p-6 rounded-xl">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">💻</span>
+              <h4 class="text-xl font-semibold">Paper 2: Application of Computational Thinking</h4>
+            </div>
+            <p class="text-sm text-indigo-200 mb-4">
+              Practical programming examination. Students write, parse, and debug functional programs in Python, focusing on rigorous problem-solving.
+            </p>
+            <ul class="text-xs text-indigo-300 space-y-2 list-disc pl-4">
+              <li>Pseudocode structure & flowchart trace tables</li>
+              <li>Algorithm design, sorting, and searching logic</li>
+              <li>Array manipulations and file I/O handling</li>
+              <li>Data validation and comprehensive test plans</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- iGCSE Revision Section -->
+  <section id="revision" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-200">
+    <div class="text-center mb-12">
+      <span class="text-indigo-600 font-semibold tracking-wider uppercase text-xs">Primary Target</span>
+      <h3 class="text-3xl font-bold text-slate-900 mt-2 mb-4">iGCSE Revision Hub</h3>
+      <p class="max-w-3xl mx-auto text-lg text-slate-600">
+        Your dedicated workspace containing past papers, curriculum guides, and interactive tools specifically crafted for the Pearson Edexcel International GCSE syllabus.
+      </p>
+    </div>
+
+    <!-- Centered Single Premium iGCSE Portal Card -->
+    <div class="flex justify-center">
+      <article class="max-w-xl w-full relative group bg-white border-2 border-indigo-100 rounded-2xl shadow-md p-8 flex flex-col hover:border-indigo-300 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="absolute top-0 right-8 transform -translate-y-1/2 bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+          Highly Recommended
+        </div>
+        
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h4 class="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            iGCSE CS Revision Portal
+          </h4>
+          <span class="text-3xl p-2 bg-indigo-50 rounded-lg" aria-hidden="true">🌐</span>
+        </div>
+        <p class="text-slate-600 leading-relaxed">
+          The main study gateway housing structured revision guides for all Edexcel iGCSE topics. Drill down into specific paper requirements, practice pseudocode structures, and build coding confidence.
+        </p>
+        <ul class="mt-6 text-sm text-slate-600 space-y-2 pl-2">
+          <li class="flex items-center gap-2">
+            <span class="text-indigo-500">✓</span>
+            <span>Comprehensive coverage of Paper 1 and Paper 2 topics</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-indigo-500">✓</span>
+            <span>Edexcel pseudocode translator and exercises</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-indigo-500">✓</span>
+            <span>Practice past papers and interactive checklists</span>
+          </li>
+        </ul>
+        <div class="mt-8">
+          <a href="IGCSE_CS_Revision_Portal.html"
+            class="w-full text-center inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3.5 rounded-xl transition after:absolute after:inset-0 shadow-sm"
+            aria-label="Open iGCSE CS Revision Portal">
+            Enter Revision Portal
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Shared GCSE CS Resources & Projects Section (Bottom) -->
+  <section id="shared-resources" class="bg-slate-100 border-t border-slate-200 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-teal-600 font-semibold tracking-wider uppercase text-xs">Shared Materials</span>
+        <h3 class="text-3xl font-bold text-slate-900 mt-2 mb-4">Shared GCSE CS Resources</h3>
+        <p class="max-w-3xl mx-auto text-base text-slate-600">
+          These shared resources and mini-websites from the main GCSE syllabus cover identical topics (like Standard Algorithms, Networks, and programming constructs) and serve as exceptional reference material.
+        </p>
+      </div>
+
+      <!-- Grid of Shared Cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Card: Standard Algorithms -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Standard Algorithms</h4>
+            <span class="text-2xl" aria-hidden="true">🔢</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Master Searching (Linear, Binary) and Sorting (Bubble, Merge). Includes midpoint logic drills and exam-style tracing.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>Search/Sort Logic Reorder</li>
+            <li>Interactive Midpoint Drill</li>
+            <li>Sorting visualisations</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/algorithm-revision.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Standard Algorithms revision in GCSE website" target="_blank">
+              Start Drill ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Card: Networks & Protocols -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Networks & Protocols</h4>
+            <span class="text-2xl" aria-hidden="true">🌐</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Standardized communication, the TCP/IP model, and network security foundations. Features an interactive mapper.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>TCP/IP 4-Layer model review</li>
+            <li>Protocol mapping exercises</li>
+            <li>Teacher answer verification</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/networks-protocols-revision.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Networks and Protocols revision in GCSE website" target="_blank">
+              Start Revision ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Card: Cybersecurity -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Cybersecurity</h4>
+            <span class="text-2xl" aria-hidden="true">🛡️</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Explore cyber attacks, human vulnerabilities, and defense mechanisms. Includes a practical detective exercise.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>Threat identification exercises</li>
+            <li>Defense strategy matching</li>
+            <li>Secure code parameters</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/cybersecurity-revision.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Cybersecurity revision in GCSE website" target="_blank">
+              Start Revision ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Card: Python Playground -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Python Playground</h4>
+            <span class="text-2xl" aria-hidden="true">🐍</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Interactive Python environment directly in your browser. Write code or load core programming challenges.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>In-browser Python compiler (Pyodide)</li>
+            <li>Pre-populated algorithm templates</li>
+            <li>Execution speed benchmarking</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/python_playground.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Python Playground in GCSE website" target="_blank">
+              Open Playground ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Project: Lists & Sorting -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Lists & Sorting Revision</h4>
+            <span class="text-2xl" aria-hidden="true">🐍</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Hands-on list playground, Merge Sort step-by-step, and a side-by-side visual comparison of sorting techniques.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>Interactive index manipulations</li>
+            <li>Visualization of recursive merge divisions</li>
+            <li>Optimized Bubble Sort analysis</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/python-rev-lists-sorting.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Lists & Sorting in GCSE website" target="_blank">
+              Open ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Project: Log Analyser -->
+        <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Log Analyser</h4>
+            <span class="text-2xl" aria-hidden="true">📊</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm">
+            Practice file handling, string splitting, validation, and analytics models on real text log structures.
+          </p>
+          <ul class="mt-4 text-xs text-slate-500 list-disc pl-5 space-y-1">
+            <li>Extracting timestamps and fields</li>
+            <li>Sorting datasets by occurrences</li>
+            <li>Algorithm practice for Paper 2</li>
+          </ul>
+          <div class="mt-6 mt-auto">
+            <a href="https://mrzisidis.github.io/gcse-cs-mini-websites/log_analyser.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-md text-sm transition after:absolute after:inset-0"
+              aria-label="Open Log Analyser in GCSE website" target="_blank">
+              Open ↗
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-slate-200 bg-white">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+      <div>
+        © <span id="year"></span> iGCSE CS Mini Websites — Built with ❤️
+      </div>
+      <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+        <span>Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank" class="underline hover:text-indigo-600">CC BY 4.0</a>.</span>
+      </div>
+      <div>
+        <a href="https://mrzisidis.github.io/"
+          class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold underline">Return to CS Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small script to set the year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Back to Top -->
+  <button id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 bg-indigo-600 hover:bg-indigo-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    // Back to top Logic
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+
+</html>
