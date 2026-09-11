@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS Turtle Revision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Palette: Slate/Sky/Emerald -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .feedback-summary-item.correct .marker {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .feedback-summary-item.incorrect .marker {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-area,
+            #print-area * {
+                visibility: visible;
+            }
+
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+
+            /* Hide non-printable elements */
+            header,
+            footer,
+            button,
+            #back-to-top {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Sticky Header -->
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html#projects" class="hover:text-sky-700">Projects</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Python Turtle</span>
+            </div>
+            <!-- In-page section links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#part1" class="text-slate-600 hover:text-sky-600 font-semibold text-sm transition">Theory</a>
+                <a href="#part2" class="text-slate-600 hover:text-sky-600 font-semibold text-sm transition">Debugging</a>
+                <a href="#part3" class="text-slate-600 hover:text-sky-600 font-semibold text-sm transition">Coding</a>
+                <a href="python_playground.html"
+                    class="text-sky-600 hover:text-sky-800 font-bold transition border-l pl-6 border-slate-300 text-sm">Python
+                    Playground 🐍</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <header class="max-w-5xl mx-auto px-4 py-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 italic">Python Turtle Revision 🐢</h1>
+            <p class="mt-4 text-lg text-slate-600 italic">Prepare for the assessment: Coordinates, Loops, Lists & Functions.
+            </p>
+            <div class="mt-8 max-w-md mx-auto">
+                <input type="text" id="student-name"
+                    class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                    placeholder="Enter your full name for the report...">
+            </div>
+        </header>
+
+        <main>
+            <!-- Part 1: Theory -->
+            <section id="part1" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                    <span
+                        class="bg-sky-100 text-sky-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">1</span>
+                    Theory & Coordinates 📐
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+                    <!-- Q1: Grid System -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 hover:shadow-lg transition">
+                        <h3 class="font-bold text-lg mb-4 text-sky-800">1. The Grid System</h3>
+                        <p class="text-sm text-slate-500 mb-4">Recall the Cartesian coordinate system used by Turtle.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">a) Coordinates (x,y) of
+                                    "Home":</label>
+                                <input id="q1a-input" type="text"
+                                    class="w-full p-2 border border-slate-300 rounded-md focus:border-sky-500 outline-none"
+                                    placeholder="e.g. 100, 100">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">b) Command to go to
+                                    center:</label>
+                                <input id="q1b-input" type="text"
+                                    class="w-full p-2 border border-slate-300 rounded-md focus:border-sky-500 outline-none"
+                                    placeholder="e.g. turtle.go...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">c) If left edge is x =
+                                    -200, right edge x is?</label>
+                                <input id="q1c-input" type="number"
+                                    class="w-full p-2 border border-slate-300 rounded-md focus:border-sky-500 outline-none"
+                                    placeholder="Enter number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2: Headings -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 hover:shadow-lg transition">
+                        <h3 class="font-bold text-lg mb-4 text-sky-800">2. Headings & Orientation</h3>
+                        <p class="text-sm text-slate-500 mb-4">Match degrees to compass directions.</p>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-2 bg-slate-50 rounded">
+                                <span class="font-mono text-slate-600">0°</span>
+                                <span class="font-semibold text-slate-800">East (Right)</span>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="font-mono text-slate-600 p-2">90°</span>
+                                <select id="q2a-select" class="w-full p-2 border border-slate-300 rounded-md text-sm">
+                                    <option value="">Select Direction...</option>
+                                    <option value="north">North (Up)</option>
+                                    <option value="south">South (Down)</option>
+                                    <option value="west">West (Left)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="font-mono text-slate-600 p-2">180°</span>
+                                <select id="q2b-select" class="w-full p-2 border border-slate-300 rounded-md text-sm">
+                                    <option value="">Select Direction...</option>
+                                    <option value="north">North (Up)</option>
+                                    <option value="south">South (Down)</option>
+                                    <option value="west">West (Left)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="font-mono text-slate-600 p-2">270°</span>
+                                <select id="q2c-select" class="w-full p-2 border border-slate-300 rounded-md text-sm">
+                                    <option value="">Select Direction...</option>
+                                    <option value="north">North (Up)</option>
+                                    <option value="south">South (Down)</option>
+                                    <option value="west">West (Left)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3: Drawing Mechanics -->
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md border border-slate-200 hover:shadow-lg transition md:col-span-2">
+                        <h3 class="font-bold text-lg mb-4 text-sky-800">3. Drawing Mechanics</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">a) Name the two formats
+                                    for defining color:</label>
+                                <div class="flex gap-2 mb-2">
+                                    <span class="text-slate-500 text-sm py-2">1.</span>
+                                    <input id="q3a-input1" type="text"
+                                        class="w-full p-2 border border-slate-300 rounded-md"
+                                        placeholder='e.g. "red" (String)'>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-slate-500 text-sm py-2">2.</span>
+                                    <input id="q3a-input2" type="text"
+                                        class="w-full p-2 border border-slate-300 rounded-md"
+                                        placeholder='e.g. (255,0,0) (RGB/Tuple)'>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">b) Why do "layers" matter
+                                    when drawing a target?</label>
+                                <textarea id="q3b-input" rows="3"
+                                    class="w-full p-2 border border-slate-300 rounded-md text-sm"
+                                    placeholder="Explain what happens if you draw a small shape before a large one..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Debugging -->
+            <section id="part2" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                    <span
+                        class="bg-sky-100 text-sky-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">2</span>
+                    Code Comprehension & Debugging 🐞
+                </h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                    <p class="mb-4 text-slate-600">The code below is supposed to draw a <strong>blue pentagon</strong>.
+                        There are <strong class="text-red-600">4 errors</strong>. Find and fix them.</p>
+
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-slate-700 mb-2">Buggy Code:</h4>
+                            <div
+                                class="bg-red-50 border border-red-200 text-red-900 p-4 rounded-md font-mono text-sm leading-relaxed whitespace-pre-wrap select-none">
+                                import turtle
+
+                                t = turtle.Turtle()
+                                t.colour("blue") # Error 1?
+
+                                # Draw a pentagon
+                                for i in range(5) # Error 2?
+                                t.forward(100)
+                                t.right(60) # Error 3?
+
+                                t.hideturtle()
+                                turtle.done()</div>
+                            <div class="mt-4 bg-yellow-50 p-4 rounded text-sm text-yellow-800 border border-yellow-200">
+                                <strong>Hint:</strong> A pentagon has 5 sides. The external angle is 360 / 5.
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-slate-700 mb-2">Your Corrected Code:</h4>
+                            <textarea id="q4-code" rows="12"
+                                class="w-full p-4 border border-slate-300 rounded-md font-mono text-sm bg-slate-900 text-green-400 focus:ring-2 focus:ring-sky-500 outline-none"
+                                placeholder="import turtle..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3: Coding Challenge -->
+            <section id="part3" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                    <span
+                        class="bg-sky-100 text-sky-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">3</span>
+                    Coding Challenges ⌨️
+                </h2>
+
+                <!-- Task C: Loop -->
+                <div class="bg-white p-8 rounded-lg shadow-md border border-slate-200 mb-8">
+                    <h3 class="font-bold text-xl mb-4 text-sky-800">Task A: The Starburst Pattern</h3>
+                    <div class="mb-6 bg-slate-50 p-4 rounded-lg border-l-4 border-sky-400">
+                        <h4 class="font-semibold text-slate-700 mb-2">Instructions:</h4>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>The turtle must start at the center <code>(0,0)</code> for every line.</li>
+                            <li>It must draw a line <strong>100 pixels long</strong>, then return to the center.</li>
+                            <li>It must change angle by <strong>90 degrees</strong> after every line.</li>
+                            <li><strong>Crucial:</strong> You must use a <code>for</code> loop to iterate through the
+                                <code>colour_list</code>.
+                            </li>
+                            <li>Use <code>setheading</code> or simple <code>right/left</code> turns.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative">
+                        <textarea id="q5-code" rows="10"
+                            class="w-full p-4 border border-slate-300 rounded-md font-mono text-sm bg-slate-900 text-sky-300 focus:ring-2 focus:ring-sky-500 outline-none"
+                            spellcheck="false"># Complete the code below
+colour_list = ["red", "purple", "blue", "green"]
+
+# Write your loop here:
+</textarea>
+                    </div>
+                </div>
+
+                <!-- Task D: Function -->
+                <div class="bg-white p-8 rounded-lg shadow-md border border-slate-200">
+                    <h3 class="font-bold text-xl mb-4 text-sky-800">Task B: Concentric Squares (Subprograms)</h3>
+                    <p class="mb-4 text-slate-600">
+                        Write a program from scratch to draw Concentric Squares centered at (0,0).<br>
+                        <span class="text-sm bg-slate-100 px-2 py-1 rounded border">Requirement 1</span> Define
+                        <code>draw_centered_square(size, fill_color)</code>.<br>
+                        <span class="text-sm bg-slate-100 px-2 py-1 rounded border">Requirement 2</span> Use
+                        <code>penup()</code> and <code>goto()</code> to center the shape (offset by size/2).<br>
+                        <span class="text-sm bg-slate-100 px-2 py-1 rounded border">Requirement 3</span> Call function 3
+                        times: Black (200), Red (150), Yellow (100).
+                    </p>
+
+                    <div class="flex flex-col gap-4">
+                        <button onclick="revealDirectly('skeleton-d', this)"
+                            class="self-start bg-amber-100 text-amber-800 hover:bg-amber-200 px-4 py-2 rounded text-sm font-semibold transition">
+                            Need a hint? Reveal Skeleton
+                        </button>
+
+                        <div id="skeleton-d" class="hidden bg-slate-800 text-slate-400 p-4 rounded text-xs font-mono">
+                            def draw_centered_square(size, fill_color):
+                            # Calculate offset
+                            offset = size / 2
+                            # Move without drawing to starting corner (-offset, -offset)
+                            # ...
+                            # Draw square loop
+                            # ...
+
+                            # Main Program Calls
+                            draw_centered_square(200, "black")
+                            # ...
+                        </div>
+
+                        <textarea id="q6-code" rows="15"
+                            class="w-full p-4 border border-slate-300 rounded-md font-mono text-sm bg-slate-900 text-emerald-300 focus:ring-2 focus:ring-sky-500 outline-none"
+                            placeholder="import turtle..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mark Button -->
+            <section class="text-center my-16">
+                <button onclick="markAllAnswers()"
+                    class="bg-emerald-600 text-white font-bold text-xl py-4 px-12 rounded-full shadow-xl hover:bg-emerald-700 transition transform hover:scale-105 active:scale-95 ring-4 ring-emerald-100">
+                    Mark My Work! ✅
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-summary" class="hidden mb-16 scroll-mt-24">
+                <div
+                    class="bg-white p-8 rounded-xl shadow-2xl border border-slate-200 max-w-4xl mx-auto relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-400 to-emerald-400"></div>
+
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2 text-center">Assessment Results</h2>
+                    <p class="text-center text-slate-500 mb-8">Here is how you performed on the revision tasks.</p>
+
+                    <div class="flex flex-col items-center justify-center mb-8">
+                        <div id="percentage-display" class="text-6xl font-black text-sky-600 mb-2">0%</div>
+                        <div id="score-display"
+                            class="text-xl font-medium text-slate-600 bg-slate-100 px-4 py-1 rounded-full">0 / 0</div>
+                    </div>
+
+                    <div id="feedback-section" class="bg-slate-50 rounded-lg p-6 mb-8 border border-slate-100">
+                        <h3 class="font-bold text-lg mb-4 text-slate-800">Feedback & Actions:</h3>
+                        <p id="feedback-intro" class="mb-4 text-slate-600"></p>
+                        <ul id="feedback-list" class="space-y-3"></ul>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="generate-report-btn" onclick="generateReport()"
+                            class="inline-flex items-center gap-2 bg-sky-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-sky-700 transition">
+                            <span>📄</span> Generate PDF Report
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-12 py-8 border-t border-slate-200">
+            <div
+                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+                <div>
+                    © <span id="footer-year">2025</span> GCSE CS Mini Websites — Built with ❤️
+                </div>
+                <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+                    <span>Copyright (c) 2025 Stefanos Zisidis. Licensed under <a
+                            href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                            class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+                    <span class="hidden md:inline">•</span>
+                    <a href="https://mrzisidis.github.io/" class="text-sky-600 hover:underline font-semibold">Return to
+                        CS Hub</a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+        </script>
+
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Global state for report generation
+        let finalScore = 0;
+        let finalMaxScore = 0;
+        let finalPercentage = 0;
+        let finalFeedbackTopics = new Map();
+
+        // Tip Database
+        const revisionTips = {
+            'Grid Coordinates': 'Remember (0,0) is the exact center of the screen. +Y is Up, -Y is Down, +X is Right, -X is Left.',
+            'Turtle Positioning Functions': 'Use `turtle.home()` to reset to (0,0) or `turtle.goto(x, y)` to jump to specific coordinates.',
+            'Coordinate Grid Math': 'The screen usually spans negative to positive. If width is 400, it goes from -200 (left) to +200 (right).',
+            'Compass Directions & Degrees': '0° is East (Right), 90° is North (Up), 180° is West (Left), 270° is South (Down).',
+            'Color Parameter Formats': 'You can use color strings like "red" OR RGB tuples like (255, 0, 0).',
+            'Graphic Layers': 'Python draws in order. The first shape drawn is on the bottom layer. The last shape is on top.',
+            'Debugging Syntax': 'Check for missing colons (:) at the end of loop/function lines and ensure indentation is correct.',
+            'Debugging Logic': 'If the shape looks wrong (e.g., wrong angle), check your math. Pentagon = 360/5 = 72°.',
+            'Iterating Lists': 'Use `for item in list_name:` to loop. The variable `item` will hold the colour string for that turn.',
+            'Subprograms & Parameters': 'Define with `def name(params):`. Call it by using `name(values)`. Parameters let you pass data into the function.'
+        };
+
+        // Reveal Hint Logic
+        function revealDirectly(elementId, button) {
+            document.getElementById(elementId).classList.remove('hidden');
+            button.textContent = 'Skeleton Revealed';
+            button.disabled = true;
+            button.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+
+        // Marking Logic
+        function markAllAnswers() {
+            let totalScore = 0;
+            const maxScore = 14; // Total possible points
+            const feedbackTopics = new Map();
+
+            // --- PART 1: THEORY (6 Points) ---
+
+            // Q1a: Home Coords
+            const q1a = document.getElementById('q1a-input').value.trim().replace(/\s/g, '');
+            if (q1a === '0,0' || q1a === '(0,0)' || q1a === '00') { totalScore++; }
+            else { feedbackTopics.set('Grid Coordinates', '#part1'); }
+
+            // Q1b: Center Command
+            const q1b = document.getElementById('q1b-input').value.trim().toLowerCase();
+            if (q1b.includes('home') || (q1b.includes('goto') && q1b.includes('0'))) { totalScore++; }
+            else { feedbackTopics.set('Turtle Positioning Functions', '#part1'); }
+
+            // Q1c: Edge Calculation
+            const q1c = document.getElementById('q1c-input').value.trim();
+            if (q1c === '200' || q1c === '+200') { totalScore++; }
+            else { feedbackTopics.set('Coordinate Grid Math', '#part1'); }
+
+            // Q2: Headings
+            const q2a = document.getElementById('q2a-select').value;
+            const q2b = document.getElementById('q2b-select').value;
+            const q2c = document.getElementById('q2c-select').value;
+            if (q2a === 'north') totalScore++;
+            if (q2b === 'west') totalScore++;
+            if (q2c === 'south') totalScore++;
+            if (q2a !== 'north' || q2b !== 'west' || q2c !== 'south') { feedbackTopics.set('Compass Directions & Degrees', '#part1'); }
+
+            // Q3a: Color Formats (Flexible matching)
+            const q3a1 = document.getElementById('q3a-input1').value.toLowerCase();
+            const q3a2 = document.getElementById('q3a-input2').value.toLowerCase();
+            const combinedColors = q3a1 + " " + q3a2;
+            if ((combinedColors.includes('string') || combinedColors.includes('"') || combinedColors.includes("'")) &&
+                (combinedColors.includes('rgb') || combinedColors.includes('tuple') || combinedColors.includes(',') || combinedColors.includes('#'))) {
+                totalScore += 2;
+            } else if (combinedColors.length > 5) {
+                totalScore += 1; // Partial credit for trying
+                feedbackTopics.set('Color Parameter Formats', '#part1');
+            } else {
+                feedbackTopics.set('Color Parameter Formats', '#part1');
+            }
+
+            // Q3b: Layers
+            const q3b = document.getElementById('q3b-input').value.toLowerCase();
+            if (q3b.includes('order') || q3b.includes('top') || q3b.includes('cover') || q3b.includes('behind') || q3b.includes('layer')) {
+                totalScore++;
+            } else {
+                feedbackTopics.set('Graphic Layers', '#part1');
+            }
+
+            // --- PART 2: DEBUGGING (2 Points) ---
+            const codeDebug = document.getElementById('q4-code').value.toLowerCase();
+            let debugScore = 0;
+            // Check for fixes
+            if (codeDebug.includes('color') && !codeDebug.includes('colour')) debugScore++; // Fix spelling
+            if (codeDebug.includes(':') && codeDebug.includes('range(5)')) debugScore++; // Fix syntax
+            if (codeDebug.includes('72')) debugScore++; // Fix logic (angle)
+
+            // Normalize to 2 points max for this section in the grand scheme
+            if (debugScore >= 2) totalScore += 2;
+            else if (debugScore === 1) { totalScore += 1; feedbackTopics.set('Debugging Syntax', '#part2'); }
+            else feedbackTopics.set('Debugging Logic', '#part2');
+
+            // --- PART 3: CODING (6 Points) ---
+
+            // Task A: Loops
+            const codeLoop = document.getElementById('q5-code').value.toLowerCase();
+            let loopScore = 0;
+            if (codeLoop.includes('for ') && codeLoop.includes(' in ')) loopScore++;
+            if (codeLoop.includes('forward') && codeLoop.includes('backward')) loopScore++;
+            if (codeLoop.includes('right') || codeLoop.includes('left')) loopScore++;
+            totalScore += loopScore;
+            if (loopScore < 3) feedbackTopics.set('Iterating Lists', '#part3');
+
+            // Task B: Functions
+            const codeFunc = document.getElementById('q6-code').value.toLowerCase();
+            let funcScore = 0;
+            if (codeFunc.includes('def ')) funcScore++;
+            if (codeFunc.includes('penup') && codeFunc.includes('goto')) funcScore++;
+            if (codeFunc.includes('200') && codeFunc.includes('150') && codeFunc.includes('100')) funcScore++;
+            totalScore += funcScore;
+            if (funcScore < 3) feedbackTopics.set('Subprograms & Parameters', '#part3');
+
+            // Calculation
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            // Store Global State
+            finalScore = totalScore;
+            finalMaxScore = maxScore;
+            finalPercentage = percentage;
+            finalFeedbackTopics = feedbackTopics;
+
+            // UI Updates
+            document.getElementById('score-display').textContent = `${totalScore} / ${maxScore}`;
+            document.getElementById('percentage-display').textContent = `${percentage}%`;
+
+            const feedbackList = document.getElementById('feedback-list');
+            const feedbackIntro = document.getElementById('feedback-intro');
+            feedbackList.innerHTML = '';
+
+            if (feedbackTopics.size > 0) {
+                feedbackIntro.innerHTML = "Based on your answers, focus your revision on these areas:";
+                feedbackTopics.forEach((anchor, topic) => {
+                    const tip = revisionTips[topic] || "Review the theory section for this topic.";
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="flex flex-col p-4 bg-white border border-slate-200 rounded-lg hover:border-sky-300 hover:shadow-sm transition">
+                            <a href="${anchor}" class="flex items-center gap-3 mb-2 font-medium text-slate-800 hover:text-sky-700">
+                                <span class="flex items-center justify-center min-w-[1.5rem] h-6 bg-red-100 text-red-600 rounded-full font-bold text-xs">!</span>
+                                ${topic}
+                            </a>
+                            <p class="text-sm text-slate-600 ml-9 bg-slate-50 p-2 rounded border border-slate-100 italic">
+                                💡 Tip: ${tip}
+                            </p>
+                        </div>`;
+                    feedbackList.appendChild(li);
+                });
+            } else {
+                feedbackIntro.innerHTML = '<span class="text-emerald-600 font-bold">Excellent work!</span> You have demonstrated a strong understanding of all topics.';
+                const li = document.createElement('li');
+                li.innerHTML = `<div class="p-4 bg-emerald-50 text-emerald-800 rounded-md border border-emerald-200 text-center">🎉 Ready for the assessment!</div>`;
+                feedbackList.appendChild(li);
+            }
+
+            const resultsSection = document.getElementById('results-summary');
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Report Generation Logic
+        function generateReport() {
+            const studentName = document.getElementById('student-name').value || 'Student';
+            const date = new Date().toLocaleDateString('en-GB');
+
+            // Feedback HTML construction
+            let feedbackHTML = '';
+            if (finalFeedbackTopics.size > 0) {
+                finalFeedbackTopics.forEach((anchor, topic) => {
+                    const tip = revisionTips[topic] || "Review course notes.";
+                    feedbackHTML += `
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color: #dc2626;">• ${topic}</strong>
+                            <div style="font-style: italic; color: #475569; margin-top: 2px; font-size: 0.95em;">
+                                Tip: ${tip}
+                            </div>
+                        </li>`;
+                });
+            } else {
+                feedbackHTML = '<li style="color: #16a34a;">No revision needed. All answers correct.</li>';
+            }
+
+            // Grab Code content safely
+            const debugCode = document.getElementById('q4-code').value.replace(/</g, "&lt;");
+            const loopCode = document.getElementById('q5-code').value.replace(/</g, "&lt;");
+            const funcCode = document.getElementById('q6-code').value.replace(/</g, "&lt;");
+
+            const reportWindow = window.open('', '', 'width=900,height=800');
+            reportWindow.document.write(`
+                <html>
+                <head>
+                    <title>Revision Report - ${studentName}</title>
+                    <style>
+                        body { font-family: 'Segoe UI', sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #334155; }
+                        h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+                        .header-info { display: flex; justify-content: space-between; margin-bottom: 30px; color: #64748b; }
+                        .score-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+                        .score-val { font-size: 32px; font-weight: bold; color: #0ea5e9; }
+                        .section-title { font-weight: bold; margin-top: 25px; margin-bottom: 10px; color: #1e293b; background: #e2e8f0; padding: 5px 10px; border-radius: 4px; }
+                        pre { background: #1e293b; color: #a5f3fc; padding: 15px; border-radius: 6px; white-space: pre-wrap; font-size: 12px; }
+                        ul { padding-left: 20px; list-style-type: none; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Python Turtle Revision Report</h1>
+                    <div class="header-info">
+                        <span><strong>Student:</strong> ${studentName}</span>
+                        <span><strong>Date:</strong> ${date}</span>
+                    </div>
+
+                    <div class="score-box">
+                        <div>Final Result</div>
+                        <div class="score-val">${finalScore} / ${finalMaxScore} (${finalPercentage}%)</div>
+                    </div>
+
+                    <h3>⚠️ Topics for Revision</h3>
+                    <ul>${feedbackHTML}</ul>
+
+                    <h3>📂 Submitted Code</h3>
+                    
+                    <div class="section-title">Debugging Task</div>
+                    <pre>${debugCode || '(No code submitted)'}</pre>
+
+                    <div class="section-title">Loops (Starburst)</div>
+                    <pre>${loopCode || '(No code submitted)'}</pre>
+
+                    <div class="section-title">Functions (Concentric Squares)</div>
+                    <pre>${funcCode || '(No code submitted)'}</pre>
+                    
+                    <div style="margin-top: 40px; font-size: 12px; text-align: center; color: #94a3b8;">
+                        Generated automatically by TurtleRevision 1.0
+                    </div>
+                </body>
+                </html>
+            `);
+            reportWindow.document.close();
+            setTimeout(() => {
+                reportWindow.focus();
+                reportWindow.print();
+            }, 500);
+        }
+
+        // Back to top Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>iGCSE CS Mini Websites</title>
+  <meta name="description" content="Mini websites for revision and homeworks for my iGCSE CS Students" />
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Poppins font to match the provided style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-bold">
+        <a href="./" class="inline-flex items-center gap-2 text-slate-900 hover:text-sky-700" aria-label="CS hub">
+          <span aria-hidden="true">🏠</span>
+          <span>iGCSE CS Mini Websites</span>
+        </a>
+      </h1>
+
+      <!-- Right-side nav -->
+      <nav class="hidden md:block">
+        <ul class="flex items-center gap-6">
+          <li><a href="https://mrzisidis.github.io/" class="text-slate-600 hover:text-sky-600 font-semibold">CS hub</a>
+          </li>
+          <li><a href="#revision" class="text-slate-600 hover:text-sky-600 font-semibold">Revision</a></li>
+          <li><a href="#projects" class="text-slate-600 hover:text-sky-600 font-semibold">Projects</a></li>
+          <li><a href="python_playground.html" class="text-slate-600 hover:text-sky-600 font-semibold">Python
+              Playground</a></li>
+          <li>
+            <a href="https://github.com/MrZisidis/igcse-cs-mini-websites"
+              class="inline-flex items-center text-slate-600 hover:text-sky-600 font-semibold"
+              aria-label="View repository on GitHub" rel="noopener noreferrer" target="_blank">
+              <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                  -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64
+                  -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18
+                  1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55
+                  .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              <span>Repository</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900">The Ultimate iGCSE CS Launchpad 🎯</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        Interactive tools and insights to sharpen your mind for the final stretch. Choose a path to begin.
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#revision"
+          class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-lg transition">
+          Start Revision
+        </a>
+        <a href="#projects"
+          class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-lg transition shadow-sm">
+          View Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Revision Section -->
+  <section id="revision" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h3 class="text-3xl font-bold text-slate-900 mb-4">Revision</h3>
+      <p class="max-w-3xl mx-auto text-lg text-slate-600">
+        We are entering the final few weeks before your GCSE CS exams. This is the time to consolidate your knowledge,
+        bridge the gaps identified in your mocks, and sharpen your problem-solving skills.
+      </p>
+    </div>
+
+    <!-- Key Insights / Intro -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 md:p-8 mb-12">
+      <h4 class="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
+        <span>⚠</span> Key Insights from Mock Exams
+      </h4>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h5 class="font-bold text-slate-900 mb-2">Paper 1: Computer Systems</h5>
+          <ul class="space-y-2 text-slate-700">
+            <li><strong class="text-red-600">Priority 1:</strong> Computational Thinking (Topic 1) – 36.2% avg.
+              Algorithms, sorting, and logic are the top priorities.</li>
+            <li><strong class="text-red-600">Priority 2:</strong> Networks (Topic 4) – 50.6% avg. Focus on TCP/IP layers
+              and protocols.</li>
+            <li><strong class="text-amber-600">Needs Reinforcing:</strong> Hardware & Software (Topic 3) – 56.7%. von
+              Neumann, OS, and compilers.</li>
+            <li><strong class="text-emerald-600">Strong Area:</strong> Data Representation (Topic 2) – 68.8%. Keep sharp
+              on Hex and overflow.</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold text-slate-900 mb-2">Paper 2: Computational Thinking & Algorithms</h5>
+          <ul class="space-y-2 text-slate-700">
+            <li><strong class="text-red-600">Critical Gap:</strong> Complex Programming (Q5) – 37.3% avg. Sorting
+              algorithms and complex logic in code are vital.</li>
+            <li><strong class="text-amber-600">Structured Practice:</strong> Decisions & Programs (Q3/Q4) – 58%.
+              Selection, iteration, file handling, and validation.</li>
+            <li><strong class="text-emerald-600">Strong Areas:</strong> Basic Programming (Q1/Q2/Q6) – >71%. Data types,
+              I/O, and output are well-handled.</li>
+            <li><strong class="text-blue-600">Urgent Support:</strong> Students with significant absences or low scores
+              on P2 need targeted individual review.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="mt-6 text-sm italic text-amber-800 border-t border-amber-200 pt-4">
+        Use the cards below to target these specific areas and turn your weaknesses into strengths.
+      </p>
+    </div>
+
+    <!-- Revision Cards Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card: Standard Algorithms -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">Standard Algorithms</h4>
+          <span class="text-2xl" aria-hidden="true">🔢</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Master Searching (Linear, Binary) and Sorting (Bubble, Merge). Includes midpoint logic drills and exam-style
+          tracing.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Search/Sort Logic Reorder</li>
+          <li>Interactive Midpoint Drill</li>
+          <li>25-Minute Exam Practice</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="algorithm-revision.html"
+            class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Algorithm Revision">
+            Start Drill
+          </a>
+        </div>
+      </article>
+
+      <!-- Card: Networks & Protocols Revision -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">Networks & Protocols</h4>
+          <span class="text-2xl" aria-hidden="true">🌐</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Standardized communication, the TCP/IP model, and network speed calculations. Includes an interactive protocol
+          mapper.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>TCP/IP 4-Layer Model</li>
+          <li>Interactive Protocol Journey</li>
+          <li>Calculation Drill & Teacher Vault</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="networks-protocols-revision.html"
+            class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Networks & Protocols Revision">
+            Start Revision
+          </a>
+        </div>
+      </article>
+
+      <!-- Card: Cybersecurity Revision -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">Cybersecurity</h4>
+          <span class="text-2xl" aria-hidden="true">🛡️</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Explore common network threats, human vulnerabilities, and defense mechanisms. Includes a cyber detective activity and teacher vault.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Identify Cyber Attacks</li>
+          <li>Defense Mechanism Mapping</li>
+          <li>Teacher Answer Vault</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="cybersecurity-revision.html"
+            class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Cybersecurity Revision">
+            Start Revision
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Project Cards -->
+  <main id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h3 class="text-3xl font-bold text-slate-900 mb-8 text-center">Projects</h3>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card: Python Playground (New) -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Python Playground</h4>
+          <span class="text-2xl" aria-hidden="true">🐍</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Interactive Python environment directly in your browser. Write code or load examples from the repo.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>In-browser Python execution (Pyodide)</li>
+          <li>Load files from GitHub repo</li>
+          <li>Export and copy functionality</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="python_playground.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Python Playground">
+            Open Playground
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Interactive Python Revision -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Interactive Python Revision: Lists & Sorting</h4>
+          <span class="text-2xl" aria-hidden="true">🐍</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Hands-on list playground, Merge Sort step-by-step, and a side-by-side visual comparison of
+          standard vs efficient Bubble Sort.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>List operations playground</li>
+          <li>Merge Sort visual walkthrough</li>
+          <li>Bubble Sort vs Efficient Bubble Sort</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="python-rev-lists-sorting.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Interactive Python Revision: Lists & Sorting">
+            Open
+          </a>
+          <a href="python-rev-lists-sorting.html#lists"
+            class="relative z-10 inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold">
+            Jump to Lists
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Log Analyser -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Log Analyser</h4>
+          <span class="text-2xl" aria-hidden="true">📊</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Explore and analyse sample logs to extract insights. Practice string handling, parsing,
+          counting and summarising data for revision.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Load and parse log lines</li>
+          <li>Filter, count, summarise</li>
+          <li>Practice data processing patterns</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="log_analyser.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Log Analyser">
+            Open
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Year 10 CS Review -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Year 10 CS Review</h4>
+          <span class="text-2xl" aria-hidden="true">🧠</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Quick revision of key iGCSE CS topics with interactive checks and examples to reinforce understanding.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Key topic summaries</li>
+          <li>Interactive checks</li>
+          <li>Classroom-friendly layout</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="yr10-cs-review.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Year 10 CS Review">
+            Open
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Halloween Turtle -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Halloween Turtle</h4>
+          <span class="text-2xl" aria-hidden="true">🎃</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Quick Python Turtle challenges themed for Halloween: pumpkins, ghosts, and spider webs using
+          functions and loops.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Use Cartesian coordinates</li>
+          <li>Practice selection & repetition</li>
+          <li>Create spooky shapes & patterns</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="halloween_turtle.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Halloween Turtle">
+            Open
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Python Turtle Revision -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Python Turtle Revision</h4>
+          <span class="text-2xl" aria-hidden="true">🐢</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Practice core Python Turtle concepts with coordinates, loops, and drawing challenges.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Refresh coordinate systems</li>
+          <li>Use loops for patterns</li>
+          <li>Build confidence with Turtle graphics</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="python_turtle_revision.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Python Turtle Revision">
+            Open
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Paper 1 Review -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Review of Paper 1</h4>
+          <span class="text-2xl" aria-hidden="true">📝</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Comprehensive review for Paper 1 topics including Systems Architecture, Memory, and Networks.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Systems Architecture</li>
+          <li>Memory & Storage</li>
+          <li>Networks & Security</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="paper-1-review.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Paper 1 Review">
+            Open
+          </a>
+        </div>
+      </article>
+
+      <!-- Project: Mock Paper 1 Analysis -->
+      <article class="relative group bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Mock Paper 1: Analysis</h4>
+          <span class="text-2xl" aria-hidden="true">📊</span>
+        </div>
+        <p class="mt-2 text-slate-600">
+          Detailed analysis of mock exam results. Includes cohort performance dashboard, student matrix, and
+          targeted intervention strategies.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Cohort Performance Dashboard</li>
+          <li>Individual Student Breakdown</li>
+          <li>Algorithm Intervention (Search & Sort)</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="mock-paper-1-analysis.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition after:absolute after:inset-0"
+            aria-label="Open Mock Paper 1 Analysis">
+            Open
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 py-8 border-t border-slate-200">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+      <div>
+        © <span id="year"></span> iGCSE CS Mini Websites — Built with ❤️
+      </div>
+      <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+        <span>Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank" class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+        <a href="https://github.com/MrZisidis/igcse-cs-mini-websites" target="_blank"
+          class="inline-block text-slate-400 hover:text-slate-800 transition-colors" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" class="w-4 h-4 fill-current">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64 -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+            </path>
+          </svg>
+        </a>
+      </div>
+      <div>
+        <a href="https://mrzisidis.github.io/"
+          class="text-xs text-sky-600 hover:text-sky-800 font-semibold underline">Return to CS Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small script to set the year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Back to Top -->
+  <button id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+    aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    // Back to top Logic
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+
+</html>

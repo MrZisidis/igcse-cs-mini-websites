@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Revision: Lists & Sorting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page, scrollable tutorial. It begins with an 'Interactive List Playground' to let students actively engage with list basics (appending, indexing). This hands-on start builds confidence. The core of the app is the 'Sorting Algorithm Visualizer,' which directly compares a standard vs. an efficient bubble sort side-by-side. This visual comparison is the most effective way to teach algorithmic efficiency. The user flow is educational: learn the data structure, then see it used in an algorithm, directly addressing the source material's goals in an engaging, non-linear way. -->
+    <!-- Visualization & Content Choices: 
+        - List Basics: Report Info -> List operations (append, index). Goal -> Teach fundamentals. Viz/Method -> Interactive HTML elements (buttons, input, visual list). Interaction -> User clicks to append items and sees the list and corresponding code update instantly. Justification -> Active participation is more memorable than passive reading. Method -> Vanilla JS DOM manipulation.
+        - Sorting Efficiency: Report Info -> Standard vs. Flagged Bubble Sort. Goal -> Compare efficiency. Viz/Method -> Side-by-side animated bar charts made with HTML divs. Interaction -> User provides data, clicks 'Sort,' and watches the animations. Counters for passes and comparisons update in real-time, quantitatively proving the efficiency gain. Justification -> A direct visual and statistical comparison is the clearest way to demonstrate the concept. Library -> Vanilla JS for animation logic.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        .bar {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-teal-700">GCSE Python Revision</h1>
+            <div class="space-x-4">
+                <a href="#lists" class="text-stone-600 hover:text-teal-600">List Basics</a>
+                <a href="#mergesort" class="text-stone-600 hover:text-teal-600">Merge Sort</a>
+                <a href="#sorting" class="text-stone-600 hover:text-teal-600">Bubble Sort</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Section 1: Python Lists -->
+        <section id="lists" class="mb-20">
+            <h2 class="text-3xl font-bold mb-4">1. Python Lists: An Interactive Playground</h2>
+            <p class="text-lg text-stone-600 mb-8">
+                In Python, a **list** is a powerful tool for storing an ordered collection of items. Below, you'll find a detailed explanation of key list operations like indexing, negative indexing, and slicing. Once you've reviewed the theory, use the interactive playground to experiment and solidify your understanding.
+            </p>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 mb-8">
+                <h3 class="text-2xl font-bold mb-4">Diving Deeper into List Operations</h3>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-2">Accessing Elements (Indexing)</h4>
+                    <p class="mb-2 text-stone-600">You access list items using their index in square brackets `[]`. Remember, Python indexing starts at <strong class="font-semibold">0</strong> for the first item.</p>
+                    <pre class="bg-gray-800 text-white p-4 rounded-md font-mono text-sm"><code>scores = [85, 92, 78, 88, 95]
+# Get the first score (at index 0)
+first_score = scores[0]  # Result: 85
+
+# Get the third score (at index 2)
+third_score = scores[2]  # Result: 78</code></pre>
+                </div>
+            
+                <div class="mt-6">
+                    <h4 class="text-xl font-semibold mb-2">Negative Indexing</h4>
+                    <p class="mb-2 text-stone-600">Python also allows you to count from the end of the list! An index of <strong class="font-semibold">-1</strong> refers to the last item, <strong class="font-semibold">-2</strong> to the second-to-last, and so on. This is incredibly useful for getting the last few items without needing to know the list's length.</p>
+                    <pre class="bg-gray-800 text-white p-4 rounded-md font-mono text-sm"><code>scores = [85, 92, 78, 88, 95]
+# Get the last score
+last_score = scores[-1]  # Result: 95
+
+# Get the second-to-last score
+second_last = scores[-2] # Result: 88</code></pre>
+                </div>
+            
+                <div class="mt-6">
+                    <h4 class="text-xl font-semibold mb-2">Slicing a List</h4>
+                    <p class="mb-2 text-stone-600">Slicing lets you get a sub-section (a new list) from an existing list. The syntax is `my_list[start:stop]`. The `start` index is inclusive, and the `stop` index is exclusive (it goes up to, but does not include, the `stop` index).</p>
+                    <pre class="bg-gray-800 text-white p-4 rounded-md font-mono text-sm"><code>scores = [85, 92, 78, 88, 95, 100]
+# Get items from index 1 up to (but not including) index 4
+middle_scores = scores[1:4]  # Result: [92, 78, 88]
+
+# Slice from the beginning to index 3 (exclusive)
+first_three = scores[:3]     # Result: [85, 92, 78]
+
+# Slice from index 3 to the end of the list
+from_third = scores[3:]      # Result: [88, 95, 100]</code></pre>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="font-bold text-lg mb-4">Your List:</h3>
+                    <div id="list-container" class="min-h-[100px] bg-stone-100 p-4 rounded-md flex flex-wrap gap-2 items-center border border-stone-300">
+                        <!-- List items will be injected here -->
+                    </div>
+                    <p class="text-sm mt-2 text-stone-500">Click on an item to see its index.</p>
+                    <div class="mt-6">
+                        <h4 class="font-bold mb-2">Append an item:</h4>
+                        <div class="flex gap-2">
+                            <input type="text" id="item-input" placeholder="e.g., 'Alice' or 85" class="flex-grow p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                            <button id="append-btn" class="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 font-semibold">Append</button>
+                        </div>
+                    </div>
+                     <button id="reset-list-btn" class="mt-4 w-full bg-stone-500 text-white px-4 py-2 rounded-md hover:bg-stone-600 font-semibold">Reset List</button>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="font-bold text-lg mb-2">Code & Explanation</h3>
+                    <div id="code-output" class="bg-gray-800 text-white p-4 rounded-md font-mono text-sm min-h-[100px]">
+                        <span class="text-gray-400">// Code will appear here...</span>
+                    </div>
+                    <div id="info-output" class="mt-4 text-stone-600 min-h-[50px]">
+                        <p>Welcome! Try appending an item to the list.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: Merge Sort -->
+        <section id="mergesort" class="mb-20">
+            <h2 class="text-3xl font-bold mb-4">2. Merge Sort: A Divide and Conquer Approach</h2>
+            <p class="text-lg text-stone-600 mb-8">
+                Merge Sort is a highly efficient algorithm that uses a 'divide and conquer' strategy. It recursively breaks the list down into single-element lists and then merges them back together in the correct order. This visualizer shows each split and merge step, offering a clear view of its powerful process.
+            </p>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 mb-6">
+                <h3 class="font-bold text-lg mb-4">Controls</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div class="flex-grow">
+                        <label for="merge-data-input" class="block text-sm font-medium text-stone-700">Enter numbers (comma-separated):</label>
+                        <input type="text" id="merge-data-input" value="8, 3, 5, 1, 4, 2" class="mt-1 w-full p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div class="flex items-center gap-4 pt-5">
+                         <button id="merge-sort-btn" class="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 font-bold">Sort</button>
+                         <button id="merge-reset-btn" class="bg-stone-500 text-white px-6 py-2 rounded-md hover:bg-stone-600 font-bold">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mergesort-container" class="bg-white p-4 rounded-lg shadow-md border border-stone-200 min-h-[200px] text-center">
+                <p class="text-stone-400">Visualization will appear here.</p>
+            </div>
+             <div class="text-center mt-2 font-mono" id="mergesort-stats">Splits: 0 | Merges: 0</div>
+        </section>
+
+        <!-- Section 3: Sorting Efficiency -->
+        <section id="sorting" class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">3. Making Sorting More Efficient: A Visual Comparison</h2>
+            <p class="text-lg text-stone-600 mb-8">
+                A simple Bubble Sort is a good start, but it can be inefficient, especially compared to Merge Sort. What if the list is already sorted? A standard Bubble Sort will keep checking needlessly. We can improve it with a simple 'flag'. This visualizer runs both algorithms on the same data. Your challenge is to see how the 'Efficient' version stops early, saving valuable processing time.
+            </p>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 mb-6">
+                <h3 class="font-bold text-lg mb-4">Controls</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div class="flex-grow">
+                        <label for="data-input" class="block text-sm font-medium text-stone-700">Enter numbers (comma-separated):</label>
+                        <input type="text" id="data-input" value="64, 34, 25, 12, 22, 11, 90" class="mt-1 w-full p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div class="flex items-center gap-4 pt-5">
+                         <button id="sort-btn" class="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 font-bold">Sort</button>
+                         <button id="reset-sort-btn" class="bg-stone-500 text-white px-6 py-2 rounded-md hover:bg-stone-600 font-bold">Reset</button>
+                    </div>
+                </div>
+                 <div class="mt-4">
+                    <label for="speed-slider" class="block text-sm font-medium text-stone-700">Animation Speed:</label>
+                    <input type="range" id="speed-slider" min="50" max="500" value="200" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+                 <div class="mt-4 flex flex-wrap gap-2">
+                    <button class="data-preset-btn bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200" data-preset="nearly-sorted">Load Nearly Sorted</button>
+                    <button class="data-preset-btn bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm hover:bg-green-200" data-preset="sorted">Load Sorted</button>
+                    <button class="data-preset-btn bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm hover:bg-yellow-200" data-preset="reversed">Load Reversed</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Standard Bubble Sort -->
+                <div>
+                    <h3 class="text-xl font-bold text-center mb-2">Standard Bubble Sort</h3>
+                    <div id="standard-sort-container" class="chart-container w-full h-64 max-w-xl mx-auto bg-stone-100 p-2 rounded-md flex items-end justify-center gap-1 border border-stone-300"></div>
+                    <div class="text-center mt-2 font-mono" id="standard-stats">Passes: 0 | Comparisons: 0</div>
+                </div>
+                <!-- Efficient Bubble Sort -->
+                <div>
+                    <h3 class="text-xl font-bold text-center mb-2">Efficient Bubble Sort (with Flag)</h3>
+                    <div id="efficient-sort-container" class="chart-container w-full h-64 max-w-xl mx-auto bg-stone-100 p-2 rounded-md flex items-end justify-center gap-1 border border-stone-300"></div>
+                    <div class="text-center mt-2 font-mono" id="efficient-stats">Passes: 0 | Comparisons: 0</div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-teal-50 border-l-4 border-teal-500 p-6 rounded-r-lg">
+                <h3 class="text-xl font-bold mb-2">Revision Task & Key Takeaway</h3>
+                <p class="text-stone-700">Use the "Load Sorted" button and run the visualizer. Notice how the Standard Sort completes many unnecessary passes, while the Efficient Sort stops after just one. The flag allows the algorithm to know when its job is done. This is a fundamental concept in writing efficient code: **avoid doing unnecessary work!**</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+            // --- SECTION 1: INTERACTIVE LIST ---
+            const listContainer = document.getElementById('list-container');
+            const itemInput = document.getElementById('item-input');
+            const appendBtn = document.getElementById('append-btn');
+            const resetListBtn = document.getElementById('reset-list-btn');
+            const codeOutput = document.getElementById('code-output');
+            const infoOutput = document.getElementById('info-output');
+
+            let studentList = ["Alice", "Bob", "Charlie"];
+            
+            function renderList() {
+                listContainer.innerHTML = '';
+                if (studentList.length === 0) {
+                    listContainer.innerHTML = `<span class="text-stone-400">List is empty.</span>`;
+                }
+                studentList.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-teal-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-teal-600';
+                    div.textContent = item;
+                    div.dataset.index = index;
+                    div.addEventListener('click', () => showIndex(item, index));
+                    listContainer.appendChild(div);
+                });
+            }
+
+            function showIndex(item, index) {
+                codeOutput.innerHTML = `<span class="text-green-400"># Accessing an element by its index</span><br>item = students[${index}]`;
+                infoOutput.innerHTML = `<p>You clicked on item <strong class="font-semibold">"${item}"</strong> which is at index <strong class="font-semibold">${index}</strong>.</p><p class="text-sm mt-1">Remember, indexing in Python always starts from 0!</p>`;
+            }
+
+            appendBtn.addEventListener('click', () => {
+                const newItem = itemInput.value.trim();
+                if (newItem) {
+                    studentList.push(newItem);
+                    renderList();
+                    codeOutput.innerHTML = `<span class="text-green-400"># Adding an item to the end of the list</span><br>students.append("${newItem}")`;
+                    infoOutput.innerHTML = `<p>Appended <strong class="font-semibold">"${newItem}"</strong> to the list. The list length is now ${studentList.length}.</p>`;
+                    itemInput.value = '';
+                } else {
+                     infoOutput.innerHTML = `<p class="text-red-500">Please enter a value to append.</p>`;
+                }
+            });
+            
+            itemInput.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') {
+                    appendBtn.click();
+                }
+            });
+
+            resetListBtn.addEventListener('click', () => {
+                studentList = ["Alice", "Bob", "Charlie"];
+                renderList();
+                codeOutput.innerHTML = `<span class="text-gray-400">// Code will appear here...</span>`;
+                infoOutput.innerHTML = `<p>List has been reset to its initial state.</p>`;
+            });
+
+
+            // --- SECTION 2: MERGE SORT ---
+            const mergeDataInput = document.getElementById('merge-data-input');
+            const mergeSortBtn = document.getElementById('merge-sort-btn');
+            const mergeResetBtn = document.getElementById('merge-reset-btn');
+            const mergesortContainer = document.getElementById('mergesort-container');
+            const mergesortStats = document.getElementById('mergesort-stats');
+            let mergeSortIsSorting = false;
+            let splitCount = 0;
+            let mergeCount = 0;
+
+            function createArrayHTML(arr) {
+                const arrContainer = document.createElement('div');
+                arrContainer.className = 'flex justify-center items-center gap-1 my-1 p-2 bg-stone-100 rounded-md border';
+                arr.forEach(val => {
+                    const el = document.createElement('div');
+                    el.className = 'bg-teal-500 text-white w-8 h-8 flex items-center justify-center font-bold rounded';
+                    el.textContent = val;
+                    arrContainer.appendChild(el);
+                });
+                return arrContainer;
+            }
+
+            function createMessageHTML(text) {
+                const msg = document.createElement('p');
+                msg.className = 'text-stone-600 font-semibold my-2';
+                msg.textContent = text;
+                return msg;
+            }
+
+            async function mergeSortRecursive(array) {
+                if (mergeSortIsSorting === false) throw new Error("Sort cancelled");
+                if (array.length <= 1) {
+                    return array;
+                }
+
+                const middle = Math.floor(array.length / 2);
+                const left = array.slice(0, middle);
+                const right = array.slice(middle);
+
+                splitCount++;
+                mergesortStats.textContent = `Splits: ${splitCount} | Merges: ${mergeCount}`;
+                const splitMsg = createMessageHTML(`Splitting [${array.join(', ')}] into [${left.join(', ')}] and [${right.join(', ')}]`);
+                mergesortContainer.appendChild(splitMsg);
+                await sleep(800);
+
+                const sortedLeft = await mergeSortRecursive(left);
+                const sortedRight = await mergeSortRecursive(right);
+                return await merge(sortedLeft, sortedRight);
+            }
+
+            async function merge(left, right) {
+                if (mergeSortIsSorting === false) throw new Error("Sort cancelled");
+                let resultArray = [], leftIndex = 0, rightIndex = 0;
+                
+                mergeCount++;
+                mergesortStats.textContent = `Splits: ${splitCount} | Merges: ${mergeCount}`;
+                const mergeMsg = createMessageHTML(`Merging [${left.join(', ')}] and [${right.join(', ')}]`);
+                mergesortContainer.appendChild(mergeMsg);
+                await sleep(800);
+
+                while (leftIndex < left.length && rightIndex < right.length) {
+                    if (left[leftIndex] < right[rightIndex]) {
+                        resultArray.push(left[leftIndex]);
+                        leftIndex++;
+                    } else {
+                        resultArray.push(right[rightIndex]);
+                        rightIndex++;
+                    }
+                }
+
+                const finalArr = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+                const finalHTML = createArrayHTML(finalArr);
+                mergesortContainer.appendChild(finalHTML);
+                await sleep(800);
+
+                return finalArr;
+            }
+            
+            function resetMergeSort() {
+                 mergeSortIsSorting = false;
+                 mergeSortBtn.disabled = false;
+                 mergeSortBtn.textContent = 'Sort';
+                 mergesortContainer.innerHTML = `<p class="text-stone-400">Visualization will appear here.</p>`;
+                 splitCount = 0;
+                 mergeCount = 0;
+                 mergesortStats.textContent = `Splits: 0 | Merges: 0`;
+            }
+
+            mergeSortBtn.addEventListener('click', async () => {
+                if (mergeSortIsSorting) return;
+                const data = mergeDataInput.value.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
+                if (data.length === 0) return;
+                
+                mergeSortIsSorting = true;
+                mergeSortBtn.disabled = true;
+                mergeSortBtn.textContent = 'Sorting...';
+                mergesortContainer.innerHTML = '';
+                splitCount = 0;
+                mergeCount = 0;
+
+                const initialMsg = createMessageHTML('Starting with array:');
+                const initialHTML = createArrayHTML(data);
+                mergesortContainer.appendChild(initialMsg);
+                mergesortContainer.appendChild(initialHTML);
+                await sleep(800);
+
+                try {
+                    const sortedData = await mergeSortRecursive(data);
+                    const finalMsg = createMessageHTML('Final sorted array:');
+                    finalMsg.className += ' text-green-600 text-lg';
+                    mergesortContainer.appendChild(finalMsg);
+                } catch (e) {
+                    console.log(e.message);
+                } finally {
+                    resetMergeSort();
+                }
+            });
+
+            mergeResetBtn.addEventListener('click', resetMergeSort);
+
+
+            // --- SECTION 3: BUBBLE SORT VISUALIZER ---
+            const dataInput = document.getElementById('data-input');
+            const sortBtn = document.getElementById('sort-btn');
+            const resetSortBtn = document.getElementById('reset-sort-btn');
+            const speedSlider = document.getElementById('speed-slider');
+            const standardContainer = document.getElementById('standard-sort-container');
+            const efficientContainer = document.getElementById('efficient-sort-container');
+            const standardStats = document.getElementById('standard-stats');
+            const efficientStats = document.getElementById('efficient-stats');
+
+            let bubbleSortIsSorting = false;
+
+            const parseInput = () => dataInput.value.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
+            
+            function renderBars(container, data) {
+                container.innerHTML = '';
+                const maxVal = Math.max(...data, 1);
+                data.forEach((val, i) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar bg-teal-500';
+                    bar.style.width = `${100 / data.length}%`;
+                    bar.style.height = `${(val / maxVal) * 100}%`;
+                    bar.dataset.value = val;
+                    container.appendChild(bar);
+                });
+            }
+
+            function getAnimationSpeed() {
+                return 550 - speedSlider.value;
+            }
+
+            async function standardBubbleSort(data) {
+                let n = data.length;
+                let passes = 0;
+                let comparisons = 0;
+                let bars = standardContainer.children;
+
+                for (let i = 0; i < n - 1; i++) {
+                    passes++;
+                    standardStats.textContent = `Passes: ${passes} | Comparisons: ${comparisons}`;
+                    for (let j = 0; j < n - i - 1; j++) {
+                        if (!bubbleSortIsSorting) return;
+                        comparisons++;
+                        standardStats.textContent = `Passes: ${passes} | Comparisons: ${comparisons}`;
+                        
+                        bars[j].style.backgroundColor = '#f59e0b'; // amber-500
+                        bars[j+1].style.backgroundColor = '#f59e0b';
+                        await sleep(getAnimationSpeed());
+
+                        if (data[j] > data[j + 1]) {
+                            bars[j].style.backgroundColor = '#ef4444'; // red-500
+                            bars[j+1].style.backgroundColor = '#ef4444';
+                            await sleep(getAnimationSpeed());
+                            [data[j], data[j + 1]] = [data[j + 1], data[j]];
+                            renderBars(standardContainer, data);
+                            bars = standardContainer.children;
+                            await sleep(getAnimationSpeed());
+                        }
+                        
+                        bars[j].style.backgroundColor = '#14b8a6'; // teal-500
+                        bars[j+1].style.backgroundColor = '#14b8a6';
+                    }
+                     bars[n - 1 - i].style.backgroundColor = '#22c55e'; // green-500
+                }
+                 if(bars[0]) bars[0].style.backgroundColor = '#22c55e';
+            }
+
+            async function efficientBubbleSort(data) {
+                let n = data.length;
+                let passes = 0;
+                let comparisons = 0;
+                let bars = efficientContainer.children;
+                let swapped = true;
+                
+                while (swapped) {
+                    if (!bubbleSortIsSorting) return;
+                    passes++;
+                    swapped = false;
+                    efficientStats.textContent = `Passes: ${passes} | Comparisons: ${comparisons}`;
+                    for (let i = 0; i < n - 1; i++) {
+                        if (!bubbleSortIsSorting) return;
+                        comparisons++;
+                        efficientStats.textContent = `Passes: ${passes} | Comparisons: ${comparisons}`;
+
+                        bars[i].style.backgroundColor = '#f59e0b';
+                        bars[i+1].style.backgroundColor = '#f59e0b';
+                        await sleep(getAnimationSpeed());
+
+                        if (data[i] > data[i + 1]) {
+                            bars[i].style.backgroundColor = '#ef4444';
+                            bars[i+1].style.backgroundColor = '#ef4444';
+                            await sleep(getAnimationSpeed());
+                            [data[i], data[i + 1]] = [data[i + 1], data[i]];
+                            swapped = true;
+                            renderBars(efficientContainer, data);
+                            bars = efficientContainer.children;
+                            await sleep(getAnimationSpeed());
+                        }
+                        bars[i].style.backgroundColor = '#14b8a6';
+                        bars[i+1].style.backgroundColor = '#14b8a6';
+                    }
+                }
+
+                for(let bar of bars) {
+                    bar.style.backgroundColor = '#22c55e';
+                }
+            }
+            
+            function resetBubbleSortVisualization() {
+                bubbleSortIsSorting = false;
+                const data = parseInput();
+                renderBars(standardContainer, data);
+                renderBars(efficientContainer, data);
+                standardStats.textContent = `Passes: 0 | Comparisons: 0`;
+                efficientStats.textContent = `Passes: 0 | Comparisons: 0`;
+                sortBtn.disabled = false;
+                sortBtn.textContent = 'Sort';
+            }
+            
+            sortBtn.addEventListener('click', async () => {
+                if(bubbleSortIsSorting) return;
+                bubbleSortIsSorting = true;
+                sortBtn.disabled = true;
+                sortBtn.textContent = 'Sorting...';
+
+                const data1 = parseInput();
+                const data2 = [...data1];
+                
+                renderBars(standardContainer, data1);
+                renderBars(efficientContainer, data2);
+                standardStats.textContent = `Passes: 0 | Comparisons: 0`;
+                efficientStats.textContent = `Passes: 0 | Comparisons: 0`;
+                
+                await Promise.all([
+                    standardBubbleSort(data1),
+                    efficientBubbleSort(data2)
+                ]);
+
+                bubbleSortIsSorting = false;
+                sortBtn.disabled = false;
+                sortBtn.textContent = 'Sort';
+            });
+            
+            resetSortBtn.addEventListener('click', resetBubbleSortVisualization);
+
+            document.querySelectorAll('.data-preset-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const preset = e.target.dataset.preset;
+                    const presets = {
+                        'nearly-sorted': '11, 12, 22, 25, 64, 34, 90',
+                        'sorted': '11, 12, 22, 25, 34, 64, 90',
+                        'reversed': '90, 64, 34, 25, 22, 12, 11'
+                    };
+                    dataInput.value = presets[preset];
+                    resetBubbleSortVisualization();
+                });
+            });
+
+
+            // Initial render
+            renderList();
+            resetBubbleSortVisualization();
+            resetMergeSort();
+        });
+    </script>
+</body>
+</html>

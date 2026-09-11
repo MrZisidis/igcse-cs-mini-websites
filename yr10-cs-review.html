@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS Kickstart (Summary Version)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Structure: Added breadcrumb header (top-left), same style approach as Lists & Sorting page. Also added floating back-to-top button. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .feedback-summary-item.correct .marker {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .feedback-summary-item.incorrect .marker {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        .truth-table-cell {
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            font-weight: 600;
+            min-width: 80px;
+        }
+
+        .truth-table-cell:not(.selected) {
+            color: #9ca3af;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-area,
+            #print-area * {
+                visibility: visible;
+            }
+
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- New sticky header with breadcrumbs (left) + section links (right) -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs (Top-left) -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="./" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="./#projects" class="hover:text-sky-700">Projects</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Yr10 Review</span>
+            </div>
+            <!-- In-page section links (Right) -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#part1" class="text-slate-600 hover:text-sky-600 font-semibold">Part 1</a>
+                <a href="#part2" class="text-slate-600 hover:text-sky-600 font-semibold">Part 2</a>
+                <a href="#part3" class="text-slate-600 hover:text-sky-600 font-semibold">Part 3</a>
+                <a href="python_playground.html"
+                    class="text-sky-600 hover:text-sky-800 font-semibold border-l pl-6 border-slate-300">Python
+                    Playground 🐍</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">GCSE Computer Science Kickstart! 🚀</h1>
+            <p class="mt-4 text-lg text-slate-600">Complete all the questions, then click "Mark My Work" at the bottom
+                for your score!</p>
+            <div class="mt-6 max-w-md mx-auto">
+                <input type="text" id="student-name" class="w-full p-3 border border-slate-300 rounded-md shadow-sm"
+                    placeholder="Enter your full name for the report...">
+            </div>
+        </header>
+
+        <!-- Removed old center-aligned sticky nav; replaced by the breadcrumb header above -->
+
+        <main>
+            <!-- Part 1: Theory Refresh -->
+            <section id="part1" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part 1: Theory Refresh 🧠</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Question 1: Binary Conversion -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">1. Binary Conversion</h3>
+                        <p class="mb-2 text-slate-600">Convert the denary number <strong>45</strong> to an 8-bit binary
+                            number.</p>
+                        <input id="q1a-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="e.g., 01010101">
+
+                        <p class="mt-6 mb-2 text-slate-600">Convert the binary number <strong>10110101</strong> to
+                            denary.</p>
+                        <input id="q1b-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="e.g., 123">
+                    </div>
+
+                    <!-- Question 2: Two's Complement -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">2. Two's Complement</h3>
+                        <p class="mb-4 text-slate-600">Show the 8-bit two's complement for <strong>-59</strong>.</p>
+                        <label class="font-semibold text-slate-700">1. Positive Binary (for 59):</label>
+                        <input id="q2a-input" type="text" class="w-full p-2 border border-slate-300 rounded-md mb-2"
+                            placeholder="Positive 59 in binary">
+                        <label class="font-semibold text-slate-700">2. Invert Bits:</label>
+                        <input id="q2b-input" type="text" class="w-full p-2 border border-slate-300 rounded-md mb-2"
+                            placeholder="Inverted bits">
+                        <label class="font-semibold text-slate-700">3. Add 1:</label>
+                        <input id="q2c-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="Final result">
+                    </div>
+
+                    <!-- Question 3: Utility Software -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">3. Utility Software</h3>
+                        <p class="mb-4 text-slate-600">Name and explain the utility used to fix a fragmented hard disk.
+                        </p>
+                        <label class="font-semibold text-slate-700">Name of utility:</label>
+                        <input id="q3a-input" type="text" class="w-full p-2 border border-slate-300 rounded-md mb-2"
+                            placeholder="Utility name">
+                        <label class="font-semibold text-slate-700">Explanation:</label>
+                        <textarea id="q3b-input" rows="3" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="How does it help?"></textarea>
+                    </div>
+
+                    <!-- Question 4: FDE Cycle -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">4. The Fetch-Decode-Execute Cycle</h3>
+                        <p class="mb-4 text-slate-600">Name the three main stages of the CPU's instruction cycle.</p>
+                        <input id="q4a-input" type="text" class="w-full p-2 border border-slate-300 rounded-md mb-2"
+                            placeholder="Stage 1">
+                        <input id="q4b-input" type="text" class="w-full p-2 border border-slate-300 rounded-md mb-2"
+                            placeholder="Stage 2">
+                        <input id="q4c-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="Stage 3">
+                    </div>
+
+                    <!-- Question 5: Boolean Logic -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 md:col-span-2 lg:col-span-1">
+                        <h3 class="font-bold text-lg mb-4">5. Boolean Logic</h3>
+                        <p class="mb-4 text-slate-600">A ride starts if `safetyBar` is down (True) AND `gate` is closed
+                            (True). Complete the truth table.</p>
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100">
+                                    <th class="p-2 border border-slate-300">safetyBar</th>
+                                    <th class="p-2 border border-slate-300">gate</th>
+                                    <th class="p-2 border border-slate-300">rideStarts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2 border border-slate-300 text-center">True</td>
+                                    <td class="p-2 border border-slate-300 text-center">True</td>
+                                    <td class="p-2 border border-slate-300 truth-table-cell"
+                                        onclick="toggleBoolean(this)">...</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-300 text-center">True</td>
+                                    <td class="p-2 border border-slate-300 text-center">False</td>
+                                    <td class="p-2 border border-slate-300 truth-table-cell"
+                                        onclick="toggleBoolean(this)">...</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-300 text-center">False</td>
+                                    <td class="p-2 border border-slate-300 text-center">True</td>
+                                    <td class="p-2 border border-slate-300 truth-table-cell"
+                                        onclick="toggleBoolean(this)">...</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-300 text-center">False</td>
+                                    <td class="p-2 border border-slate-300 text-center">False</td>
+                                    <td class="p-2 border border-slate-300 truth-table-cell"
+                                        onclick="toggleBoolean(this)">...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Code Skills -->
+            <section id="part2" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part 2: Code Comprehension & Debugging 💻
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+
+                    <!-- Task A: Identify Constructs -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">Task A: Identify the Constructs</h3>
+                        <p class="mb-4 text-slate-600">Identify the line number for an example of each programming
+                            construct.</p>
+                        <div class="bg-slate-800 text-white p-4 rounded-md mb-4 text-sm font-mono whitespace-pre-wrap">#
+                            Line 1
+                            name = input("What is your name? ")
+                            # Line 2
+                            score = 0
+                            # Line 3
+                            attempts_left = 3
+                            # Line 4
+                            # Line 5
+                            while attempts_left > 0:
+                            # Line 6
+                            print(f"You have {attempts_left} attempts remaining.")
+                            # Line 7
+                            answer = int(input("What is 5 + 5? "))
+                            # Line 8
+                            if answer == 10:
+                            # Line 9
+                            print("Correct!")
+                            # Line 10
+                            score = score + 1
+                            # Line 11
+                            break
+                            # Line 12
+                            else:
+                            # Line 13
+                            print("Incorrect, try again.")
+                            # Line 14
+                            attempts_left = attempts_left - 1
+                            # Line 15
+                            # Line 16
+                            print(f"{name}, your final score is {score}.")</div>
+                        <div id="q6-inputs">
+                            <div class="flex items-center mb-2"><label class="w-2/5">Selection (if):</label><input
+                                    type="number" class="w-3/5 p-2 border border-slate-300 rounded-md" data-answer="8">
+                            </div>
+                            <div class="flex items-center mb-2"><label class="w-2/5">Assignment:</label><input
+                                    type="number" class="w-3/5 p-2 border border-slate-300 rounded-md" data-answer="2">
+                            </div>
+                            <div class="flex items-center mb-2"><label class="w-2/5">Iteration (while):</label><input
+                                    type="number" class="w-3/5 p-2 border border-slate-300 rounded-md" data-answer="5">
+                            </div>
+                            <div class="flex items-center mb-2"><label class="w-2/5">Taking user input:</label><input
+                                    type="number" class="w-3/5 p-2 border border-slate-300 rounded-md" data-answer="1">
+                            </div>
+                            <div class="flex items-center mb-2"><label class="w-2/5">Casting:</label><input
+                                    type="number" class="w-3/5 p-2 border border-slate-300 rounded-md" data-answer="7">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task B: Spot the Bugs -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">Task B: Spot the Bugs! 🐞</h3>
+                        <p class="mb-4 text-slate-600">The code below is broken. Find and fix at least three errors.</p>
+                        <h4 class="font-semibold">Buggy Code:</h4>
+                        <div
+                            class="bg-red-100 border border-red-300 text-red-800 p-4 rounded-md mb-4 text-sm font-mono whitespace-pre-wrap">
+                            favourite_subject = input(What is your favourite subject?)
+
+                            if favourite_subject = "Computer Science":
+                            print("That's the best subject!")
+                            else
+                            print("That's a good subject too.")</div>
+                        <h4 class="font-semibold">Your Corrected Code:</h4>
+                        <textarea id="q7-input" rows="6"
+                            class="w-full p-2 border border-slate-300 rounded-md font-mono text-sm"
+                            placeholder="Write your corrected code here..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3: Coding Challenge -->
+            <section id="part3" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part 3: Python Coding Challenge ⌨️</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md border border-slate-200 max-w-4xl mx-auto">
+                    <h3 class="font-bold text-xl mb-2">The Goal: A Simple "Classroom Quiz" Program</h3>
+                    <p class="mb-6 text-slate-600">Follow the steps to build the quiz program. You can reveal a code
+                        skeleton if you need help getting started.</p>
+                    <div class="space-y-4">
+                        <div class="p-4 border-l-4 border-sky-500 bg-sky-50">
+                            <h4 class="font-bold">Step 1: Create Question & Answer Lists</h4>
+                            <p class="text-slate-700">You need two lists to store your questions and the corresponding
+                                answers. The order is important!</p>
+                        </div>
+                        <div class="p-4 border-l-4 border-sky-500 bg-sky-50">
+                            <h4 class="font-bold">Step 2: Ask the Questions</h4>
+                            <p class="text-slate-700">A <code>for</code> loop is perfect for this. You need to iterate
+                                through the questions, print each one, and get the user's answer.</p>
+                        </div>
+                        <div class="p-4 border-l-4 border-sky-500 bg-sky-50">
+                            <h4 class="font-bold">Step 3: Check the Answer and Keep Score</h4>
+                            <p class="text-slate-700">Inside the loop, an <code>if</code> statement can compare the
+                                user's answer to the correct one. Remember to create a <code>score</code> variable
+                                before the loop starts.</p>
+                        </div>
+                        <div class="p-4 border-l-4 border-sky-500 bg-sky-50">
+                            <h4 class="font-bold">Step 4: Display the Final Score</h4>
+                            <p class="text-slate-700">After the loop finishes, a final <code>print</code> statement can
+                                show the user how well they did.</p>
+                        </div>
+                    </div>
+                    <div id="challenge-skeleton" class="hidden mt-8">
+                        <h4 class="font-bold text-lg">Code Skeleton:</h4>
+                        <div class="bg-slate-800 text-white p-4 rounded-md mt-2 text-sm font-mono whitespace-pre-wrap">#
+                            Step 1: Create your lists here. Remember to match questions with answers!
+                            questions = [
+                            # Add your first question string here
+                            ]
+
+                            answers = [
+                            # Add the answer for your first question here
+                            ]
+
+                            # Step 3: Initialise score to zero before the loop starts
+                            score = 0
+
+                            # Step 2: Set up the for loop to go through each question
+                            # for i in range(len(questions)):
+                            # Inside the loop:
+                            # 1. Print the question
+
+                            # 2. Get the user's answer
+
+                            # Step 3: Check if the user's answer is correct
+                            # if user_answer.lower() == ... :
+                            # What happens if they are correct?
+
+                            # else:
+                            # What happens if they are wrong?
+
+                            # Step 4: After the loop, print the final score
+                            # print(...)</div>
+                    </div>
+                    <div class="mt-8">
+                        <button onclick="revealDirectly('challenge-skeleton', this)"
+                            class="bg-amber-500 text-white font-bold py-2 px-4 rounded-md hover:bg-amber-600 transition">Get
+                            Code Skeleton</button>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-lg">Your Code:</h4>
+                        <textarea id="challenge-code-input" rows="15"
+                            class="w-full p-2 mt-2 border border-slate-300 rounded-md font-mono text-sm"
+                            placeholder="Write your Python code for the quiz here..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mark My Work Button -->
+            <section class="text-center my-16">
+                <button onclick="markAllAnswers()"
+                    class="bg-green-600 text-white font-bold text-xl py-4 px-8 rounded-lg shadow-lg hover:bg-green-700 transition transform hover:scale-105">
+                    Mark My Work!
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-summary" class="hidden mb-16">
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Your Results</h2>
+                    <div id="score-display" class="text-center text-2xl font-bold mb-2"></div>
+                    <div id="percentage-display" class="text-center text-5xl font-bold mb-6"></div>
+                    <div id="feedback-section">
+                        <h3 class="font-bold text-xl mb-4">Feedback & Revision Topics:</h3>
+                        <p id="feedback-intro" class="mb-4"></p>
+                        <ul id="feedback-list" class="space-y-3"></ul>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button id="generate-report-btn" onclick="generateReport()"
+                            class="bg-sky-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-sky-700 transition">
+                            Generate & Export Report (PDF)
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-12 py-8 border-t border-slate-200">
+            <div
+                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+                <div>
+                    © <span id="footer-year">2025</span> GCSE CS Mini Websites — Built with ❤️
+                </div>
+                <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+                    <span>Copyright (c) 2025 Stefanos Zisidis. Licensed under <a
+                            href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                            class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+                    <span class="hidden md:inline">•</span>
+                    <a href="https://mrzisidis.github.io/" class="text-sky-600 hover:underline font-semibold">Return to
+                        CS Hub</a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+        </script>
+    </div>
+
+    <!-- Floating Back-to-Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Store results globally to be accessible by report generator
+        let finalScore = 0;
+        let finalMaxScore = 10;
+        let finalPercentage = 0;
+        let finalFeedbackTopics = new Map();
+
+        function toggleBoolean(cell) {
+            cell.classList.add('selected');
+            if (cell.textContent === '...') cell.textContent = 'True';
+            else if (cell.textContent === 'True') cell.textContent = 'False';
+            else {
+                cell.textContent = '...';
+                cell.classList.remove('selected');
+            }
+        }
+
+        function markAllAnswers() {
+            let totalScore = 0;
+            const maxScore = 10;
+            const feedbackTopics = new Map();
+
+            // Question 1a (1 point)
+            const q1a = document.getElementById('q1a-input').value.trim().replace(/\s/g, '');
+            if (q1a === '00101101') { totalScore++; } else { feedbackTopics.set('Binary & Denary Conversion', '#part1'); }
+
+            // Question 1b (1 point)
+            const q1b = document.getElementById('q1b-input').value.trim();
+            if (q1b === '181') { totalScore++; } else { feedbackTopics.set('Binary & Denary Conversion', '#part1'); }
+
+            // Question 2 (1 point)
+            const q2a = document.getElementById('q2a-input').value.trim().replace(/\s/g, '') === '00111011';
+            const q2b = document.getElementById('q2b-input').value.trim().replace(/\s/g, '') === '11000100';
+            const q2c = document.getElementById('q2c-input').value.trim().replace(/\s/g, '') === '11000101';
+            if (q2a && q2b && q2c) { totalScore++; } else { feedbackTopics.set("Two's Complement", '#part1'); }
+
+            // Question 3 (1 point)
+            const q3a = document.getElementById('q3a-input').value.trim().toLowerCase();
+            if (q3a.includes('defrag') || q3a.includes('defragmentation')) { totalScore++; } else { feedbackTopics.set('Utility Software', '#part1'); }
+
+            // Question 4 (1 point)
+            const q4a = document.getElementById('q4a-input').value.trim().toLowerCase();
+            const q4b = document.getElementById('q4b-input').value.trim().toLowerCase();
+            const q4c = document.getElementById('q4c-input').value.trim().toLowerCase();
+            const stages = [q4a, q4b, q4c];
+            if (stages.includes('fetch') && stages.includes('decode') && stages.includes('execute')) { totalScore++; } else { feedbackTopics.set('The Fetch-Decode-Execute Cycle', '#part1'); }
+
+            // Question 5 (1 point)
+            const q5cells = document.querySelectorAll('.truth-table-cell');
+            const userAnswersQ5 = Array.from(q5cells).map(cell => cell.textContent);
+            const correctAnswersQ5 = ['True', 'False', 'False', 'False'];
+            if (JSON.stringify(userAnswersQ5) === JSON.stringify(correctAnswersQ5)) { totalScore++; } else { feedbackTopics.set('Boolean Logic', '#part1'); }
+
+            // Question 6 (1 point)
+            const q6inputs = document.querySelectorAll('#q6-inputs input');
+            let q6Correct = 0;
+            q6inputs.forEach(input => { if (input.value.trim() === input.dataset.answer) { q6Correct++; } });
+            if (q6Correct >= 3) { totalScore += 1; } else {
+                feedbackTopics.set('Identifying Programming Constructs', '#part2');
+            }
+
+            // Question 7 - Debugging (1 point)
+            const q7input = document.getElementById('q7-input').value.trim();
+            if (q7input.includes('==') && q7input.includes(':') && q7input.includes('"') && !q7input.includes(' = ')) {
+                totalScore += 1;
+            } else {
+                feedbackTopics.set('Debugging Python Code', '#part2');
+            }
+
+            // Question 8 - Coding Challenge (2 points)
+            const challengeCode = document.getElementById('challenge-code-input').value.toLowerCase();
+            let challengeScore = 0;
+            if (challengeCode.includes('for') && challengeCode.includes('input') && challengeCode.includes('if')) {
+                challengeScore++;
+            }
+            if (challengeCode.includes('score') && (challengeCode.includes('+= 1') || challengeCode.includes('= score + 1')) && challengeCode.includes('print')) {
+                challengeScore++;
+            }
+            totalScore += challengeScore;
+            if (challengeScore < 2) {
+                feedbackTopics.set('Python Programming Logic (Challenge)', '#part3');
+            }
+
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            // Store results globally
+            finalScore = totalScore;
+            finalMaxScore = maxScore;
+            finalPercentage = percentage;
+            finalFeedbackTopics = feedbackTopics;
+
+            // Display results on page
+            document.getElementById('score-display').textContent = `You scored ${totalScore} out of ${maxScore}.`;
+            document.getElementById('percentage-display').textContent = `${percentage}%`;
+
+            const feedbackList = document.getElementById('feedback-list');
+            const feedbackIntro = document.getElementById('feedback-intro');
+            feedbackList.innerHTML = '';
+
+            if (feedbackTopics.size > 0) {
+                feedbackIntro.textContent = "Based on your answers, you might want to review the following topics:";
+                feedbackTopics.forEach((anchor, topic) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="${anchor}" class="flex items-center p-3 bg-slate-100 rounded-md hover:bg-sky-100 transition"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-red-500 text-white rounded-full font-bold text-sm">!</span><span class="font-semibold text-slate-700">${topic}</span></a>`;
+                    feedbackList.appendChild(li);
+                });
+            } else {
+                feedbackIntro.innerHTML = '<strong>Excellent work!</strong> You answered everything correctly. You have a great grasp of these topics.';
+            }
+
+            const resultsSection = document.getElementById('results-summary');
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView();
+        }
+
+        function generateReport() {
+            const studentName = document.getElementById('student-name').value || 'Anonymous Student';
+            const date = new Date().toLocaleDateString('en-GB');
+
+            let feedbackHTML = '';
+            if (finalFeedbackTopics.size > 0) {
+                finalFeedbackTopics.forEach((anchor, topic) => {
+                    feedbackHTML += `<li style="background-color: #f1f5f9; padding: 10px; border-radius: 5px; margin-bottom: 8px;">${topic}</li>`;
+                });
+            } else {
+                feedbackHTML = '<li>No specific topics for revision. Great job!</li>';
+            }
+
+            const debuggedCode = document.getElementById('q7-input').value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const challengeCode = document.getElementById('challenge-code-input').value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            const reportHTML = `
+                <html>
+                <head>
+                    <title>Report for ${studentName}</title>
+                    <style>
+                        body { font-family: sans-serif; margin: 40px; }
+                        h1, h2, h3 { color: #0f172a; }
+                        .report-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px; }
+                        .score-summary { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+                        .score { font-size: 2.5em; font-weight: bold; color: #0284c7; }
+                        .percentage { font-size: 1.5em; color: #475569; }
+                        .code-box { background-color: #0f172a; color: #f8fafc; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-family: monospace; }
+                        ul { list-style: none; padding: 0; }
+                    </style>
+                </head>
+                <body>
+                    <div class="report-header">
+                        <h1>GCSE CS Kickstart Report</h1>
+                        <p><strong>Student:</strong> ${studentName}</p>
+                        <p><strong>Date:</strong> ${date}</p>
+                    </div>
+
+                    <div class="score-summary">
+                        <h2>Final Score</h2>
+                        <div class="score">${finalScore} / ${finalMaxScore}</div>
+                        <div class="percentage">${finalPercentage}%</div>
+                    </div>
+                    
+                    <h3>Revision Topics</h3>
+                    <ul>${feedbackHTML}</ul>
+
+                    <h3 style="margin-top: 30px;">Submitted Code</h3>
+                    <h4>Task B: Debugged Code</h4>
+                    <div class="code-box">${debuggedCode || 'No code submitted.'}</div>
+                    
+                    <h4 style="margin-top: 20px;">Part 3: Coding Challenge</h4>
+                    <div class="code-box">${challengeCode || 'No code submitted.'}</div>
+                </body>
+                </html>
+            `;
+
+            const reportWindow = window.open('', '', 'width=800,height=600');
+            reportWindow.document.write(reportHTML);
+            reportWindow.document.close();
+            reportWindow.focus();
+            reportWindow.print();
+        }
+
+        function revealDirectly(elementId, button) {
+            document.getElementById(elementId).classList.remove('hidden');
+            button.textContent = 'Skeleton Revealed';
+            button.disabled = true;
+        }
+
+        // Floating Back-to-Top button logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

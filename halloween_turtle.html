@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS: Spooky Spiderweb Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Adapted from example) -->
+    <!-- Structure: Based on yr10-cs-review.html, adapted for new content -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .boolean-cell {
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            font-weight: 600;
+            min-width: 80px;
+        }
+
+        .boolean-cell:not(.selected) {
+            color: #9ca3af;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html#projects" class="hover:text-sky-700">Projects</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Halloween Turtle</span>
+            </div>
+            <!-- In-page section links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#intro" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Intro</a>
+                <a href="#partA" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Part A</a>
+                <a href="#partB" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Part B</a>
+                <a href="#check" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Check</a>
+                <a href="python_playground.html"
+                    class="text-sky-600 hover:text-sky-800 font-bold border-l pl-6 border-slate-300 text-sm">Python
+                    Playground 🐍</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">🕸️ The Spooky Spiderweb Challenge</h1>
+            <p class="mt-4 text-lg text-slate-600">Follow the tasks, then check your understanding at the bottom!</p>
+            <div class="mt-6 max-w-md mx-auto">
+                <input type="text" id="student-name" class="w-full p-3 border border-slate-300 rounded-md shadow-sm"
+                    placeholder="Enter your full name for the report...">
+            </div>
+        </header>
+
+        <main>
+            <!-- Part 1: Introduction to Turtle -->
+            <section id="intro" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part 1: Understanding Python Turtle 🐢
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">Method 1: The "Global" Turtle</h3>
+                        <p class="mb-4 text-slate-600">This method is quick for simple drawings. You import the whole
+                            module and call functions like `turtle.forward()`.</p>
+                        <div class="bg-slate-800 text-white p-4 rounded-md mb-4 text-sm font-mono">
+                            <pre>
+import turtle
+
+turtle.forward(100)
+turtle.left(90)
+turtle.color("red")
+turtle.forward(50)
+
+turtle.done()
+</pre>
+                        </div>
+                        <p class="text-slate-700">You are using a single, built-in turtle. This is fine, but can be
+                            confusing if you want multiple turtles on the screen.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">Method 2: The Turtle "Object" (Instance)</h3>
+                        <p class="mb-4 text-slate-600">This is the method we use. You create a *new* turtle object (we
+                            call ours `t`) from the `turtle.Turtle()` blueprint.</p>
+                        <div class="bg-slate-800 text-white p-4 rounded-md mb-4 text-sm font-mono">
+                            <pre>
+import turtle
+
+# Create a new Turtle object
+t = turtle.Turtle() 
+
+t.forward(100)
+t.left(90)
+t.color("blue")
+t.forward(50)
+
+turtle.done()
+</pre>
+                        </div>
+                        <p class="text-slate-700">This is much more powerful. You could create `t2 = turtle.Turtle()`
+                            and have a *second* independent turtle!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Turtle Commands Review -->
+            <section id="review" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">⚙️ Essential Turtle Commands</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 max-w-3xl mx-auto">
+                    <p class="mb-4 text-slate-600">To complete this challenge, you will be using your Turtle object
+                        named `t`. Review these key commands:</p>
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="p-2 border border-slate-300">Command</th>
+                                <th class="p-2 border border-slate-300">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.speed(0)</td>
+                                <td class="p-2 border border-slate-300">Sets the turtle to the fastest speed.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.home()</td>
+                                <td class="p-2 border border-slate-300">Moves the turtle instantly to the origin (0, 0).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.setheading(angle)</td>
+                                <td class="p-2 border border-slate-300">Sets the direction (0=East, 90=North).</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.forward(dist)</td>
+                                <td class="p-2 border border-slate-300">Moves the turtle forward.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.backward(dist)</td>
+                                <td class="p-2 border border-slate-300">Moves the turtle backward.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.right(angle)</td>
+                                <td class="p-2 border border-slate-300">Turns the turtle clockwise.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.penup()</td>
+                                <td class="p-2 border border-slate-300">Lifts the pen (no drawing).</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-slate-300 font-mono">t.pendown()</td>
+                                <td class="p-2 border border-slate-300">Lowers the pen (drawing active).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Part 3: Challenge Part A -->
+            <section id="partA" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part A: The Radial Spokes 🕸️</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md border border-slate-200 max-w-4xl mx-auto">
+                    <h3 class="font-bold text-xl mb-2">Task A.1: Define the `draw_spoke` function</h3>
+                    <p class="mb-4 text-slate-600">Write a function that draws one spoke (a line of length 150),
+                        starting and ending at the origin (0, 0).</p>
+                    <h3 class="font-bold text-xl mb-2">Task A.2: Use a simple loop to draw the web framework</h3>
+                    <p class="mb-6 text-slate-600">Use a `for` loop to repeat the `draw_spoke` function 8 times, turning
+                        45° each time, to create the radial lines of the web.</p>
+
+                    <h4 class="font-semibold text-lg">Skeleton Code:</h4>
+                    <div class="bg-slate-800 text-white p-4 rounded-md mt-2 text-sm font-mono">
+                        <pre>
+import turtle
+screen = turtle.Screen()
+screen.setup(width=600, height=600)
+screen.bgcolor("black") 
+t = turtle.Turtle()
+t.color("white")
+t.pensize(2)
+t.speed(0)
+
+# --- FUNCTION DEFINITION AREA ---
+def draw_spoke(length):
+    """Draws a single line spoke of the web and returns to the center."""
+    t.pendown()
+    t.forward(length)
+    t.backward(length)
+    t.penup()
+
+# --- MAIN PROGRAM AREA (Start of the Web) ---
+
+# TODO: Set the number of spokes (N) and calculate the angle (360/N)
+N = 8
+angle = 360 / N
+
+# TODO: Write a for loop that calls draw_spoke N times
+# ... your loop here ...
+
+turtle.done()
+</pre>
+                    </div>
+
+                    <h4 class="font-semibold text-lg mt-8">Example Solution & Visual:</h4>
+                    <p class="mb-4 text-slate-600">If you complete Part A correctly, your code for the main program area
+                        should look like this, and your output will show 8 spokes.</p>
+                    <div class="bg-sky-50 border border-sky-200 p-4 rounded-md mt-2 text-sm font-mono">
+                        <pre>
+# --- MAIN PROGRAM AREA (Start of the Web) ---
+
+N = 8
+angle = 360 / N
+
+# Loop 8 times
+for _ in range(N):
+    draw_spoke(150) # Call the function
+    t.left(angle)   # Turn ready for the next spoke
+
+t.hideturtle()
+turtle.done()
+</pre>
+                    </div>
+                    <div class="text-center mt-4">
+                        <img src="https://placehold.co/400x400/000000/FFFFFF?text=Visual+Output:%0A8+White+Spokes%0Aon+Black+Background"
+                            alt="8 spokes of a spiderweb radiating from the center on a black background"
+                            class="w-full max-w-sm mx-auto border border-slate-300 rounded-md shadow-sm">
+                        <p class="text-sm text-slate-500 mt-2">Visual Output for Part A</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 4: Challenge Part B -->
+            <section id="partB" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part B: The Concentric Rings 🎯</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md border border-slate-200 max-w-4xl mx-auto">
+                    <h3 class="font-bold text-xl mb-2">Task B.1: Draw the Rings</h3>
+                    <p class="mb-6 text-slate-600">After your code for Part A, add a new loop to draw 5 concentric rings
+                        (circles). The size of the circle depends on the ring number. The web has a max radius of 150.
+                        To draw 5 rings, they should be 30 units apart (150 / 5 = 30).</p>
+
+                    <h4 class="font-semibold text-lg">Ring Drawing Logic (Add this *after* your Part A loop):</h4>
+                    <div class="bg-slate-800 text-white p-4 rounded-md mt-2 text-sm font-mono">
+                        <pre>
+# --- RING DRAWING AREA (Part B) ---
+num_rings = 5
+max_radius = 150
+step_size = max_radius / num_rings
+
+t.home()
+t.setheading(0) # Reset heading
+
+for i in range(num_rings):
+    # 1. Calculate the radius for the current ring (i starts at 0)
+    current_radius = (i + 1) * step_size
+
+    # 2. Go to the starting point of the circle
+    t.penup()
+    # TODO: Go home, set heading to 0
+    # TODO: Move forward by current_radius
+    # TODO: Set heading to 270 (South)
+    
+    # 3. Draw the circle!
+    t.pendown()
+    t.circle(current_radius)
+
+# Optional: Draw a spooky spider in the center!
+t.dot(20, "orange")
+</pre>
+                    </div>
+
+                    <h4 class="font-semibold text-lg mt-8">Example Solution & Visual:</h4>
+                    <p class="mb-4 text-slate-600">Here is the completed code for the rings. This creates the final
+                        spiderweb.</p>
+                    <div class="bg-sky-50 border border-sky-200 p-4 rounded-md mt-2 text-sm font-mono">
+                        <pre>
+# --- RING DRAWING AREA (Part B) ---
+num_rings = 5
+max_radius = 150
+step_size = max_radius / num_rings
+
+t.home()
+t.setheading(0) # Reset heading
+
+for i in range(num_rings):
+    current_radius = (i + 1) * step_size
+    
+    t.penup()
+    t.goto(0, 0)      # Go home
+    t.setheading(0)   # Face East
+    t.forward(current_radius) # Move to the circle's edge
+    t.setheading(270) # Face South to start the circle
+    
+    t.pendown()
+    t.circle(current_radius) # Draw the ring
+
+t.dot(20, "orange") # Add the spider
+t.hideturtle()
+turtle.done()
+</pre>
+                    </div>
+                    <div class="text-center mt-4">
+                        <img src="https://placehold.co/400x400/000000/FFFFFF?text=Visual+Output:%0AComplete+Spiderweb%0A(Spokes+and+Rings)"
+                            alt="A complete spiderweb with 8 spokes and 5 concentric rings on a black background, with an orange dot in the center"
+                            class="w-full max-w-sm mx-auto border border-slate-300 rounded-md shadow-sm">
+                        <p class="text-sm text-slate-500 mt-2">Visual Output for Part B</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 5: Check Questions -->
+            <section id="check" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Part 5: Check Your Understanding 🧠</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">1. The Angle</h3>
+                        <p class="mb-2 text-slate-600">If you wanted to draw **6** spokes, what angle would you need to
+                            turn by? (360 / 6)</p>
+                        <input id="q1-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="Enter angle in degrees">
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">2. Fill in the Blank</h3>
+                        <p class="mb-2 text-slate-600">To stop the turtle from drawing when it moves, you would use the
+                            command `t.____()`.</p>
+                        <input id="q2-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="Enter command name">
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">3. Command Recall</h3>
+                        <p class="mb-2 text-slate-600">Which single command moves the turtle to (0, 0) and faces it East
+                            (heading 0)?</p>
+                        <input id="q3-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="e.g., t.command()">
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">4. True or False?</h3>
+                        <p class="mb-4 text-slate-600">Click to select the correct answer for the statement:</p>
+                        <p class="mb-4 text-slate-700 font-semibold">"<code>t.speed(0)</code> makes the turtle move very
+                            slowly."</p>
+                        <table class="w-full border-collapse">
+                            <tbody>
+                                <tr>
+                                    <td class="p-2 border border-slate-300 boolean-cell"
+                                        onclick="toggleBoolean(this, 'q4-cell')">...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">5. Code Logic</h3>
+                        <p class="mb-2 text-slate-600">If `num_rings = 4` and `max_radius = 200`, what is the radius of
+                            the *first* ring? (step_size = 200/4 = 50)</p>
+                        <input id="q5-input" type="text" class="w-full p-2 border border-slate-300 rounded-md"
+                            placeholder="Radius of first ring (i=0)">
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 md:col-span-2 lg:col-span-1">
+                        <h3 class="font-bold text-lg mb-4">👻 Extra Activities</h3>
+                        <p class="mb-4 text-slate-600">If you're finished, try these extensions (not marked):</p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li>Import `random` and draw a spider at a random `(x, y)` location.</li>
+                            <li>Use a list of colors `["red", "orange"]` to make the web flicker.</li>
+                            <li>Define a new function `draw_hat()` to draw a witch hat.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mark My Work Button -->
+            <section class="text-center my-16">
+                <button onclick="markAllAnswers()"
+                    class="bg-green-600 text-white font-bold text-xl py-4 px-8 rounded-lg shadow-lg hover:bg-green-700 transition transform hover:scale-105">
+                    Mark My Work!
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-summary" class="hidden mb-16">
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Your Results</h2>
+                    <div id="score-display" class="text-center text-2xl font-bold mb-2"></div>
+                    <div id="percentage-display" class="text-center text-5xl font-bold mb-6"></div>
+                    <div id="feedback-section">
+                        <h3 class="font-bold text-xl mb-4">Feedback & Revision Topics:</h3>
+                        <p id="feedback-intro" class="mb-4"></p>
+                        <ul id="feedback-list" class="space-y-3"></ul>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button id="generate-report-btn" onclick="generateReport()"
+                            class="bg-sky-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-sky-700 transition">
+                            Generate & Export Report (PDF)
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-12 py-8 border-t border-slate-200">
+            <div
+                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+                <div>
+                    © <span id="footer-year">2025</span> GCSE CS Mini Websites — Built with ❤️
+                </div>
+                <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+                    <span>Copyright (c) 2025 Stefanos Zisidis. Licensed under <a
+                            href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                            class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+                    <span class="hidden md:inline">•</span>
+                    <a href="https://mrzisidis.github.io/" class="text-sky-600 hover:underline font-semibold">Return to
+                        CS Hub</a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+        </script>
+    </div>
+
+    <!-- Floating Back-to-Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Store results globally
+        let finalScore = 0;
+        let finalMaxScore = 5;
+        let finalPercentage = 0;
+        let finalFeedbackTopics = new Map();
+
+        function toggleBoolean(cell, group) {
+            // Deselect others in the same group if needed (though here it's one cell)
+            document.querySelectorAll('.' + group).forEach(c => {
+                c.textContent = '...';
+                c.classList.remove('selected');
+            });
+            cell.classList.add('selected');
+            if (cell.textContent === '...') cell.textContent = 'True';
+            else if (cell.textContent === 'True') cell.textContent = 'False';
+            else {
+                cell.textContent = '...';
+                cell.classList.remove('selected');
+            }
+        }
+
+        function markAllAnswers() {
+            let totalScore = 0;
+            const maxScore = 5;
+            const feedbackTopics = new Map();
+
+            // Question 1 (1 point)
+            const q1 = document.getElementById('q1-input').value.trim();
+            if (q1 === '60') { totalScore++; } else { feedbackTopics.set('Calculating Angles', '#check'); }
+
+            // Question 2 (1 point)
+            const q2 = document.getElementById('q2-input').value.trim().toLowerCase();
+            if (q2 === 'penup' || q2 === 'penup()') { totalScore++; } else { feedbackTopics.set('Pen Commands (penup/pendown)', '#check'); }
+
+            // Question 3 (1 point)
+            const q3 = document.getElementById('q3-input').value.trim().toLowerCase();
+            if (q3 === 't.home()' || q3 === 'home()') { totalScore++; } else { feedbackTopics.set('Movement Commands (home)', '#check'); }
+
+            // Question 4 (1 point)
+            const q4cell = document.querySelector('.boolean-cell');
+            if (q4cell.textContent === 'False') { totalScore++; } else { feedbackTopics.set('Speed Command', '#check'); }
+
+            // Question 5 (1 point)
+            const q5 = document.getElementById('q5-input').value.trim();
+            if (q5 === '50') { totalScore++; } else { feedbackTopics.set('Loop Logic & Calculation', '#check'); }
+
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            // Store results globally
+            finalScore = totalScore;
+            finalMaxScore = maxScore;
+            finalPercentage = percentage;
+            finalFeedbackTopics = feedbackTopics;
+
+            // Display results on page
+            document.getElementById('score-display').textContent = `You scored ${totalScore} out of ${maxScore}.`;
+            document.getElementById('percentage-display').textContent = `${percentage}%`;
+
+            const feedbackList = document.getElementById('feedback-list');
+            const feedbackIntro = document.getElementById('feedback-intro');
+            feedbackList.innerHTML = '';
+
+            if (feedbackTopics.size > 0) {
+                feedbackIntro.textContent = "Based on your answers, you might want to review the following topics:";
+                feedbackTopics.forEach((anchor, topic) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="${anchor}" class="flex items-center p-3 bg-slate-100 rounded-md hover:bg-sky-100 transition"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-red-500 text-white rounded-full font-bold text-sm">!</span><span class="font-semibold text-slate-700">${topic}</span></a>`;
+                    feedbackList.appendChild(li);
+                });
+            } else {
+                feedbackIntro.innerHTML = '<strong>Excellent work!</strong> You answered all questions correctly. You have a great grasp of these Turtle concepts.';
+            }
+
+            const resultsSection = document.getElementById('results-summary');
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView();
+        }
+
+        function generateReport() {
+            const studentName = document.getElementById('student-name').value || 'Anonymous Student';
+            const date = new Date().toLocaleDateString('en-GB');
+
+            let feedbackHTML = '';
+            if (finalFeedbackTopics.size > 0) {
+                finalFeedbackTopics.forEach((anchor, topic) => {
+                    feedbackHTML += `<li style="background-color: #f1f5f9; padding: 10px; border-radius: 5px; margin-bottom: 8px;">${topic}</li>`;
+                });
+            } else {
+                feedbackHTML = '<li>No specific topics for revision. Great job!</li>';
+            }
+
+            const q1_ans = document.getElementById('q1-input').value;
+            const q2_ans = document.getElementById('q2-input').value;
+            const q3_ans = document.getElementById('q3-input').value;
+            const q4_ans = document.querySelector('.boolean-cell').textContent;
+            const q5_ans = document.getElementById('q5-input').value;
+
+
+            const reportHTML = `
+                <html>
+                <head>
+                    <title>Report for ${studentName}</title>
+                    <style>
+                        body { font-family: sans-serif; margin: 40px; }
+                        h1, h2, h3 { color: #0f172a; }
+                        .report-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px; }
+                        .score-summary { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+                        .score { font-size: 2.5em; font-weight: bold; color: #0284c7; }
+                        .percentage { font-size: 1.5em; color: #475569; }
+                        .answers { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; }
+                        .answers p { margin: 5px 0 10px; }
+                        ul { list-style: none; padding: 0; }
+                    </style>
+                </head>
+                <body>
+                    <div class="report-header">
+                        <h1>GCSE CS: Spooky Spiderweb Report</h1>
+                        <p><strong>Student:</strong> ${studentName}</p>
+                        <p><strong>Date:</strong> ${date}</p>
+                    </div>
+
+                    <div class="score-summary">
+                        <h2>Final Score</h2>
+                        <div class="score">${finalScore} / ${finalMaxScore}</div>
+                        <div class="percentage">${finalPercentage}%</div>
+                    </div>
+                    
+                    <h3>Revision Topics</h3>
+                    <ul>${feedbackHTML}</ul>
+
+                    <h3 style="margin-top: 30px;">Submitted Answers</h3>
+                    <div class="answers">
+                        <p><strong>1. Angle for 6 spokes:</strong> ${q1_ans || 'n/a'}</p>
+                        <p><strong>2. Stop drawing command:</strong> ${q2_ans || 'n/a'}</p>
+                        <p><strong>3. Go to (0,0) command:</strong> ${q3_ans || 'n/a'}</p>
+                        <p><strong>4. t.speed(0) is slow (True/False):</strong> ${q4_ans || 'n/a'}</p>
+                        <p><strong>5. First ring radius:</strong> ${q5_ans || 'n/a'}</p>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            const reportWindow = window.open('', '', 'width=800,height=600');
+            reportWindow.document.write(reportHTML);
+            reportWindow.document.close();
+            reportWindow.focus();
+            reportWindow.print();
+        }
+
+        // Floating Back-to-Top button logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

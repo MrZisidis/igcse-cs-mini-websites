@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS Mock Paper 1 Analysis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Slate & Indigo (Professional, Academic, Calm) -->
+    <!-- Application Structure Plan: 
+         1. Dashboard: High-level metrics with DNT students excluded from mean calculations.
+         2. Students: Interactive table including DNT status and specific intervention tagging.
+         3. Intervention: Expanded visualizer for Binary vs Linear search covering all search scenarios.
+    -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html#projects" class="hover:text-sky-700">Projects</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Mock Analysis</span>
+            </div>
+            <!-- In-page section links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <button onclick="switchTab('dashboard')"
+                    class="text-slate-600 hover:text-sky-600 font-semibold text-sm"
+                    id="btn-dashboard">Dashboard</button>
+                <button onclick="switchTab('intervention')"
+                    class="text-slate-600 hover:text-sky-600 font-semibold text-sm"
+                    id="btn-intervention">Intervention Labs</button>
+            </nav>
+        </div>
+    </header>
+
+    <header class="max-w-7xl mx-auto px-4 py-8 text-center bg-white border-b border-slate-200">
+        <h1 class="text-3xl font-extrabold text-slate-900 leading-tight">Mock Paper 1 Analysis</h1>
+        <p class="text-xs text-slate-500 mt-1">Year 11 • Feb 2026 • Teacher: Mr. Zisidis</p>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- DASHBOARD SECTION -->
+        <div id="view-dashboard" class="view-section animate-fade-in space-y-8">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Executive Summary</h2>
+                <p class="text-slate-600 leading-relaxed">
+                    Excluding students who <strong>Did Not Take (DNT)</strong> the exam, the class mean is <span
+                        class="font-bold text-indigo-600">43.75%</span>.
+                    While <strong>Data Representation</strong> remains a significant strength (68%),
+                    <strong>Computational Thinking</strong> is the primary concern (34.5%), necessitating immediate
+                    intervention on search and sort algorithms.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="text-slate-500 text-sm font-medium uppercase tracking-wider">Active Avg Score</div>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-3xl font-bold text-slate-900">29.3</span>
+                        <span class="text-sm text-slate-400 mb-1">/ 67</span>
+                    </div>
+                    <div class="mt-2 text-sm text-emerald-600 font-medium">13 Candidates Recorded</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="text-slate-500 text-sm font-medium uppercase tracking-wider">DNT Rate</div>
+                    <div class="mt-2">
+                        <span class="text-3xl font-bold text-slate-900">18.7%</span>
+                    </div>
+                    <div class="mt-2 text-sm text-slate-500">3 Students Absent</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="text-slate-500 text-sm font-medium uppercase tracking-wider">Topic Strength</div>
+                    <div class="mt-2 text-3xl font-bold text-emerald-600">Q1 Data</div>
+                    <div class="mt-2 text-sm text-slate-500">68% Avg. Mastery</div>
+                </div>
+                <div
+                    class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-rose-500">
+                    <div class="text-slate-500 text-sm font-medium uppercase tracking-wider">Critical Failure</div>
+                    <div class="mt-2 text-2xl font-bold text-rose-600">Q4 Algorithms</div>
+                    <div class="mt-2 text-sm text-slate-500">34% Avg. Mastery</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Topic Mastery (Active Candidates)</h3>
+                    <div class="chart-container"><canvas id="topicChart"></canvas></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Grade Distribution</h3>
+                    <div class="chart-container" style="max-width: 400px;"><canvas id="gradeChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERVENTION SECTION -->
+        <div id="view-intervention" class="view-section hidden animate-fade-in space-y-8">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Algorithm Laboratory</h2>
+                <p class="text-slate-600 mb-8">This module addresses the core weakness identified in Q4. Practice
+                    <strong>Binary Search</strong> (for sorted lists) vs. <strong>Linear Search</strong> (for any list)
+                    to understand efficiency and trace logic.
+                </p>
+
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                    <!-- Config Panel -->
+                    <div class="xl:col-span-1 space-y-6">
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-slate-800 mb-3">1. Select Algorithm</h3>
+                            <div class="flex gap-2">
+                                <button onclick="setAlgo('binary')" id="algo-bin"
+                                    class="flex-1 py-2 px-3 bg-indigo-600 text-white rounded-md text-sm font-bold shadow-sm">Binary</button>
+                                <button onclick="setAlgo('linear')" id="algo-lin"
+                                    class="flex-1 py-2 px-3 bg-white border border-slate-300 text-slate-600 rounded-md text-sm font-bold">Linear</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-slate-800 mb-3">2. Select Scenario</h3>
+                            <select id="scenario-select" onchange="loadScenario()"
+                                class="w-full p-2 bg-white border border-slate-300 rounded text-sm focus:ring-2 focus:ring-indigo-500">
+                                <optgroup label="Binary Search">
+                                    <option value="bin-notfound">Exam Case (Not Found: 78)</option>
+                                    <option value="bin-found">Standard (Found: 33)</option>
+                                    <option value="bin-best">Best Case (Mid Point: 66)</option>
+                                    <option value="bin-worst">Worst Case (Edge: 101)</option>
+                                </optgroup>
+                                <optgroup label="Linear Search">
+                                    <option value="lin-best">Best Case (Index 0: 11)</option>
+                                    <option value="lin-avg">Average Case (Index 5: 66)</option>
+                                    <option value="lin-worst">Worst Case (Not Found: 105)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="p-4 border-l-4 border-amber-400 bg-amber-50 text-xs text-amber-800 italic">
+                            Binary Search requires the array to be <strong>sorted</strong>. Linear Search does not, but
+                            it is much slower for large datasets.
+                        </div>
+                    </div>
+
+                    <!-- Simulator Output -->
+                    <div
+                        class="xl:col-span-2 bg-slate-900 rounded-xl p-6 text-white shadow-xl flex flex-col min-h-[450px]">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 id="sim-title" class="text-lg font-bold">Binary Search</h3>
+                                <p id="sim-subtitle" class="text-indigo-400 text-sm font-mono">Target: 78</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="resetSim()"
+                                    class="p-2 bg-slate-800 hover:bg-slate-700 rounded transition text-xs">Reset</button>
+                                <button onclick="stepSim()"
+                                    class="px-6 py-2 bg-indigo-500 hover:bg-indigo-400 rounded font-bold shadow-lg transition transform active:scale-95 text-sm">Step
+                                    Forward</button>
+                            </div>
+                        </div>
+
+                        <!-- Array Display -->
+                        <div class="flex flex-wrap gap-2 justify-center mb-8" id="sim-array-box"></div>
+
+                        <!-- Trace Table/Log -->
+                        <div class="flex-grow flex flex-col">
+                            <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-2 font-bold">Step-by-Step
+                                Execution Log</h4>
+                            <div id="sim-log"
+                                class="bg-black/40 rounded-lg p-4 font-mono text-xs overflow-y-auto max-h-[200px] border border-slate-800 space-y-1">
+                                <div class="text-slate-500 italic">Algorithm ready. Press 'Step Forward' to begin.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW: Network Laboratory -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Network Laboratory</h2>
+                <p class="text-slate-600 mb-8">Mastering the <strong>TCP/IP Model</strong> and network infrastructure
+                    decision-making.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- TCP/IP Model -->
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                            <span class="bg-indigo-100 p-1.5 rounded text-indigo-600">📦</span>
+                            TCP/IP Protocol Stack
+                        </h3>
+                        <div class="space-y-3">
+                            <div
+                                class="p-4 bg-indigo-600 text-white rounded-lg shadow-md transform transition hover:scale-[1.02]">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold uppercase tracking-widest opacity-80">Layer 4</span>
+                                    <span class="text-xs px-2 py-0.5 bg-white/20 rounded">Data Format</span>
+                                </div>
+                                <h4 class="font-bold text-lg">Application Layer</h4>
+                                <p class="text-indigo-100 text-sm mt-1">HTTP, HTTPS, FTP, SMTP, IMAP, DNS</p>
+                            </div>
+                            <div
+                                class="p-4 bg-indigo-500 text-white rounded-lg shadow-md transform transition hover:scale-[1.02]">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold uppercase tracking-widest opacity-80">Layer 3</span>
+                                    <span class="text-xs px-2 py-0.5 bg-white/20 rounded">End-to-End</span>
+                                </div>
+                                <h4 class="font-bold text-lg">Transport Layer</h4>
+                                <p class="text-indigo-100 text-sm mt-1">TCP (Reliable), UDP (Fast)</p>
+                            </div>
+                            <div
+                                class="p-4 bg-indigo-400 text-white rounded-lg shadow-md transform transition hover:scale-[1.02]">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold uppercase tracking-widest opacity-80">Layer 2</span>
+                                    <span class="text-xs px-2 py-0.5 bg-white/20 rounded">Routing</span>
+                                </div>
+                                <h4 class="font-bold text-lg">Internet Layer</h4>
+                                <p class="text-indigo-100 text-sm mt-1">IP (Internet Protocol)</p>
+                            </div>
+                            <div
+                                class="p-4 bg-indigo-300 text-slate-900 rounded-lg shadow-md transform transition hover:scale-[1.02]">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold uppercase tracking-widest opacity-60">Layer 1</span>
+                                    <span class="text-xs px-2 py-0.5 bg-black/5 rounded font-bold">Hardware</span>
+                                </div>
+                                <h4 class="font-bold text-lg text-indigo-900">Link Layer</h4>
+                                <p class="text-indigo-800 text-sm mt-1 font-medium">Ethernet, Wi-Fi, MAC addresses</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scenarios -->
+                    <div class="space-y-8">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                            <span class="bg-emerald-100 p-1.5 rounded text-emerald-600">🏗️</span>
+                            Infrastructure Scenarios
+                        </h3>
+
+                        <!-- Scenario 1: Star -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col md:flex-row gap-6">
+                            <div
+                                class="w-full md:w-32 flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-slate-100 p-2">
+                                <svg viewBox="0 0 100 100" class="w-24 h-24">
+                                    <circle cx="50" cy="50" r="8" fill="#4f46e5" />
+                                    <line x1="50" y1="50" x2="20" y2="20" stroke="#94a3b8" stroke-width="2" />
+                                    <line x1="50" y1="50" x2="80" y2="20" stroke="#94a3b8" stroke-width="2" />
+                                    <line x1="50" y1="50" x2="20" y2="80" stroke="#94a3b8" stroke-width="2" />
+                                    <line x1="50" y1="50" x2="80" y2="80" stroke="#94a3b8" stroke-width="2" />
+                                    <circle cx="20" cy="20" r="5" fill="#10b981" />
+                                    <circle cx="80" cy="20" r="5" fill="#10b981" />
+                                    <circle cx="20" cy="80" r="5" fill="#10b981" />
+                                    <circle cx="80" cy="80" r="5" fill="#10b981" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Small Office Floor</h4>
+                                <div class="text-xs font-bold text-indigo-600 mb-2 uppercase tracking-tight">Star
+                                    Topology + Cat6 Copper</div>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    <strong>Justification:</strong> A central switch allows high-speed 1Gbps
+                                    connections. If one cable fails, the rest of the network stays online. Copper is
+                                    cost-effective for distances under 100m.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Scenario 2: Fiber -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col md:flex-row gap-6">
+                            <div
+                                class="w-full md:w-32 flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-slate-100 p-2">
+                                <svg viewBox="0 0 100 100" class="w-24 h-24">
+                                    <rect x="10" y="40" width="15" height="20" rx="2" fill="#4f46e5" />
+                                    <rect x="75" y="40" width="15" height="20" rx="2" fill="#4f46e5" />
+                                    <path d="M25 50 C 40 40, 60 60, 75 50" stroke="#38bdf8" stroke-width="3" fill="none"
+                                        class="animate-pulse" />
+                                    <text x="35" y="75" font-size="8" fill="#0369a1" font-weight="bold">FIBER
+                                        LINK</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Inter-Building Link</h4>
+                                <div class="text-xs font-bold text-sky-600 mb-2 uppercase tracking-tight">Point-to-Point
+                                    + Fiber Optic</div>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    <strong>Justification:</strong> Fiber uses light pulses, making it immune to
+                                    electrical interference between buildings. It supports 10Gbps+ speeds over many
+                                    kilometers without signal loss.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Scenario 3: Mesh/Wireless -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col md:flex-row gap-6">
+                            <div
+                                class="w-full md:w-32 flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-slate-100 p-2">
+                                <svg viewBox="0 0 100 100" class="w-24 h-24">
+                                    <circle cx="30" cy="30" r="5" fill="#f59e0b" />
+                                    <circle cx="70" cy="30" r="5" fill="#f59e0b" />
+                                    <circle cx="50" cy="70" r="5" fill="#f59e0b" />
+                                    <line x1="30" y1="30" x2="70" y2="30" stroke="#f59e0b" stroke-width="1"
+                                        stroke-dasharray="2,2" />
+                                    <line x1="30" y1="30" x2="50" y2="70" stroke="#f59e0b" stroke-width="1"
+                                        stroke-dasharray="2,2" />
+                                    <line x1="70" y1="30" x2="50" y2="70" stroke="#f59e0b" stroke-width="1"
+                                        stroke-dasharray="2,2" />
+                                    <path d="M50 20 Q 50 10, 60 10" fill="none" stroke="#f59e0b" />
+                                    <circle cx="50" cy="20" r="2" fill="#f59e0b" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Hospital/School Campus</h4>
+                                <div class="text-xs font-bold text-amber-600 mb-2 uppercase tracking-tight">Mesh
+                                    Topology + Wi-Fi 6</div>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    <strong>Justification:</strong> Provides high mobility for users. Mesh topology
+                                    allows nodes to route traffic around dead zones or failed units, ensuring constant
+                                    uptime for critical applications.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-8 border-t border-slate-200">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+            <div>
+                © <span id="year"></span> GCSE CS Mini Websites — Built with ❤️
+            </div>
+            <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+                <span>Copyright (c) 2026 Stefanos Zisidis. Licensed under <a
+                        href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                        class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+                <a href="https://github.com/MrZisidis/gcse-cs-mini-websites" target="_blank"
+                    class="inline-block text-slate-400 hover:text-slate-800 transition-colors" aria-label="GitHub">
+                    <svg viewBox="0 0 16 16" class="w-4 h-4 fill-current">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64 -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div>
+                <a href="https://mrzisidis.github.io/"
+                    class="text-xs text-sky-600 hover:text-sky-800 font-semibold underline">Return to CS Hub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const rawData = [
+            { id: 'S1', q1: 0, q2: 0, q3: 0, q4: 0, total: 0, grade: 'U', status: 'DNT' },
+            { id: 'S2', q1: 16, q2: 10, q3: 6, q4: 2, total: 34, grade: 5, status: 'Active' },
+            { id: 'S3', q1: 13, q2: 9, q3: 7, q4: 16, total: 45, grade: 7, status: 'Active' },
+            { id: 'S4', q1: 0, q2: 0, q3: 0, q4: 0, total: 0, grade: 'U', status: 'DNT' },
+            { id: 'S5', q1: 15, q2: 11, q3: 7, q4: 6, total: 39, grade: 6, status: 'Active' },
+            { id: 'S6', q1: 14, q2: 12, q3: 6, q4: 6, total: 38, grade: 6, status: 'Active' },
+            { id: 'S7', q1: 8, q2: 7, q3: 6, q4: 3, total: 24, grade: 4, status: 'Active' },
+            { id: 'S8', q1: 14, q2: 13, q3: 8, q4: 13, total: 48, grade: 7, status: 'Active' },
+            { id: 'S9', q1: 11, q2: 10, q3: 7, q4: 5, total: 33, grade: 5, status: 'Active' },
+            { id: 'S10', q1: 5, q2: 4, q3: 4, q4: 5, total: 18, grade: 3, status: 'Active' },
+            { id: 'S11', q1: 15, q2: 11, q3: 9, q4: 6, total: 41, grade: 6, status: 'Active' },
+            { id: 'S12', q1: 14, q2: 11, q3: 5, q4: 8, total: 38, grade: 6, status: 'Active' },
+            { id: 'S13', q1: 8, q2: 7, q3: 6, q4: 3, total: 24, grade: 4, status: 'Active' },
+            { id: 'S14', q1: 5, q2: 4, q3: 4, q4: 5, total: 18, grade: 3, status: 'Active' },
+            { id: 'S15', q1: 16, q2: 12, q3: 6, q4: 7, total: 41, grade: 6, status: 'Active' },
+            { id: 'S16', q1: 0, q2: 0, q3: 0, q4: 0, total: 0, grade: 'U', status: 'DNT' }
+        ];
+
+        // --- NAVIGATION ---
+        function switchTab(id) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${id}`).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-indigo-50', 'text-indigo-600'));
+            document.getElementById(`btn-${id}`).classList.add('bg-indigo-50', 'text-indigo-600');
+        }
+
+        // --- CHARTS ---
+        function initCharts() {
+            const activeOnly = rawData.filter(s => s.status === 'Active');
+
+            new Chart(document.getElementById('topicChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Q1: Data', 'Q2: Comp', 'Q3: Net', 'Q4: Alg'],
+                    datasets: [{
+                        label: 'Mastery (%)',
+                        data: [68.16, 56.36, 49.04, 34.51],
+                        backgroundColor: ['#10b981', '#f59e0b', '#8b5cf6', '#f43f5e']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { max: 100 } }, plugins: { legend: { display: false } } }
+            });
+
+            const gradeCounts = { '7+': 0, '5-6': 0, '4': 0, '<4': 0 };
+            activeOnly.forEach(s => {
+                if (s.grade >= 7) gradeCounts['7+']++;
+                else if (s.grade >= 5) gradeCounts['5-6']++;
+                else if (s.grade === 4) gradeCounts['4']++;
+                else gradeCounts['<4']++;
+            });
+
+            new Chart(document.getElementById('gradeChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(gradeCounts),
+                    datasets: [{ data: Object.values(gradeCounts), backgroundColor: ['#4f46e5', '#818cf8', '#94a3b8', '#e2e8f0'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
+            });
+        }
+
+
+
+        // --- SIMULATOR LOGIC ---
+        let currentAlgo = 'binary';
+        let target = 78;
+        let array = [11, 22, 33, 44, 55, 66, 77, 88, 99, 100, 101];
+        let state = { low: 0, high: 10, mid: -1, pointer: -1, finished: false, steps: 0 };
+
+        function setAlgo(a) {
+            currentAlgo = a;
+            document.getElementById('algo-bin').className = a === 'binary' ? 'flex-1 py-2 px-3 bg-indigo-600 text-white rounded-md text-sm font-bold' : 'flex-1 py-2 px-3 bg-white border border-slate-300 text-slate-600 rounded-md text-sm font-bold';
+            document.getElementById('algo-lin').className = a === 'linear' ? 'flex-1 py-2 px-3 bg-indigo-600 text-white rounded-md text-sm font-bold' : 'flex-1 py-2 px-3 bg-white border border-slate-300 text-slate-600 rounded-md text-sm font-bold';
+            document.getElementById('sim-title').innerText = a === 'binary' ? 'Binary Search' : 'Linear Search';
+            resetSim();
+        }
+
+        function loadScenario() {
+            const scenario = document.getElementById('scenario-select').value;
+            // Update UI
+            if (scenario.startsWith('bin')) setAlgo('binary');
+            else setAlgo('linear');
+
+            switch (scenario) {
+                case 'bin-notfound': target = 78; break;
+                case 'bin-found': target = 33; break;
+                case 'bin-best': target = 66; break;
+                case 'bin-worst': target = 101; break;
+                case 'lin-best': target = 11; break;
+                case 'lin-avg': target = 66; break;
+                case 'lin-worst': target = 105; break;
+            }
+            resetSim();
+        }
+
+        function resetSim() {
+            state = { low: 0, high: array.length - 1, mid: -1, pointer: -1, finished: false, steps: 0 };
+            document.getElementById('sim-log').innerHTML = '<div class="text-slate-500 italic">Algorithm ready. Press Step to begin.</div>';
+            document.getElementById('sim-subtitle').innerText = `Target: ${target}`;
+            renderArray();
+        }
+
+        function renderArray() {
+            const box = document.getElementById('sim-array-box');
+            box.innerHTML = '';
+            array.forEach((val, i) => {
+                const item = document.createElement('div');
+                item.className = 'w-10 h-12 rounded border border-slate-700 bg-slate-800 flex flex-col items-center justify-center relative transition-all duration-300';
+
+                // Active highlighting
+                if (currentAlgo === 'binary') {
+                    if (i < state.low || i > state.high) item.classList.add('opacity-20');
+                    if (i === state.mid) item.classList.add('bg-indigo-600', 'border-white', 'scale-110', 'z-10');
+                } else {
+                    if (i === state.pointer) item.classList.add('bg-indigo-600', 'border-white', 'scale-110');
+                    else if (state.pointer !== -1 && i < state.pointer) item.classList.add('opacity-40');
+                }
+
+                item.innerHTML = `<span class="text-[8px] text-slate-500 absolute top-0.5">#${i}</span><span class="font-bold">${val}</span>`;
+                box.appendChild(item);
+            });
+        }
+
+        function log(msg, color = 'text-slate-300') {
+            const l = document.getElementById('sim-log');
+            const div = document.createElement('div');
+            div.className = `border-l-2 border-slate-700 pl-2 py-0.5 ${color}`;
+            div.innerText = `[Step ${++state.steps}] ${msg}`;
+            l.prepend(div);
+        }
+
+        function stepSim() {
+            if (state.finished) return;
+
+            if (currentAlgo === 'binary') {
+                if (state.low > state.high) {
+                    log(`Target ${target} NOT FOUND. Low crossed High.`, 'text-rose-400');
+                    state.finished = true;
+                    return;
+                }
+                state.mid = Math.floor((state.low + state.high) / 2);
+                const val = array[state.mid];
+
+                if (val === target) {
+                    log(`FOUND! Target ${target} equals Mid value ${val} at index ${state.mid}`, 'text-emerald-400');
+                    state.finished = true;
+                } else if (val < target) {
+                    log(`${val} < ${target}. Discarding lower half (Index ${state.low} to ${state.mid}).`);
+                    state.low = state.mid + 1;
+                } else {
+                    log(`${val} > ${target}. Discarding upper half (Index ${state.mid} to ${state.high}).`);
+                    state.high = state.mid - 1;
+                }
+            } else {
+                state.pointer++;
+                if (state.pointer >= array.length) {
+                    log(`End of list reached. ${target} NOT FOUND. (Checked ${array.length} items)`, 'text-rose-400');
+                    state.finished = true;
+                    return;
+                }
+                const val = array[state.pointer];
+                if (val === target) {
+                    log(`FOUND! ${target} located at index ${state.pointer}.`, 'text-emerald-400');
+                    state.finished = true;
+                } else {
+                    log(`Checked index ${state.pointer}: ${val} != ${target}. Moving right...`);
+                }
+            }
+            renderArray();
+        }
+
+        // --- INIT ---
+        window.onload = () => {
+            // Set year in footer
+            if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+            initCharts();
+            resetSim();
+        };
+    </script>
+    <!-- Back to Top -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Back to top Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

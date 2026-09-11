@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS Revision: Networks & Protocols</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Poppins font for consistency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --edexcel-blue: #003057;
+            --edexcel-light: #0076d6;
+            --network-blue: #0f172a;
+            --layer-app: #f59e0b;
+            --layer-trans: #3b82f6;
+            --layer-net: #10b981;
+            --layer-link: #8b5cf6;
+        }
+
+        body {
+            background-color: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+            color: #334155;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--edexcel-blue) 0%, var(--edexcel-light) 100%);
+        }
+
+        .layer-card {
+            transition: all 0.3s ease;
+            border-left: 6px solid;
+        }
+
+        .layer-app {
+            border-color: var(--layer-app);
+        }
+
+        .layer-trans {
+            border-color: var(--layer-trans);
+        }
+
+        .layer-net {
+            border-color: var(--layer-net);
+        }
+
+        .layer-link {
+            border-color: var(--layer-link);
+        }
+
+        .protocol-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: #e2e8f0;
+            cursor: grab;
+            margin: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .drop-zone {
+            min-height: 50px;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        .locked-content {
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .unlocked {
+            filter: none !important;
+            pointer-events: auto !important;
+        }
+
+        .feedback-correct {
+            border-color: #10b981 !important;
+            background-color: #f0fdf4 !important;
+        }
+
+        .feedback-incorrect {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="pb-20">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html#revision" class="hover:text-sky-700">Revision</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Networks</span>
+            </div>
+            <!-- In-page section links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#concepts" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Concepts</a>
+                <a href="#tcp-ip" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">TCP/IP Model</a>
+                <a href="#activities" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Activities</a>
+                <a href="#maths" class="bg-blue-600 text-white px-3 py-1.5 rounded-md font-bold text-xs hover:bg-blue-700 transition">Maths Drill</a>
+            </nav>
+        </div>
+    </header>
+
+    <header class="max-w-5xl mx-auto px-4 py-8 text-center">
+        <h1 class="text-4xl font-bold text-slate-900 italic uppercase">Networks & Protocols</h1>
+        <p class="mt-2 text-slate-600 italic">Topic 4: Communication & Layered Models</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 space-y-12">
+
+        <!-- 1. The Protocol Concept -->
+        <section id="concepts" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card p-6 border-t-4 border-blue-500">
+                <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span>📡</span> What is a Protocol?
+                </h2>
+                <p class="text-slate-600 leading-relaxed">
+                    A <strong>Protocol</strong> is a standard set of rules that govern how data is transmitted across a
+                    network. Without them, devices from different manufacturers could not communicate.
+                </p>
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                    <p class="text-sm font-bold text-blue-800 uppercase">Key Term: Interoperability</p>
+                    <p class="text-xs text-blue-700 italic">The ability of computer systems or software to exchange and
+                        make use of information.</p>
+                </div>
+            </div>
+
+            <div class="card p-6 border-t-4 border-orange-500">
+                <h2 class="text-2xl font-bold mb-4">📧 The Email Triangle</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded border border-slate-100">
+                        <span class="font-bold text-blue-600">SMTP</span>
+                        <span class="text-xs text-slate-500 font-medium">Sending email to a server</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded border border-slate-100">
+                        <span class="font-bold text-orange-600">POP3</span>
+                        <span class="text-xs text-slate-500 font-medium">Downloads & Deletes from server</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded border border-slate-100">
+                        <span class="font-bold text-emerald-600">IMAP</span>
+                        <span class="text-xs text-slate-500 font-medium">Syncs across multiple devices</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. The TCP/IP Model -->
+        <section id="tcp-ip">
+            <h2 class="text-2xl font-bold mb-6 border-b-2 border-slate-200 pb-2">The 4-Layer TCP/IP Model</h2>
+            <div class="space-y-4">
+                <div class="layer-card layer-app p-5 rounded-lg">
+                    <h3 class="font-bold text-amber-600 text-lg">1. Application Layer</h3>
+                    <p class="text-sm text-slate-600">Where the network applications operate (Browsers, Email clients).
+                        Encodes the data being sent.</p>
+                </div>
+                <div class="layer-card layer-trans p-5 rounded-lg">
+                    <h3 class="font-bold text-blue-600 text-lg">2. Transport Layer</h3>
+                    <p class="text-sm text-slate-600">Sets up communication between hosts. Splits data into
+                        <strong>packets</strong> and handles error checking.</p>
+                </div>
+                <div class="layer-card layer-net p-5 rounded-lg">
+                    <h3 class="font-bold text-emerald-600 text-lg">3. Internet Layer</h3>
+                    <p class="text-sm text-slate-600">Addresses and packages data for transmission. Routes packets
+                        across different networks using IP addresses.</p>
+                </div>
+                <div class="layer-card layer-link p-5 rounded-lg">
+                    <h3 class="font-bold text-purple-600 text-lg">4. Link Layer</h3>
+                    <p class="text-sm text-slate-600">The physical connection. Handles hardware interaction (MAC
+                        addresses, Ethernet cables, Wi-Fi radio waves).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Student Activity: The Packet Journey -->
+        <section id="activities" class="bg-slate-900 text-white p-8 rounded-2xl shadow-xl">
+            <h2 class="text-2xl font-bold mb-2 text-blue-400">Activity 1: The Data Packet’s Journey</h2>
+            <p class="text-slate-400 mb-6">Trace an HTTP request from your browser to a web server.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700" id="q1-container">
+                        <label class="block text-xs font-bold uppercase mb-2 text-blue-400">Step 1: Application</label>
+                        <p class="text-sm mb-3">You type a URL into the browser. Which protocol is used?</p>
+                        <input type="text" id="ans-protocol" placeholder="Protocol Name..."
+                            class="w-full bg-slate-900 border border-slate-700 rounded p-3 text-sm focus:border-blue-500 outline-none transition">
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700" id="q2-container">
+                        <label class="block text-xs font-bold uppercase mb-2 text-blue-400">Step 2: Internet</label>
+                        <p class="text-sm mb-3">A header is added to the packet. What specific address is added here?
+                        </p>
+                        <input type="text" id="ans-address" placeholder="Address type..."
+                            class="w-full bg-slate-900 border border-slate-700 rounded p-3 text-sm focus:border-blue-500 outline-none transition">
+                    </div>
+                    <button onclick="checkActivity1()"
+                        class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-bold transition shadow-lg">Check
+                        Answers</button>
+                </div>
+                <div
+                    class="border-2 border-dashed border-slate-700 rounded-xl flex items-center justify-center p-8 text-center bg-slate-800/50">
+                    <p class="text-slate-400 italic text-sm leading-relaxed">
+                        <span class="text-blue-400 text-3xl block mb-2 font-serif">"</span>
+                        Encapsulation is like putting a letter inside an envelope, then inside a crate, then inside a
+                        shipping container.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Matching Drill -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6 border-b-2 border-slate-200 pb-2">Activity 2: Layer Mapping</h2>
+            <p class="text-sm text-slate-500 mb-6 italic">Drag the protocols into their theoretical layers:</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container" data-layer="app">
+                    <h4 class="font-bold text-xs uppercase text-amber-600 mb-2">Application</h4>
+                    <div class="drop-zone" id="app-zone"></div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container"
+                    data-layer="trans">
+                    <h4 class="font-bold text-xs uppercase text-blue-600 mb-2">Transport</h4>
+                    <div class="drop-zone" id="trans-zone"></div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container" data-layer="net">
+                    <h4 class="font-bold text-xs uppercase text-emerald-600 mb-2">Internet</h4>
+                    <div class="drop-zone" id="net-zone"></div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container" data-layer="link">
+                    <h4 class="font-bold text-xs uppercase text-purple-600 mb-2">Link</h4>
+                    <div class="drop-zone" id="link-zone"></div>
+                </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-slate-100 rounded-xl border border-slate-200" id="protocol-vault">
+                <span class="protocol-pill" data-correct="app">HTTP</span>
+                <span class="protocol-pill" data-correct="trans">TCP</span>
+                <span class="protocol-pill" data-correct="net">IP</span>
+                <span class="protocol-pill" data-correct="link">Ethernet</span>
+                <span class="protocol-pill" data-correct="app">HTTPS</span>
+                <span class="protocol-pill" data-correct="app">FTP</span>
+                <span class="protocol-pill" data-correct="app">SMTP</span>
+                <span class="protocol-pill" data-correct="link">Wi-Fi</span>
+                <span class="protocol-pill" data-correct="trans">UDP</span>
+            </div>
+            <button onclick="checkMapping()"
+                class="mt-6 px-8 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition shadow-md">Mark
+                Mapping Task</button>
+        </section>
+
+        <!-- 5. Math Drill -->
+        <section id="maths" class="card p-8 border-t-4 border-blue-500">
+            <h2 class="text-2xl font-bold mb-4">Network Speed Calculations</h2>
+            <p class="text-sm text-slate-600 mb-8">Construct the expressions for the following scenarios:</p>
+
+            <div class="space-y-6">
+                <div class="p-6 bg-slate-50 rounded-xl border border-slate-100" id="math1-container">
+                    <p class="font-semibold mb-3 text-slate-700">1. A file is 500MB. The network speed is 50Mbps.
+                        Calculate the time in seconds.</p>
+                    <div class="flex gap-3 items-center">
+                        <span class="text-sm font-mono bg-white px-2 py-1 rounded border">Time =</span>
+                        <input type="text" id="math1" placeholder="e.g. (500 * 8) / 50"
+                            class="bg-white border p-3 rounded-lg text-sm w-full outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-xl border border-slate-100" id="math2-container">
+                    <p class="font-semibold mb-3 text-slate-700">2. Rearrange the formula to find the File Size if you
+                        know Time and Rate.</p>
+                    <div class="flex gap-3 items-center">
+                        <span class="text-sm font-mono bg-white px-2 py-1 rounded border">Size =</span>
+                        <input type="text" id="math2" placeholder="Formula in words or symbols..."
+                            class="bg-white border p-3 rounded-lg text-sm w-full outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <button onclick="checkMath()"
+                    class="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-500 transition shadow-md">Mark
+                    Calculation Expressions</button>
+            </div>
+        </section>
+
+        <!-- TEACHER VAULT -->
+        <section class="mt-20 border-t-2 border-slate-200 pt-16">
+            <div class="max-w-xl mx-auto text-center">
+                <div id="unlock-form" class="card p-8 border-2 border-slate-100">
+                    <h2 class="text-xl font-bold mb-4">🔐 Teacher Answer Vault</h2>
+                    <p class="text-xs text-slate-500 mb-6 italic">Enter password to reveal answer keys and examiner
+                        tips.</p>
+                    <div class="flex gap-2">
+                        <input type="password" id="vault-pass" placeholder="Password..."
+                            class="border p-3 rounded-lg flex-grow outline-none focus:border-slate-900 transition text-sm">
+                        <button onclick="unlockVault()"
+                            class="bg-slate-900 text-white px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition">Unlock</button>
+                    </div>
+                    <p id="error-msg" class="text-red-500 text-xs mt-3 hidden font-bold">Incorrect Password.</p>
+                </div>
+
+                <div id="vault-content"
+                    class="locked-content hidden text-left space-y-6 bg-emerald-50 p-8 rounded-2xl border-2 border-emerald-100 shadow-inner">
+                    <h3 class="text-2xl font-bold text-emerald-800 flex items-center gap-2">
+                        <span>🎖</span> Answer Key & Examiner Tips
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-900 underline decoration-emerald-200 underline-offset-4">
+                                Layer Mapping Answer</h4>
+                            <ul class="text-sm space-y-1 mt-3 text-emerald-800">
+                                <li><strong>Application:</strong> HTTP, HTTPS, FTP, SMTP, IMAP, POP3</li>
+                                <li><strong>Transport:</strong> TCP, UDP</li>
+                                <li><strong>Internet:</strong> IP</li>
+                                <li><strong>Link:</strong> Ethernet, Wi-Fi</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-900 underline decoration-emerald-200 underline-offset-4">
+                                Packet Journey Answers</h4>
+                            <ul class="text-sm space-y-1 mt-3 text-emerald-800">
+                                <li>Step 1 Protocol: <strong>HTTP or HTTPS</strong></li>
+                                <li>Step 2 Address: <strong>IP Address</strong></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/50 p-4 rounded-lg border border-emerald-100">
+                            <h4 class="font-bold text-emerald-900 mb-2">Math Logic</h4>
+                            <p class="text-sm text-emerald-800">Time = (File Size in Bytes * 8) / Rate in bits per
+                                second.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-20 py-12 border-t border-slate-200 bg-white">
+        <div class="max-w-5xl mx-auto px-4 text-center text-slate-400 text-sm">
+            <p>© 2026 Edexcel GCSE CS Revision Guide | Networks & Protocols Section</p>
+            <p class="mt-4"><a href="index.html"
+                    class="text-blue-500 font-bold hover:underline inline-flex items-center gap-1">🏠 Back to
+                    Launchpad</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function unlockVault() {
+            const pass = document.getElementById('vault-pass').value;
+            if (pass === 'Edexcel2024') {
+                document.getElementById('vault-content').classList.remove('hidden');
+                document.getElementById('vault-content').classList.add('unlocked');
+                document.getElementById('unlock-form').classList.add('hidden');
+            } else {
+                const err = document.getElementById('error-msg');
+                err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Marking Logic
+        function checkActivity1() {
+            const p = document.getElementById('ans-protocol').value.toLowerCase().trim();
+            const a = document.getElementById('ans-address').value.toLowerCase().trim();
+
+            document.getElementById('q1-container').className = (p === 'http' || p === 'https') ? 'bg-slate-800 p-4 rounded-lg feedback-correct' : 'bg-slate-800 p-4 rounded-lg feedback-incorrect';
+            document.getElementById('q2-container').className = (a === 'ip' || a.includes('ip address')) ? 'bg-slate-800 p-4 rounded-lg feedback-correct' : 'bg-slate-800 p-4 rounded-lg feedback-incorrect';
+        }
+
+        function checkMath() {
+            const m1 = document.getElementById('math1').value.toLowerCase();
+            const m2 = document.getElementById('math2').value.toLowerCase();
+
+            document.getElementById('math1-container').className = (m1.includes('500') && m1.includes('50') && m1.includes('/')) ? 'p-6 bg-slate-50 rounded-xl border border-slate-100 feedback-correct' : 'p-6 bg-slate-50 rounded-xl border border-slate-100 feedback-incorrect';
+            document.getElementById('math2-container').className = (m2.includes('time') && m2.includes('rate') && m2.includes('*')) ? 'p-6 bg-slate-50 rounded-xl border border-slate-100 feedback-correct' : 'p-6 bg-slate-50 rounded-xl border border-slate-100 feedback-incorrect';
+        }
+
+        function checkMapping() {
+            const zones = document.querySelectorAll('.drop-container');
+            zones.forEach(container => {
+                const layer = container.getAttribute('data-layer');
+                const items = container.querySelectorAll('.protocol-pill');
+                let allCorrect = true;
+                if (items.length === 0) allCorrect = false;
+                items.forEach(item => {
+                    if (item.getAttribute('data-correct') !== layer) allCorrect = false;
+                });
+                container.className = allCorrect ? `p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container feedback-correct` : `p-4 bg-white rounded-xl shadow-sm border border-slate-100 drop-container feedback-incorrect`;
+            });
+        }
+
+        // Drag & Drop
+        const pills = document.querySelectorAll('.protocol-pill');
+        const zones = document.querySelectorAll('.drop-zone');
+
+        pills.forEach(pill => {
+            pill.setAttribute('draggable', true);
+            pill.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.innerText);
+                e.dataTransfer.setData('correct', e.target.getAttribute('data-correct'));
+                e.target.classList.add('dragging-active');
+            });
+        });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => e.preventDefault());
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const text = e.dataTransfer.getData('text/plain');
+                const correct = e.dataTransfer.getData('correct');
+                const newPill = document.createElement('span');
+                newPill.className = 'protocol-pill text-[10px] ml-1 mb-1';
+                newPill.innerText = text;
+                newPill.setAttribute('data-correct', correct);
+                zone.appendChild(newPill);
+
+                // Remove original pill from vault
+                pills.forEach(p => { if (p.innerText === text) p.remove(); });
+            });
+        });
+    </script>
+    <!-- Back to Top -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Back to top Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

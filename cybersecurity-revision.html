@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE CS: Cybersecurity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyber-red: #dc2626;
+            --cyber-dark: #111827;
+            --cyber-green: #10b981;
+        }
+        body { background-color: #f9fafb; font-family: 'Poppins', sans-serif; }
+        .threat-card { transition: transform 0.2s; }
+        .threat-card:hover { transform: scale(1.02); }
+        .feedback-correct { border-color: #10b981 !important; background-color: #f0fdf4 !important; }
+        .feedback-incorrect { border-color: #ef4444 !important; background-color: #fef2f2 !important; }
+        .locked-content { filter: blur(4px); pointer-events: none; user-select: none; }
+        .unlocked { filter: none !important; pointer-events: auto !important; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-20 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html#revision" class="hover:text-sky-700">Revision</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Cybersecurity</span>
+            </div>
+            <!-- In-page section links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#threats" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Threats</a>
+                <a href="#human" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Human</a>
+                <a href="#detective" class="text-slate-600 hover:text-sky-600 font-semibold text-sm">Detective</a>
+                <a href="#defense" class="bg-red-600 text-white px-3 py-1.5 rounded-md font-bold text-xs hover:bg-red-700 transition">Defense</a>
+            </nav>
+        </div>
+    </header>
+
+    <header class="max-w-5xl mx-auto px-4 py-8 text-center">
+        <h1 class="text-4xl font-bold text-slate-900 italic">Lesson 6: Cybersecurity</h1>
+        <p class="mt-2 text-slate-600 italic">Threats, Vulnerabilities & Defense Mechanisms</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 space-y-12">
+
+        <!-- 1. Types of Attack -->
+        <section id="threats">
+            <h2 class="text-2xl font-bold mb-6 border-b-2 border-red-200 pb-2 text-slate-800">1. Common Network Threats</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Malware -->
+                <div class="threat-card bg-white p-5 rounded-xl shadow-sm border-t-4 border-red-500">
+                    <h3 class="font-bold text-red-600 mb-2">Malware</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Software designed to cause damage. Includes <strong>Viruses</strong>, <strong>Worms</strong>, <strong>Trojans</strong>, and <strong>Ransomware</strong>.</p>
+                </div>
+                <!-- Phishing -->
+                <div class="threat-card bg-white p-5 rounded-xl shadow-sm border-t-4 border-orange-500">
+                    <h3 class="font-bold text-orange-600 mb-2">Phishing</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Social engineering where attackers pose as a legitimate organization to steal sensitive data via email/SMS.</p>
+                </div>
+                <!-- Brute Force -->
+                <div class="threat-card bg-white p-5 rounded-xl shadow-sm border-t-4 border-blue-500">
+                    <h3 class="font-bold text-blue-600 mb-2">Brute Force</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">A trial-and-error method used to guess passwords. Attackers use automated software to try millions of combinations.</p>
+                </div>
+                <!-- Denial of Service -->
+                <div class="threat-card bg-white p-5 rounded-xl shadow-sm border-t-4 border-purple-500">
+                    <h3 class="font-bold text-purple-600 mb-2">DoS / DDoS</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Flooding a server with useless traffic to make it crash or become unavailable to legitimate users.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Human Vulnerabilities -->
+        <section id="human" class="bg-slate-900 text-white p-8 rounded-2xl shadow-inner">
+            <h2 class="text-2xl font-bold mb-4 text-red-400">The "Human Link"</h2>
+            <p class="text-slate-300 mb-6 italic">Even the strongest firewall cannot protect against human error. Why are people a vulnerability?</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                    <h4 class="font-bold text-sm mb-1">Social Engineering</h4>
+                    <p class="text-xs text-slate-400">Manipulating people into giving up confidential information (e.g., Shoulder Surfing).</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                    <h4 class="font-bold text-sm mb-1">Weak Passwords</h4>
+                    <p class="text-xs text-slate-400">Using "123456" or birthdays makes brute force attacks significantly easier.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                    <h4 class="font-bold text-sm mb-1">Lack of Training</h4>
+                    <p class="text-xs text-slate-400">Employees clicking on suspicious links or plugging in unknown USB drives.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Student Activity: The Cyber Detective -->
+        <section id="detective" class="space-y-6">
+            <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-2">Activity 1: Identify the Attack</h2>
+            <p class="text-sm text-slate-500">Read the scenarios and identify which cyber threat is occurring.</p>
+            
+            <div class="space-y-4">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200" id="case1-container">
+                    <p class="text-sm font-medium mb-3">Case 1: "I received an email from 'PayPa1' saying my account is locked and I need to login to verify my identity via a link."</p>
+                    <input type="text" id="ans1" placeholder="Type attack name..." class="bg-slate-50 border p-2 rounded text-sm w-full md:w-64">
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200" id="case2-container">
+                    <p class="text-sm font-medium mb-3">Case 2: "Our company website has gone offline because it is receiving 5 million requests per second from thousands of different computers."</p>
+                    <input type="text" id="ans2" placeholder="Type attack name..." class="bg-slate-50 border p-2 rounded text-sm w-full md:w-64">
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200" id="case3-container">
+                    <p class="text-sm font-medium mb-3">Case 3: "A hacker has entered <code>' OR 1=1 --</code> into our website login box and has managed to bypass the password check."</p>
+                    <input type="text" id="ans3" placeholder="Type attack name..." class="bg-slate-50 border p-2 rounded text-sm w-full md:w-64">
+                </div>
+
+                <button onclick="checkDetective()" class="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition">Mark Activity</button>
+            </div>
+        </section>
+
+        <!-- 4. Prevention Tactics -->
+        <section id="defense">
+            <h2 class="text-2xl font-bold mb-6 border-b-2 border-slate-200 pb-2">Activity 2: Defense Mechanisms</h2>
+            <p class="text-sm text-slate-500 mb-6">Match the prevention technique to the threat it stops.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-white border-2 rounded-lg flex items-center justify-between" id="def1">
+                    <span class="text-sm">1. Input Sanitisation</span>
+                    <select id="sel1" class="text-xs bg-slate-100 p-1 rounded">
+                        <option value="">Select Threat...</option>
+                        <option value="sql">SQL Injection</option>
+                        <option value="dos">DoS Attack</option>
+                        <option value="brute">Brute Force</option>
+                    </select>
+                </div>
+                <div class="p-4 bg-white border-2 rounded-lg flex items-center justify-between" id="def2">
+                    <span class="text-sm">2. Account Lockout (3 tries)</span>
+                    <select id="sel2" class="text-xs bg-slate-100 p-1 rounded">
+                        <option value="">Select Threat...</option>
+                        <option value="sql">SQL Injection</option>
+                        <option value="dos">DoS Attack</option>
+                        <option value="brute">Brute Force</option>
+                    </select>
+                </div>
+                <div class="p-4 bg-white border-2 rounded-lg flex items-center justify-between" id="def3">
+                    <span class="text-sm">3. Firewall / Traffic filtering</span>
+                    <select id="sel3" class="text-xs bg-slate-100 p-1 rounded">
+                        <option value="">Select Threat...</option>
+                        <option value="sql">SQL Injection</option>
+                        <option value="dos">DoS Attack</option>
+                        <option value="brute">Brute Force</option>
+                    </select>
+                </div>
+                <button onclick="checkDefense()" class="md:col-span-2 bg-slate-900 text-white py-3 rounded-lg font-bold">Mark Defense Task</button>
+            </div>
+        </section>
+
+        <!-- TEACHER VAULT -->
+        <section class="mt-20 border-t-2 border-slate-300 pt-10">
+            <div class="max-w-xl mx-auto text-center">
+                <div id="unlock-form">
+                    <h2 class="text-xl font-bold mb-4">🔐 Teacher Answer Vault</h2>
+                    <p class="text-xs text-slate-500 mb-4 italic">Enter password to reveal answer keys and exam mark schemes.</p>
+                    <input type="password" id="vault-pass" placeholder="Password..." class="border p-2 rounded mr-2">
+                    <button onclick="unlockVault()" class="bg-red-800 text-white px-4 py-2 rounded font-bold">Unlock</button>
+                    <p id="error-msg" class="text-red-500 text-xs mt-2 hidden">Incorrect Password.</p>
+                </div>
+
+                <div id="vault-content" class="locked-content hidden text-left space-y-6 bg-red-50 p-8 rounded-xl border-2 border-red-200">
+                    <h3 class="text-2xl font-bold text-red-800">Answer Key: Cybersecurity</h3>
+                    
+                    <div>
+                        <h4 class="font-bold underline">Detective Activity</h4>
+                        <ul class="text-sm space-y-1 mt-2">
+                            <li>Case 1: <strong>Phishing</strong></li>
+                            <li>Case 2: <strong>DoS or DDoS</strong></li>
+                            <li>Case 3: <strong>SQL Injection</strong></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold underline">Defense Mapping</h4>
+                        <ul class="text-sm space-y-1 mt-2">
+                            <li>Sanitisation → <strong>SQL Injection</strong></li>
+                            <li>Lockout → <strong>Brute Force</strong></li>
+                            <li>Firewall → <strong>DoS / DDoS</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded border border-red-300">
+                        <h4 class="font-bold text-red-600">Examiner Tip: SQL Injection</h4>
+                        <p class="text-sm italic">"When explaining SQL Injection, students must mention that it involves entering code into a form field to manipulate the database. <strong>Input Sanitisation</strong> is the key technical prevention method to remember."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 py-12 border-t border-slate-200 bg-white">
+        <div class="max-w-5xl mx-auto px-4 text-center text-slate-400 text-sm">
+            <p>© 2026 Edexcel GCSE CS Revision Guide | Lesson 6: Cybersecurity</p>
+            <p class="mt-4"><a href="index.html" class="text-red-600 font-bold hover:underline inline-flex items-center gap-1">🏠 Back to Launchpad</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function unlockVault() {
+            const pass = document.getElementById('vault-pass').value;
+            if (pass === 'Edexcel2024') {
+                document.getElementById('vault-content').classList.remove('hidden');
+                document.getElementById('vault-content').classList.add('unlocked');
+                document.getElementById('unlock-form').classList.add('hidden');
+            } else {
+                const err = document.getElementById('error-msg');
+                err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
+            }
+        }
+
+        function checkDetective() {
+            const a1 = document.getElementById('ans1').value.toLowerCase().trim();
+            const a2 = document.getElementById('ans2').value.toLowerCase().trim();
+            const a3 = document.getElementById('ans3').value.toLowerCase().trim();
+
+            document.getElementById('case1-container').className = a1 === 'phishing' ? 'bg-white p-6 rounded-lg shadow-sm feedback-correct border' : 'bg-white p-6 rounded-lg shadow-sm feedback-incorrect border';
+            document.getElementById('case2-container').className = (a2 === 'dos' || a2 === 'ddos' || a2.includes('denial')) ? 'bg-white p-6 rounded-lg shadow-sm feedback-correct border' : 'bg-white p-6 rounded-lg shadow-sm feedback-incorrect border';
+            document.getElementById('case3-container').className = (a3 === 'sql injection' || a3 === 'sql') ? 'bg-white p-6 rounded-lg shadow-sm feedback-correct border' : 'bg-white p-6 rounded-lg shadow-sm feedback-incorrect border';
+        }
+
+        function checkDefense() {
+            const s1 = document.getElementById('sel1').value;
+            const s2 = document.getElementById('sel2').value;
+            const s3 = document.getElementById('sel3').value;
+
+            document.getElementById('def1').className = s1 === 'sql' ? 'p-4 border-2 rounded-lg flex items-center justify-between feedback-correct' : 'p-4 border-2 rounded-lg flex items-center justify-between feedback-incorrect';
+            document.getElementById('def2').className = s2 === 'brute' ? 'p-4 border-2 rounded-lg flex items-center justify-between feedback-correct' : 'p-4 border-2 rounded-lg flex items-center justify-between feedback-incorrect';
+            document.getElementById('def3').className = s3 === 'dos' ? 'p-4 border-2 rounded-lg flex items-center justify-between feedback-correct' : 'p-4 border-2 rounded-lg flex items-center justify-between feedback-incorrect';
+        }
+    </script>
+    <!-- Back to Top -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Back to top Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
