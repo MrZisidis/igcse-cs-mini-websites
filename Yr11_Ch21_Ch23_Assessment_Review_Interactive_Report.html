@@ -2722,5 +2722,28 @@
 
     document.addEventListener(`DOMContentLoaded`, initApp);
   </script>
+
+  <!-- Back to Top -->
+  <button id="back-to-top"
+    style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;background:#0f62fe;color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgb(0 0 0/.18);cursor:pointer;transition:background 120ms,transform 120ms;"
+    aria-label="Back to top"
+    onmouseenter="this.style.background='#0353e9';this.style.transform='translateY(-2px)'"
+    onmouseleave="this.style.background='#0f62fe';this.style.transform='translateY(0)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', function () {
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+      });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
 </body>
 </html>
