@@ -1,0 +1,2726 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="carbon">
+  <title>Year 11 Assessment Review: Chapters 21 &amp; 23 — Networks &amp; The Internet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Carbon) */
+      --background: #ffffff;
+      --surface-container-low: #f4f4f4;
+      --surface-container: #f4f4f4;
+      --surface-container-high: #e0e0e0;
+
+      /* Ink */
+      --on-surface: #161616;
+      --on-surface-variant: #525252;
+
+      /* Rules */
+      --outline: #8d8d8d;
+      --outline-variant: #e0e0e0;
+
+      /* Accents */
+      --primary: #0f62fe;
+      --on-primary: #ffffff;
+      --primary-hover: #0353e9;
+      --primary-container: #d0e2ff;
+      --on-primary-container: #161616;
+      --secondary: #6f6f6f;
+      --tertiary: #198038;
+      --error: #da1e28;
+      --on-error: #ffffff;
+
+      /* Data series */
+      --data-1: #0f62fe;
+      --data-2: #6929c4;
+      --data-3: #005d5d;
+      --data-4: #9f1853;
+      --data-context: #8d8d8d;
+
+      /* Semantic containers (WCAG AA compliant) */
+      --positive: #198038;
+      --positive-container: #defbe6;
+      --on-positive-container: #0e4a1f;
+      --warning: #7a5900;
+      --warning-container: #fcf4d6;
+      --on-warning-container: #473300;
+      --error-container: #fff1f1;
+      --on-error-container: #750e13;
+
+      /* Focus */
+      --focus: var(--primary);
+
+      /* Fonts */
+      --font-headline: 'IBM Plex Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-label: 'IBM Plex Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.25rem;
+      --rounded-full: 0.75rem;
+
+      /* Style effects */
+      --shadow-1: 0 2px 6px rgb(0 0 0 / 0.1);
+      --shadow-2: 0 4px 12px rgb(0 0 0 / 0.12);
+      --rule: 1px solid var(--outline-variant);
+      --field-rule: 1px solid var(--outline);
+      --indicator: 2px solid var(--primary);
+      --indicator-strong: 3px solid var(--primary);
+      --indicator-positive: 3px solid var(--positive);
+      --indicator-error: 3px solid var(--error);
+      --indicator-warning: 3px solid var(--warning);
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.125rem, 1.3rem + 3vw, 3.5rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.4vw, 2.25rem);
+      --subhead-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+      --body-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-2xl);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, p, ul, ol { margin-top: 0; }
+    .mono-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface-variant);
+    }
+    .mono-code {
+      font-family: var(--font-label);
+      font-size: 0.92em;
+      font-variant-numeric: tabular-nums;
+    }
+    .display-title {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: 0;
+      margin-bottom: var(--space-md);
+      color: var(--on-surface);
+    }
+    .display-title strong {
+      font-weight: 600;
+    }
+    .section-heading {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: var(--space-sm);
+      color: var(--on-surface);
+    }
+    .section-heading strong {
+      font-weight: 600;
+    }
+    .subhead {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: var(--space-sm);
+      color: var(--on-surface);
+    }
+    .lede {
+      font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      line-height: 1.55;
+      margin-bottom: var(--space-lg);
+    }
+    .prose {
+      max-width: 65ch;
+      color: var(--on-surface);
+    }
+    .helper-text {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      line-height: 1.45;
+    }
+
+    /* Hairline dividers & Carbon layers */
+    .section-block {
+      display: grid;
+      gap: var(--space-lg);
+      padding-top: var(--space-xl);
+      border-top: var(--rule);
+    }
+    .section-head {
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+    .section-head-copy {
+      max-width: 68ch;
+    }
+    .layer {
+      background: var(--surface-container);
+      border-radius: 0;
+      padding: var(--space-md);
+    }
+    .layer-lg {
+      background: var(--surface-container);
+      border-radius: 0;
+      padding: var(--space-lg);
+    }
+    .layer .layer,
+    .layer-lg .layer {
+      background: var(--surface-container-high);
+    }
+
+    /* Header & Lesson Pacing Strip */
+    .report-header {
+      display: grid;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+    }
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm) var(--space-lg);
+      padding-bottom: var(--space-sm);
+      border-bottom: var(--rule);
+      align-items: center;
+    }
+    .lesson-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+    .lesson-nav-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      min-height: 44px;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .lesson-nav-link:hover {
+      background: var(--surface-container-high);
+      border-bottom-color: var(--primary);
+    }
+    .lesson-nav-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+
+    /* Tags / Pills (Carbon: --rounded-full only for 24px tags) */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      height: 24px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded-full);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .tag-blue {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .tag-green {
+      background: var(--positive-container);
+      color: var(--on-positive-container);
+    }
+    .tag-red {
+      background: var(--error-container);
+      color: var(--on-error-container);
+    }
+    .tag-amber {
+      background: var(--warning-container);
+      color: var(--on-warning-container);
+    }
+    .tag-neutral {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    /* Buttons (Carbon square corners, left-aligned label) */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-md);
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      border-radius: 0;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--primary);
+      padding: var(--space-sm) var(--space-md);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-container);
+    }
+    .btn-danger-ghost {
+      background: transparent;
+      color: var(--error);
+      border-color: var(--error);
+      padding: var(--space-sm) var(--space-md);
+    }
+    .btn-danger-ghost:hover:not(:disabled) {
+      background: var(--error-container);
+      color: var(--on-error-container);
+    }
+
+    /* Section 1: Dashboard Layout & KPIs */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .kpi-tile {
+      background: var(--surface-container);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-xs);
+      align-content: start;
+    }
+    .kpi-tile.is-primary {
+      border-bottom: var(--indicator);
+    }
+    .kpi-value {
+      font-family: var(--font-label);
+      font-weight: 300;
+      font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.25rem);
+      line-height: 1.15;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-value-positive { color: var(--positive); }
+    .kpi-value-error { color: var(--error); }
+    .kpi-value-blue { color: var(--primary); }
+
+    .asymmetric-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .chart-panel {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+    }
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+    }
+    .swatch-strong { background: var(--positive); }
+    .swatch-focus { background: var(--primary); }
+    .swatch-mean { background: var(--on-surface); height: 2px; width: 14px; }
+
+    .chart-wrap {
+      position: relative;
+      min-height: 300px;
+      width: 100%;
+    }
+
+    /* Question Breakdown Selector */
+    .q-list {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .q-item-btn {
+      width: 100%;
+      background: var(--surface-container);
+      border: 0;
+      border-left: 3px solid transparent;
+      padding: var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      text-align: left;
+      cursor: pointer;
+      min-height: 44px;
+      font-family: var(--font-body);
+      color: var(--on-surface);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .q-item-btn:hover {
+      background: var(--surface-container-high);
+    }
+    .q-item-btn.is-active {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-left: var(--indicator-strong);
+    }
+    .q-item-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      display: block;
+    }
+    .q-item-score {
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .q-detail-card {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      border-top: var(--indicator);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .www-ebi-grid {
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .callout-strip {
+      background: var(--background);
+      padding: var(--space-md);
+      border-left: 3px solid var(--primary);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .callout-strip.is-positive { border-left-color: var(--positive); }
+    .callout-strip.is-error { border-left-color: var(--error); }
+    .callout-strip.is-warning { border-left-color: var(--warning); }
+
+    /* Cohort Grade Spectrum */
+    .spectrum-panel {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .spectrum-track {
+      position: relative;
+      height: 36px;
+      background: var(--surface-container-high);
+      display: flex;
+      align-items: stretch;
+    }
+    .spectrum-fill-cohort {
+      position: absolute;
+      left: 33.3%;
+      width: 56.7%;
+      top: 0;
+      bottom: 0;
+      background: var(--primary-container);
+      border-left: 3px solid var(--error);
+      border-right: 3px solid var(--positive);
+    }
+    .spectrum-mean-marker {
+      position: absolute;
+      left: 60%;
+      top: -6px;
+      bottom: -6px;
+      width: 3px;
+      background: var(--primary);
+      z-index: 2;
+    }
+    .spectrum-labels {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+      padding-top: var(--space-xs);
+    }
+    .spectrum-stat {
+      border-top: var(--rule);
+      padding-top: var(--space-xs);
+    }
+
+    /* Section 2: 4-Layer TCP/IP Stack */
+    .mode-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      background: var(--surface-container);
+      padding: var(--space-md);
+    }
+    .tab-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      border-bottom: var(--rule);
+    }
+    .tab-btn {
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .tab-btn:hover {
+      color: var(--on-surface);
+    }
+    .tab-btn.is-active {
+      color: var(--on-surface);
+      font-weight: 600;
+      border-bottom-color: var(--primary);
+    }
+
+    .tcpip-stack {
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .tcpip-layer-row {
+      display: grid;
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr) minmax(0, 260px);
+      gap: var(--space-md);
+      background: var(--surface-container);
+      padding: var(--space-md);
+      border-left: 4px solid var(--primary);
+      align-items: start;
+    }
+    .tcpip-layer-row[data-layer="application"] { border-left-color: var(--data-1); }
+    .tcpip-layer-row[data-layer="transport"] { border-left-color: var(--data-2); }
+    .tcpip-layer-row[data-layer="network"] { border-left-color: var(--data-3); }
+    .tcpip-layer-row[data-layer="datalink"] { border-left-color: var(--data-4); }
+
+    .protocol-chips-static {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+    .proto-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 var(--space-sm);
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      border-radius: var(--rounded-full);
+    }
+    .pdu-box {
+      background: var(--surface-container-high);
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.8125rem;
+      color: var(--on-surface);
+    }
+
+    /* Interactive Protocol Matching Game */
+    .matching-workspace {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .matching-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--rule);
+    }
+    .protocol-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      background: var(--background);
+      border: var(--rule);
+      min-height: 68px;
+      align-items: center;
+    }
+    .proto-token {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background: var(--surface-container);
+      border: 1px solid var(--outline);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .proto-token:hover {
+      background: var(--surface-container-high);
+    }
+    .proto-token.is-selected {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .proto-token.is-correct {
+      background: var(--positive-container);
+      color: var(--on-positive-container);
+      border-color: var(--positive);
+    }
+    .proto-token.is-wrong {
+      background: var(--error-container);
+      color: var(--on-error-container);
+      border-color: var(--error);
+    }
+
+    .drop-zones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .drop-zone {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-top: 3px solid var(--primary);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-sm);
+      align-content: start;
+      min-height: 170px;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .drop-zone:hover,
+    .drop-zone.is-drag-over {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .drop-zone:hover .helper-text,
+    .drop-zone:hover .mono-label,
+    .drop-zone.is-drag-over .helper-text,
+    .drop-zone.is-drag-over .mono-label {
+      color: var(--on-primary-container);
+    }
+    .drop-zone.is-ready-target {
+      border-color: var(--primary);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    .zone-tokens {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      align-items: start;
+    }
+
+    .watchpoints-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    /* Section 3: DNS Sequencer & IPv4/IPv6 */
+    .dns-workspace {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .dns-controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--rule);
+    }
+    .field-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+    .carbon-select {
+      height: 44px;
+      min-width: 240px;
+      background: var(--background);
+      color: var(--on-surface);
+      border: 0;
+      border-bottom: var(--field-rule);
+      padding: 0 var(--space-xl) 0 var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .dns-diagram-box {
+      background: var(--background);
+      border: var(--rule);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .dns-svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .dns-step-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: var(--space-md);
+      align-items: start;
+    }
+    .dns-io-box {
+      background: var(--surface-container);
+      padding: var(--space-md);
+      border-left: var(--indicator-strong);
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    /* Comparison Table */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+    }
+    table.carbon-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+    .carbon-table th {
+      background: var(--surface-container-high);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface);
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline);
+    }
+    .carbon-table td {
+      padding: var(--space-md);
+      border-bottom: var(--rule);
+      vertical-align: top;
+      color: var(--on-surface);
+    }
+    .carbon-table tbody tr:nth-child(even) {
+      background: var(--surface-container);
+    }
+
+    /* Spot the Error Grid */
+    .spot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .spot-card {
+      background: var(--surface-container);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+      align-content: space-between;
+      border-top: 3px solid var(--outline);
+    }
+    .spot-card.is-resolved-right { border-top-color: var(--positive); }
+    .spot-card.is-resolved-wrong { border-top-color: var(--error); }
+    .spot-prompt {
+      background: var(--background);
+      padding: var(--space-md);
+      border: var(--rule);
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      word-break: break-word;
+    }
+
+    /* Section 4: Differentiated Action Plan & Exit Quiz */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .tier-card {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+      border-top: 3px solid var(--outline-variant);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .tier-card.is-selected-tier {
+      border-top: 3px solid var(--primary);
+      background: var(--background);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    .checklist-ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .check-label {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      cursor: pointer;
+      min-height: 44px;
+      padding: var(--space-xs) 0;
+      font-size: 0.9375rem;
+    }
+    .check-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Exit Quiz */
+    .quiz-container {
+      background: var(--surface-container);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .quiz-card {
+      background: var(--background);
+      border: var(--rule);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+    }
+    .quiz-options {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .quiz-opt-btn {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      border: 1px solid transparent;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      background: var(--surface-container-high);
+    }
+    .quiz-opt-btn.is-chosen {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .quiz-opt-btn.is-correct {
+      background: var(--positive-container);
+      color: var(--on-positive-container);
+      border-color: var(--positive);
+      font-weight: 600;
+    }
+    .quiz-opt-btn.is-wrong {
+      background: var(--error-container);
+      color: var(--on-error-container);
+      border-color: var(--error);
+    }
+
+    .feedback-banner {
+      padding: var(--space-sm) var(--space-md);
+      border-left: 3px solid var(--primary);
+      background: var(--surface-container);
+      font-size: 0.875rem;
+      line-height: 1.45;
+    }
+    .feedback-banner.is-positive {
+      border-left-color: var(--positive);
+      background: var(--positive-container);
+      color: var(--on-positive-container);
+    }
+    .feedback-banner.is-error {
+      border-left-color: var(--error);
+      background: var(--error-container);
+      color: var(--on-error-container);
+    }
+    .feedback-banner.is-warning {
+      border-left-color: var(--warning);
+      background: var(--warning-container);
+      color: var(--on-warning-container);
+    }
+
+    /* Footer */
+    .report-footer {
+      border-top: var(--rule);
+      padding: var(--space-lg) 0 var(--space-xl);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    /* Responsive container & mobile rules */
+    .card-wrapper { container-type: inline-size; }
+    @container (max-width: 520px) {
+      .dns-step-detail { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .asymmetric-grid { grid-template-columns: 1fr; }
+      .tcpip-layer-row { grid-template-columns: 1fr; }
+      .dns-step-detail { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-xl);
+      }
+      .spectrum-labels {
+        grid-template-columns: 1fr 1fr;
+      }
+      .quiz-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+
+    <!-- HEADER & 30-MINUTE LESSON STRUCTURE -->
+    <header class="report-header">
+      <div class="meta-strip">
+        <span class="mono-label">Pearson Edexcel iGCSE Computer Science (4CP0)</span>
+        <span class="mono-label">Chapters 21 &amp; 23 Assessment Review</span>
+        <span class="mono-label">Report ID: Yr11_Ch21_Ch23_Assessment_Review_Interactive_Report</span>
+      </div>
+
+      <div>
+        <h1 class="display-title">Year 11 Assessment Review: <strong>Networks &amp; The Internet</strong></h1>
+        <p class="lede">
+          Your cohort scored a solid <strong>60.0% class average (18.0 / 30)</strong>, demonstrating strong command of network topologies and hardware media (<strong>71.3%</strong>). This 30-minute interactive review targets the <strong>14 marks</strong> across the TCP/IP 4-layer stack and DNS/IP addressing where the highest grade gains sit.
+        </p>
+      </div>
+
+      <nav aria-label="30-minute lesson review sections" class="lesson-nav">
+        <a class="lesson-nav-link" href="#sec-dashboard">
+          <span class="mono-label">00–05 MIN · PART 1</span>
+          <span class="lesson-nav-title">Executive Performance Dashboard</span>
+        </a>
+        <a class="lesson-nav-link" href="#sec-tcpip">
+          <span class="mono-label">05–15 MIN · PART 2</span>
+          <span class="lesson-nav-title">Deep-Dive 1: 4-Layer TCP/IP Model</span>
+        </a>
+        <a class="lesson-nav-link" href="#sec-dns">
+          <span class="mono-label">15–25 MIN · PART 3</span>
+          <span class="lesson-nav-title">Deep-Dive 2: DNS &amp; IPv4 vs IPv6</span>
+        </a>
+        <a class="lesson-nav-link" href="#sec-action">
+          <span class="mono-label">25–30 MIN · PART 4</span>
+          <span class="lesson-nav-title">Action Plan &amp; 4-Mark Exit Quiz</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- SECTION 1: EXECUTIVE PERFORMANCE DASHBOARD (0-5 MINS) -->
+    <section id="sec-dashboard" class="section-block" aria-labelledby="heading-dashboard">
+      <div class="section-head">
+        <div class="section-head-copy">
+          <span class="mono-label">Part 1 · 5 Minutes · Cohort Diagnostic</span>
+          <h2 id="heading-dashboard" class="section-heading">Strong hardware foundations, with a <strong>24.9-point gap</strong> in protocols and addressing</h2>
+        </div>
+        <div id="live-progress-pill" class="tag tag-blue">0 / 21 Interactive Checks Completed</div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-tile is-primary">
+          <span class="mono-label">Cohort Average (30 Marks)</span>
+          <div class="kpi-value kpi-value-blue">18.0 / 30</div>
+          <span class="helper-text">60.0% mean across Year 11 assessment</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Q1 &amp; Q2 Combined (Strength)</span>
+          <div class="kpi-value kpi-value-positive">71.3%</div>
+          <span class="helper-text">5.7 / 8 avg on Fundamentals &amp; Hardware</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Q3 &amp; Q4 Combined (Focus)</span>
+          <div class="kpi-value kpi-value-error">46.4%</div>
+          <span class="helper-text">6.5 / 14 avg on TCP/IP Stack &amp; DNS/IP</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Student Grade Range</span>
+          <div class="kpi-value">G2 – G9</div>
+          <span class="helper-text">Marks spanned 10 / 30 to 27 / 30</span>
+        </div>
+      </div>
+
+      <div class="asymmetric-grid">
+        <div class="chart-panel">
+          <div class="chart-header">
+            <div>
+              <h3 class="subhead">Average Score by Question (%)</h3>
+              <span class="mono-label">Chapters 21 &amp; 23 Assessment · 30 Total Marks</span>
+            </div>
+            <div class="chart-legend" aria-label="Chart legend">
+              <span class="legend-item"><span class="legend-swatch swatch-strong" aria-hidden="true"></span>Strong (≥ 70%)</span>
+              <span class="legend-item"><span class="legend-swatch swatch-focus" aria-hidden="true"></span>Main Focus (&lt; 50%)</span>
+              <span class="legend-item"><span class="legend-swatch swatch-mean" aria-hidden="true"></span>Class Mean (60.0%)</span>
+            </div>
+          </div>
+          <div id="assessmentChartWrap" class="chart-wrap">
+            <canvas id="assessmentChart" aria-label="Bar chart of class averages across Questions 1 to 4"></canvas>
+          </div>
+          <p class="helper-text">
+            Source: Year 11 Ch21 &amp; Ch23 Assessment Markbook. Q1 and Q2 each averaged 5.7 / 8 (71.3%). Q3 averaged 3.4 / 7 (48.6%) and Q4 averaged 3.1 / 7 (44.3%).
+          </p>
+        </div>
+
+        <div class="card-wrapper" style="display: grid; gap: var(--space-md);">
+          <div>
+            <span class="mono-label">Select Question to Inspect Strengths &amp; Targets</span>
+          </div>
+          <div class="q-list" role="tablist" aria-label="Assessment question breakdown">
+            <button type="button" class="q-item-btn is-active" id="qbtn-1" onclick="selectQuestion(1)">
+              <div>
+                <span class="q-item-title">Q1: Network Fundamentals &amp; Topologies</span>
+                <span class="tag tag-green">Strong · Spec 5.1.1–5.1.2, 5.1.7</span>
+              </div>
+              <span class="q-item-score">5.7 / 8 (71.3%)</span>
+            </button>
+            <button type="button" class="q-item-btn" id="qbtn-2" onclick="selectQuestion(2)">
+              <div>
+                <span class="q-item-title">Q2: Hardware, Media &amp; Transmission</span>
+                <span class="tag tag-green">Strong · Spec 5.1.3–5.1.4, 5.3.4</span>
+              </div>
+              <span class="q-item-score">5.7 / 8 (71.3%)</span>
+            </button>
+            <button type="button" class="q-item-btn" id="qbtn-3" onclick="selectQuestion(3)">
+              <div>
+                <span class="q-item-title">Q3: Protocols &amp; TCP/IP 4-Layer Stack</span>
+                <span class="tag tag-red">Main Focus · Spec 5.1.5–5.1.6</span>
+              </div>
+              <span class="q-item-score">3.4 / 7 (48.6%)</span>
+            </button>
+            <button type="button" class="q-item-btn" id="qbtn-4" onclick="selectQuestion(4)">
+              <div>
+                <span class="q-item-title">Q4: The Internet, DNS &amp; IP Addressing</span>
+                <span class="tag tag-red">Main Focus · Spec 5.3.1–5.3.3</span>
+              </div>
+              <span class="q-item-score">3.1 / 7 (44.3%)</span>
+            </button>
+          </div>
+
+          <div id="question-detail-panel" class="q-detail-card" aria-live="polite">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="spectrum-panel">
+        <div class="chart-header">
+          <div>
+            <h3 class="subhead">Cohort Grade Distribution Range</h3>
+            <span class="mono-label">Where recovering Q3 &amp; Q4 marks shifts your grade boundary</span>
+          </div>
+          <span class="tag tag-blue">10 / 30 (Grade 2) → 27 / 30 (Grade 9)</span>
+        </div>
+        <div class="spectrum-track" role="img" aria-label="Cohort score distribution from 10 out of 30 (Grade 2) to 27 out of 30 (Grade 9), with class average at 18 out of 30">
+          <div class="spectrum-fill-cohort"></div>
+          <div class="spectrum-mean-marker" title="Class Average: 18.0 / 30 (60.0%)"></div>
+        </div>
+        <div class="spectrum-labels">
+          <div class="spectrum-stat">
+            <span class="mono-label">0 / 30 (0%)</span>
+            <div class="helper-text">Scale Baseline</div>
+          </div>
+          <div class="spectrum-stat">
+            <span class="mono-label">10 / 30 (33.3%)</span>
+            <div class="helper-text">Lowest Cohort Score — <strong>Grade 2</strong></div>
+          </div>
+          <div class="spectrum-stat">
+            <span class="mono-label">18.0 / 30 (60.0%)</span>
+            <div class="helper-text">Class Mean — <strong>+5 marks in Q3/Q4 lifts average to 77%</strong></div>
+          </div>
+          <div class="spectrum-stat">
+            <span class="mono-label">27 / 30 (90.0%)</span>
+            <div class="helper-text">Highest Cohort Score — <strong>Grade 9</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: TARGETED DEEP-DIVE 1 — THE 4-LAYER TCP/IP MODEL (5-15 MINS) -->
+    <section id="sec-tcpip" class="section-block" aria-labelledby="heading-tcpip">
+      <div class="section-head">
+        <div class="section-head-copy">
+          <span class="mono-label">Part 2 · 10 Minutes · Deep-Dive 1 (Q3 Focus: 48.6% Avg)</span>
+          <h2 id="heading-tcpip" class="section-heading">The 4-layer TCP/IP stack separates <strong>application services</strong> from <strong>physical delivery</strong></h2>
+        </div>
+        <span class="tag tag-blue">Spec 5.1.5 &amp; 5.1.6</span>
+      </div>
+
+      <p class="prose">
+        In Pearson Edexcel 4CP0, network communication is organised into <strong>four layers</strong>. Separating tasks into layers means engineers can update a web browser or swap Ethernet cables for Wi-Fi without rewriting the protocols in other layers. Toggle the transmission direction below to trace how packets are built and unwrapped.
+      </p>
+
+      <div class="mode-bar">
+        <div>
+          <span class="mono-label">Packet Direction Inspector</span>
+          <div class="helper-text" id="encap-summary">Sending device: Data moves down from Application to Data Link, adding a header at each layer (encapsulation).</div>
+        </div>
+        <div class="tab-row" role="tablist" aria-label="Packet encapsulation direction">
+          <button type="button" class="tab-btn is-active" id="dir-send" onclick="setTcpDirection('send')">Sending: Encapsulation ↓</button>
+          <button type="button" class="tab-btn" id="dir-recv" onclick="setTcpDirection('receive')">Receiving: Decapsulation ↑</button>
+        </div>
+      </div>
+
+      <div class="tcpip-stack" id="tcpip-stack-list">
+        <!-- Populated dynamically by JS for Sending / Receiving flow -->
+      </div>
+
+      <!-- Interactive Protocol-to-Layer Matching Activity -->
+      <div class="matching-workspace">
+        <div class="matching-header">
+          <div>
+            <h3 class="subhead">Interactive Activity: Match All 11 Protocols to Their TCP/IP Layer</h3>
+            <p class="helper-text">
+              Click a protocol chip (or drag it), then click the matching TCP/IP layer box below. Click a placed chip to return it to the tray.
+            </p>
+          </div>
+          <div class="btn-row">
+            <span class="tag tag-neutral" id="match-score-badge">0 / 11 Checked</span>
+            <button type="button" class="btn btn-primary" onclick="checkProtocolMatches()">
+              <span>Check Placements</span>
+              <i data-lucide="check-circle-2" width="18" height="18" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="showProtocolHint()">
+              <span>Hint</span>
+              <i data-lucide="help-circle" width="18" height="18" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-danger-ghost" id="reset-match-btn" onclick="resetProtocolMatches(this)">
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="match-feedback-bar" class="feedback-banner" aria-live="polite">
+          Select a protocol from the bank below and click one of the four layers to place it.
+        </div>
+
+        <div>
+          <span class="mono-label">Protocol Bank (Unplaced)</span>
+          <div class="protocol-bank" id="protocol-bank" ondragover="allowDrop(event)" ondrop="dropToBank(event)">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="drop-zones-grid">
+          <div class="drop-zone" id="zone-application" onclick="placeIntoLayer('application')" ondragover="allowDrop(event)" ondrop="dropToLayer(event, 'application')">
+            <div>
+              <span class="mono-label">Layer 4 (Top)</span>
+              <div class="subhead" style="margin-bottom: 0;">Application Layer</div>
+              <span class="helper-text">Web, file transfer &amp; email services</span>
+            </div>
+            <div class="zone-tokens" id="tokens-application"></div>
+          </div>
+
+          <div class="drop-zone" id="zone-transport" onclick="placeIntoLayer('transport')" ondragover="allowDrop(event)" ondrop="dropToLayer(event, 'transport')">
+            <div>
+              <span class="mono-label">Layer 3</span>
+              <div class="subhead" style="margin-bottom: 0;">Transport Layer</div>
+              <span class="helper-text">Packet splitting, numbering &amp; reliability</span>
+            </div>
+            <div class="zone-tokens" id="tokens-transport"></div>
+          </div>
+
+          <div class="drop-zone" id="zone-network" onclick="placeIntoLayer('network')" ondragover="allowDrop(event)" ondrop="dropToLayer(event, 'network')">
+            <div>
+              <span class="mono-label">Layer 2</span>
+              <div class="subhead" style="margin-bottom: 0;">Network Layer</div>
+              <span class="helper-text">Logical IP addressing &amp; routing</span>
+            </div>
+            <div class="zone-tokens" id="tokens-network"></div>
+          </div>
+
+          <div class="drop-zone" id="zone-datalink" onclick="placeIntoLayer('datalink')" ondragover="allowDrop(event)" ondrop="dropToLayer(event, 'datalink')">
+            <div>
+              <span class="mono-label">Layer 1 (Bottom)</span>
+              <div class="subhead" style="margin-bottom: 0;">Data Link Layer</div>
+              <span class="helper-text">Physical frames, MAC addresses &amp; media</span>
+            </div>
+            <div class="zone-tokens" id="tokens-datalink"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Examiner Watchpoints -->
+      <div>
+        <h3 class="subhead">Common Examiner Watchpoints (Pearson 4CP0)</h3>
+        <div class="watchpoints-grid">
+          <div class="callout-strip is-error">
+            <span class="mono-label">Watchpoint 1 · Model Choice</span>
+            <strong>Do not use the 7-layer OSI model</strong>
+            <p class="helper-text">
+              Pearson Edexcel 4CP0 assesses the <strong>4-layer TCP/IP model</strong> exclusively (Application, Transport, Network, Data Link). Writing Session, Presentation, or Physical layers causes mark loss when naming the TCP/IP stack.
+            </p>
+          </div>
+          <div class="callout-strip">
+            <span class="mono-label">Watchpoint 2 · Encapsulation</span>
+            <strong>Name the header added at each layer</strong>
+            <p class="helper-text">
+              For top-band marks on transmission questions, state that Transport adds <strong>port &amp; sequence numbers</strong>, Network adds <strong>source &amp; destination IP addresses</strong>, and Data Link adds <strong>MAC addresses</strong> for the local hop.
+            </p>
+          </div>
+          <div class="callout-strip is-positive">
+            <span class="mono-label">Watchpoint 3 · Email Protocols (Paper 1 Q3c)</span>
+            <strong>Justify IMAP vs POP3 vs SMTP in context</strong>
+            <p class="helper-text">
+              Examiner commentary emphasises linking mechanism to scenario: <strong>IMAP</strong> keeps emails on the server (ideal for syncing multiple devices with limited storage); <strong>POP3</strong> downloads and removes from server; <strong>SMTP</strong> sends outgoing mail.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TARGETED DEEP-DIVE 2 — DNS TRANSLATION & IPv4 VS IPv6 (15-25 MINS) -->
+    <section id="sec-dns" class="section-block" aria-labelledby="heading-dns">
+      <div class="section-head">
+        <div class="section-head-copy">
+          <span class="mono-label">Part 3 · 10 Minutes · Deep-Dive 2 (Q4 Focus: 44.3% Avg)</span>
+          <h2 id="heading-dns" class="section-heading">DNS resolves memorable names into <strong>32-bit IPv4</strong> or <strong>128-bit IPv6</strong> addresses</h2>
+        </div>
+        <span class="tag tag-blue">Spec 5.3.1 – 5.3.3</span>
+      </div>
+
+      <p class="prose">
+        Routers forward packets using numerical IP addresses, not text URLs. In Pearson Paper 1 Question 2(c), students often lost marks by confusing what enters and leaves a <strong>Domain Name Server (DNS)</strong>—remember: the <strong>input</strong> is the URL or domain name, and the <strong>output</strong> is the IP address. Step through the 4-stage lookup sequence below.
+      </p>
+
+      <!-- Interactive DNS Lookup Sequence -->
+      <div class="dns-workspace">
+        <div class="dns-controls-bar">
+          <div class="field-group">
+            <label for="dns-domain-select" class="field-label">Select Target Website Domain</label>
+            <select id="dns-domain-select" class="carbon-select" onchange="changeDnsDomain(this.value)">
+              <option value="pearson">www.pearson.com → 104.18.24.119</option>
+              <option value="bbc">www.bbc.co.uk → 151.101.0.81</option>
+              <option value="qual">qualifications.pearson.com → 2001:db8:85a3::8a2e:370:7334</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" id="dns-prev-btn" onclick="stepDns(-1)">Previous</button>
+            <button type="button" class="btn btn-ghost" id="dns-step-1" onclick="setDnsStep(1)">1</button>
+            <button type="button" class="btn btn-ghost" id="dns-step-2" onclick="setDnsStep(2)">2</button>
+            <button type="button" class="btn btn-ghost" id="dns-step-3" onclick="setDnsStep(3)">3</button>
+            <button type="button" class="btn btn-ghost" id="dns-step-4" onclick="setDnsStep(4)">4</button>
+            <button type="button" class="btn btn-primary" id="dns-next-btn" onclick="stepDns(1)">
+              <span>Next Step</span>
+              <i data-lucide="arrow-right" width="18" height="18" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="dns-diagram-box card-wrapper">
+          <div class="dns-svg-wrap">
+            <svg id="dns-svg" viewBox="0 0 860 220" width="100%" height="220" role="img" aria-label="Interactive DNS lookup sequence diagram between Browser, DNS Server, and Web Server" style="min-width: 620px; display: block;">
+              <!-- Connection Base Lines -->
+              <line x1="190" y1="90" x2="360" y2="90" stroke="var(--outline-variant)" stroke-width="2" stroke-dasharray="4 4"/>
+              <line x1="520" y1="90" x2="670" y2="90" stroke="var(--outline-variant)" stroke-width="2" stroke-dasharray="4 4"/>
+              <line x1="115" y1="150" x2="115" y2="195" stroke="var(--outline-variant)" stroke-width="2"/>
+              <line x1="115" y1="195" x2="745" y2="195" stroke="var(--outline-variant)" stroke-width="2"/>
+              <line x1="745" y1="195" x2="745" y2="150" stroke="var(--outline-variant)" stroke-width="2"/>
+
+              <!-- Active Path Highlight (controlled by JS) -->
+              <path id="dns-active-path" d="M 190 90 L 350 90" fill="none" stroke="var(--primary)" stroke-width="3"/>
+              <polygon id="dns-arrow-head" points="350,84 362,90 350,96" fill="var(--primary)"/>
+
+              <!-- Node 1: User Browser -->
+              <rect id="node-browser" x="30" y="40" width="160" height="100" fill="var(--surface-container)" stroke="var(--primary)" stroke-width="2"/>
+              <text x="45" y="65" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">CLIENT DEVICE</text>
+              <text x="45" y="90" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="600" fill="var(--on-surface)">Web Browser</text>
+              <text id="svg-browser-sub" x="45" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">Local cache check</text>
+
+              <!-- Node 2: DNS Server -->
+              <rect id="node-dns" x="360" y="40" width="160" height="100" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="1"/>
+              <text x="375" y="65" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">NAME RESOLUTION</text>
+              <text x="375" y="90" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="600" fill="var(--on-surface)">DNS Server</text>
+              <text id="svg-dns-sub" x="375" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">Domain ↔ IP table</text>
+
+              <!-- Node 3: Web Server -->
+              <rect id="node-web" x="670" y="40" width="160" height="100" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="1"/>
+              <text x="685" y="65" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">HOST SERVER</text>
+              <text x="685" y="90" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="600" fill="var(--on-surface)">Web Server</text>
+              <text id="svg-web-sub" x="685" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--on-surface-variant)">Holds HTML &amp; assets</text>
+
+              <!-- Packet Badge Label on Active Path -->
+              <rect id="dns-packet-bg" x="200" y="14" width="150" height="26" fill="var(--primary-container)"/>
+              <text id="dns-packet-label" x="275" y="31" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--on-primary-container)">STEP 1: URL ENTERED</text>
+            </svg>
+          </div>
+
+          <div class="dns-step-detail">
+            <div style="display: grid; gap: var(--space-xs);">
+              <span class="mono-label" id="dns-step-kicker">Step 1 of 4 · Browser Input &amp; Local Cache</span>
+              <h4 class="subhead" id="dns-step-title">User types a URL into the browser address bar</h4>
+              <p class="prose" id="dns-step-desc" style="margin-bottom: 0;">
+                The user types a human-readable URL such as <code class="mono-code">www.pearson.com</code>. Before contacting the network, the browser checks its local DNS cache to see if it already knows the IP address.
+              </p>
+            </div>
+            <div class="dns-io-box">
+              <span class="mono-label">Exam Mark Scheme Check (Paper 1 Q2c)</span>
+              <div class="helper-text" id="dns-io-readout">
+                <strong>Input to DNS:</strong> URL / domain name<br>
+                <strong>Output from DNS:</strong> IP address
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side-by-Side Comparison Table: IPv4 vs IPv6 -->
+      <div style="display: grid; gap: var(--space-sm);">
+        <h3 class="subhead">IPv4 vs IPv6 Comparison (Spec 5.3.3)</h3>
+        <div class="table-scroll">
+          <table class="carbon-table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">IPv4 (Internet Protocol v4)</th>
+                <th scope="col">IPv6 (Internet Protocol v6)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bit Length</strong></td>
+                <td class="mono-code">32 bits (4 bytes)</td>
+                <td class="mono-code">128 bits (16 bytes)</td>
+              </tr>
+              <tr>
+                <td><strong>Number Base &amp; Format</strong></td>
+                <td><strong>4 denary octets</strong> (0–255 each), separated by dots (<code class="mono-code">.</code>)</td>
+                <td><strong>8 hexadecimal groups</strong> (4 hex digits 0–F each), separated by colons (<code class="mono-code">:</code>)</td>
+              </tr>
+              <tr>
+                <td><strong>Example Address</strong></td>
+                <td class="mono-code">192.168.14.25</td>
+                <td class="mono-code">2001:0db8:85a3:0000:0000:8a2e:0370:7334</td>
+              </tr>
+              <tr>
+                <td><strong>Total Address Space</strong></td>
+                <td class="mono-code">2³² ≈ 4.3 billion addresses</td>
+                <td class="mono-code">2¹²⁸ ≈ 3.4 × 10³⁸ addresses</td>
+              </tr>
+              <tr>
+                <td><strong>Shorthand Rules</strong></td>
+                <td>No leading zeros in octets; all 4 octets must be shown</td>
+                <td>Leading zeros in a group can be dropped; one consecutive block of all-zero groups can become <code class="mono-code">::</code></td>
+              </tr>
+              <tr>
+                <td><strong>Why IPv6 Was Needed</strong></td>
+                <td><strong>Exhaustion:</strong> Rapid growth of smartphones, laptops, servers, and IoT devices ran out of unique 32-bit addresses.</td>
+                <td>Provides virtually inexhaustible unique global addresses without relying heavily on Network Address Translation (NAT).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Interactive Spot-the-Error Activity -->
+      <div class="matching-workspace">
+        <div class="matching-header">
+          <div>
+            <h3 class="subhead">Interactive Activity: Spot the Error in IP Addresses &amp; DNS Statements</h3>
+            <p class="helper-text">
+              Decide whether each statement or address is <strong>Valid / Accurate</strong> or <strong>Contains an Error</strong> to get instant mark-scheme feedback.
+            </p>
+          </div>
+          <div class="btn-row">
+            <span class="tag tag-neutral" id="spot-score-badge">0 / 6 Diagnosed</span>
+            <button type="button" class="btn btn-danger-ghost" onclick="resetSpotErrors(this)">Reset Checks</button>
+          </div>
+        </div>
+
+        <div class="spot-grid" id="spot-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: DIFFERENTIATED STUDENT ACTION PLAN & EXIT QUIZ (25-30 MINS) -->
+    <section id="sec-action" class="section-block" aria-labelledby="heading-action">
+      <div class="section-head">
+        <div class="section-head-copy">
+          <span class="mono-label">Part 4 · 5 Minutes · Personalised Action &amp; Exit Ticket</span>
+          <h2 id="heading-action" class="section-heading">Target your grade band and complete the <strong>4-question exit check</strong></h2>
+        </div>
+        <span class="tag tag-blue">Independent Consolidation</span>
+      </div>
+
+      <p class="prose">
+        Select your current assessment band below to set your target revision checklist for tonight's homework, then answer the four rapid exit questions to verify your progress before the lesson ends.
+      </p>
+
+      <!-- Differentiated Revision Paths -->
+      <div class="tier-grid" id="tier-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- 4-Question Rapid Exit Quiz -->
+      <div class="quiz-container">
+        <div class="matching-header">
+          <div>
+            <h3 class="subhead">4-Question Rapid Exit Ticket</h3>
+            <p class="helper-text">Choose one answer per question, then click <strong>Mark Exit Ticket</strong> to view your score and examiner rationales.</p>
+          </div>
+          <div class="btn-row">
+            <span class="tag tag-neutral" id="exit-score-badge">Not Marked Yet</span>
+            <button type="button" class="btn btn-primary" onclick="gradeExitQuiz()">
+              <span>Mark Exit Ticket</span>
+              <i data-lucide="check-circle-2" width="18" height="18" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-danger-ghost" onclick="resetExitQuiz(this)">Reset Quiz</button>
+          </div>
+        </div>
+
+        <div id="exit-summary-banner" class="feedback-banner" aria-live="polite" style="display: none;"></div>
+
+        <div class="quiz-grid" id="exit-quiz-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER / SOURCES -->
+    <footer class="report-footer">
+      <div class="meta-strip" style="border-bottom: 0; padding-bottom: 0;">
+        <span class="mono-label">Lesson Pacing: 00–05m Dashboard · 05–15m TCP/IP · 15–25m DNS &amp; IP · 25–30m Action Plan &amp; Exit Quiz</span>
+      </div>
+      <p class="helper-text" style="margin-bottom: 0;">
+        Sources: Pearson Edexcel International GCSE in Computer Science (4CP0) Specification (Topics 5.1 &amp; 5.3); Paper 1 Exemplar Responses &amp; Examiner Commentary (Issue 1); Chapters 21 &amp; 23 Teaching Materials (Networks, The Internet &amp; WWW); Year 11 Cohort Assessment Results (30 marks).
+      </p>
+    </footer>
+
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    /* =========================================================================
+       DATA DEFINITIONS (Backtick template literals for defensive JS)
+       ========================================================================= */
+
+    const QUESTION_DETAILS = {
+      1: {
+        title: `Question 1: Network Fundamentals & Topologies`,
+        score: `5.7 / 8 (71.3%)`,
+        status: `STRONG`,
+        statusClass: `tag-green`,
+        spec: `Spec 5.1.1, 5.1.2 & 5.1.7`,
+        www: `Students confidently identified why computers are networked (sharing files, peripherals, and internet access) and accurately compared LAN vs WAN and Star vs Mesh topologies.`,
+        ebi: `Ensure you state both an advantage and a specific vulnerability when comparing client-server vs peer-to-peer or star topology (e.g., central switch single point of failure).`
+      },
+      2: {
+        title: `Question 2: Hardware, Media & Transmission`,
+        score: `5.7 / 8 (71.3%)`,
+        status: `STRONG`,
+        statusClass: `tag-green`,
+        spec: `Spec 5.1.3, 5.1.4 & 5.3.4`,
+        www: `Strong recall of wired (copper Ethernet vs fibre-optic) vs wireless (Wi-Fi) characteristics, data transmission speeds in Mbps/Gbps, and the roles of switches, routers, and WAPs.`,
+        ebi: `Be precise when distinguishing a switch (forwards frames by MAC address within a LAN) from a router (routes packets by IP address between networks).`
+      },
+      3: {
+        title: `Question 3: Protocols & TCP/IP 4-Layer Stack`,
+        score: `3.4 / 7 (48.6%)`,
+        status: `MAIN FOCUS`,
+        statusClass: `tag-red`,
+        spec: `Spec 5.1.5 & 5.1.6`,
+        www: `Most students recognised common abbreviations like HTTP and Wi-Fi when prompted.`,
+        ebi: `Common mark losses: confusing the 4-layer TCP/IP stack with the 7-layer OSI model, misplacing protocols (e.g., putting HTTP in Transport or IP in Data Link), and failing to justify IMAP vs POP3 in multi-device scenarios.`
+      },
+      4: {
+        title: `Question 4: The Internet, DNS & IP Addressing`,
+        score: `3.1 / 7 (44.3%)`,
+        status: `MAIN FOCUS`,
+        statusClass: `tag-red`,
+        spec: `Spec 5.3.1, 5.3.2 & 5.3.3`,
+        www: `Students understood that IP addresses identify devices on the internet.`,
+        ebi: `Common mark losses: imprecise DNS descriptions (forgetting that input = URL/domain name and output = IP address), confusing IPv4 bit lengths (32-bit denary) with IPv6 (128-bit hexadecimal), and missing invalid octets (> 255).`
+      }
+    };
+
+    const TCPIP_LAYERS_DATA = [
+      {
+        id: `application`,
+        orderNum: `Layer 4 (Top)`,
+        name: `Application Layer`,
+        role: `Provides network services directly to user applications (browsers, email clients, file managers). Formats data into standard requests and messages.`,
+        protocols: [`HTTP`, `HTTPS`, `FTP`, `POP3`, `IMAP`, `SMTP`],
+        sendAction: `1. Creates payload (e.g., HTTP GET request or email message) and passes it down to Transport.`,
+        recvAction: `4. Receives reassembled payload and renders the webpage, file, or email for the user.`
+      },
+      {
+        id: `transport`,
+        orderNum: `Layer 3`,
+        name: `Transport Layer`,
+        role: `Breaks data into manageable segments/packets, assigns port numbers, numbers packets for reassembly, and handles error checking and acknowledgements.`,
+        protocols: [`TCP`, `UDP`],
+        sendAction: `2. Splits data into numbered segments, adds source/destination port numbers (TCP/UDP header).`,
+        recvAction: `3. Checks for missing packets, requests retransmissions (TCP), reorders segments, strips port header.`
+      },
+      {
+        id: `network`,
+        orderNum: `Layer 2`,
+        name: `Network Layer`,
+        role: `Handles logical addressing and determines the best path (routing) for packets across multiple interconnected networks (the internet).`,
+        protocols: [`IP (IPv4 / IPv6)`],
+        sendAction: `3. Wraps segment in an IP packet, adding source and destination IP addresses.`,
+        recvAction: `2. Verifies destination IP address matches this host and strips the IP header.`
+      },
+      {
+        id: `datalink`,
+        orderNum: `Layer 1 (Bottom)`,
+        name: `Data Link Layer`,
+        role: `Places packets into frames for physical transmission over local wired or wireless media using hardware MAC addresses and NICs.`,
+        protocols: [`Ethernet`, `Wi-Fi`],
+        sendAction: `4. Encapsulates IP packet into a frame with local MAC addresses and converts to electrical/light/radio signals.`,
+        recvAction: `1. Receives physical signals via NIC, verifies frame check sequence and MAC address, strips frame.`
+      }
+    ];
+
+    const PROTOCOLS_LIST = [
+      { id: `HTTP`, layer: `application`, hint: `Hypertext Transfer Protocol — transfers unencrypted webpages in the Application layer.` },
+      { id: `HTTPS`, layer: `application`, hint: `HTTP Secure — encrypts web traffic using TLS/SSL at the Application layer.` },
+      { id: `FTP`, layer: `application`, hint: `File Transfer Protocol — uploads and downloads files between client and server.` },
+      { id: `POP3`, layer: `application`, hint: `Post Office Protocol v3 — retrieves email and typically deletes it from the server.` },
+      { id: `IMAP`, layer: `application`, hint: `Internet Message Access Protocol — syncs email across devices while keeping messages on the server.` },
+      { id: `SMTP`, layer: `application`, hint: `Simple Mail Transfer Protocol — sends and relays outgoing emails.` },
+      { id: `TCP`, layer: `transport`, hint: `Transmission Control Protocol — breaks data into packets, orders them, and checks for errors.` },
+      { id: `UDP`, layer: `transport`, hint: `User Datagram Protocol — fast, connectionless packet delivery in the Transport layer.` },
+      { id: `IP`, layer: `network`, hint: `Internet Protocol — adds source/destination IP addresses and routes packets across networks.` },
+      { id: `Ethernet`, layer: `datalink`, hint: `Wired LAN standard governing physical frames and MAC addresses on cables.` },
+      { id: `Wi-Fi`, layer: `datalink`, hint: `Wireless LAN standard governing frames and radio transmission at the Data Link layer.` }
+    ];
+
+    const DNS_DOMAINS = {
+      pearson: { url: `www.pearson.com`, ip: `104.18.24.119`, label: `IPv4` },
+      bbc: { url: `www.bbc.co.uk`, ip: `151.101.0.81`, label: `IPv4` },
+      qual: { url: `qualifications.pearson.com`, ip: `2001:db8:85a3::8a2e:370:7334`, label: `IPv6` }
+    };
+
+    const SPOT_ERROR_ITEMS = [
+      {
+        id: `spot1`,
+        prompt: `IPv4 address: 192.168.256.12`,
+        isValid: false,
+        explanation: `Invalid IPv4: The third octet is 256. Each 8-bit denary octet must be between 0 and 255.`
+      },
+      {
+        id: `spot2`,
+        prompt: `IPv6 address: 2001:0db8:85a3:0000:0000:8a2e:0370:7334`,
+        isValid: true,
+        explanation: `Valid IPv6: It contains 8 colon-separated groups of 4 hexadecimal digits (0–9, a–f), totalling 128 bits.`
+      },
+      {
+        id: `spot3`,
+        prompt: `IPv4 address: 172.16.45`,
+        isValid: false,
+        explanation: `Invalid IPv4: Only 3 octets (24 bits) are present. A valid IPv4 address requires 4 dot-separated octets (32 bits).`
+      },
+      {
+        id: `spot4`,
+        prompt: `IPv6 address: 2001:0db8:85g3:0000:0000:8a2e:0370:7334`,
+        isValid: false,
+        explanation: `Invalid IPv6: The third group contains "g", which is not a valid hexadecimal digit (hex only uses 0–9 and A–F).`
+      },
+      {
+        id: `spot5`,
+        prompt: `DNS statement: "A Domain Name Server translates an IP address into the HTML webpage."`,
+        isValid: false,
+        explanation: `Error in DNS role: A DNS translates a domain name/URL into an IP address. The web server (not the DNS) sends the HTML webpage.`
+      },
+      {
+        id: `spot6`,
+        prompt: `DNS statement: "The browser sends a URL as input to the DNS, and receives an IP address as output."`,
+        isValid: true,
+        explanation: `Accurate (Paper 1 Q2c mark scheme): Input to DNS = URL / domain name (1 mark); Output from DNS = IP address (1 mark).`
+      }
+    ];
+
+    const ACTION_TIERS = [
+      {
+        id: `g24`,
+        badge: `Grade 2 – 4 Target (10–15 / 30)`,
+        title: `Foundation Builder`,
+        focus: `Lock in core terminology and exact mark-scheme definitions before adding detail.`,
+        items: [
+          { id: `g24_1`, text: `Memorise the 4 TCP/IP layers in order: Application, Transport, Network, Data Link.` },
+          { id: `g24_2`, text: `Learn one key protocol per layer (e.g., HTTP, TCP, IP, Ethernet).` },
+          { id: `g24_3`, text: `State DNS Input = URL/domain name and DNS Output = IP address.` },
+          { id: `g24_4`, text: `Practise spotting invalid IPv4 octets (> 255 or not 4 numbers).` }
+        ]
+      },
+      {
+        id: `g56`,
+        badge: `Grade 5 – 6 Target (16–21 / 30)`,
+        title: `Developing & Secure`,
+        focus: `Bridge from naming concepts to explaining how protocols and addressing work.`,
+        items: [
+          { id: `g56_1`, text: `Contrast TCP (reliable, ordered, error-checked) vs UDP (fast, connectionless).` },
+          { id: `g56_2`, text: `Distinguish POP3 (download & delete), IMAP (sync on server), and SMTP (send).` },
+          { id: `g56_3`, text: `Trace all 4 steps from typing a URL to receiving HTML from the web server.` },
+          { id: `g56_4`, text: `Compare IPv4 (32-bit, 4 denary octets) and IPv6 (128-bit, 8 hex groups) and explain exhaustion.` }
+        ]
+      },
+      {
+        id: `g79`,
+        badge: `Grade 7 – 9 Target (22–30 / 30)`,
+        title: `Mastery & Distinction`,
+        focus: `Sharpen technical precision on encapsulation, abstraction, and scenario justification.`,
+        items: [
+          { id: `g79_1`, text: `Explain encapsulation headers added at each layer (ports, IP addresses, MAC frames).` },
+          { id: `g79_2`, text: `Justify why the 4-layer model enables interoperability and independent hardware/software updates.` },
+          { id: `g79_3`, text: `Write full-mark scenario answers linking IMAP server storage to device storage limits.` },
+          { id: `g79_4`, text: `Validate compressed IPv6 notation (::) and explain DNS caching benefits.` }
+        ]
+      }
+    ];
+
+    const EXIT_QUIZ = [
+      {
+        id: `eq1`,
+        question: `1. Which layer of the 4-layer TCP/IP model adds source and destination IP addresses and routes packets across networks?`,
+        options: [
+          `Application Layer`,
+          `Transport Layer`,
+          `Network Layer`,
+          `Data Link Layer`
+        ],
+        correctIndex: 2,
+        rationale: `Mark point: The Network Layer runs IP, adds logical source/destination IP addresses, and routes packets between networks.`
+      },
+      {
+        id: `eq2`,
+        question: `2. Isra accesses her email on both a tablet and a smartphone with limited storage. Which protocol should she choose so messages remain on the server?`,
+        options: [
+          `POP3`,
+          `IMAP`,
+          `SMTP`,
+          `FTP`
+        ],
+        correctIndex: 1,
+        rationale: `Mark point (Paper 1 Q3c): IMAP keeps messages residing on the email server so multiple devices stay synchronised without filling local storage.`
+      },
+      {
+        id: `eq3`,
+        question: `3. When a browser queries a Domain Name Server (DNS), what are the input to and output from the DNS?`,
+        options: [
+          `Input: IP address | Output: HTML webpage`,
+          `Input: MAC address | Output: IP address`,
+          `Input: URL / domain name | Output: IP address`,
+          `Input: URL / domain name | Output: HTTP packet`
+        ],
+        correctIndex: 2,
+        rationale: `Mark point (Paper 1 Q2c): The DNS takes a URL or domain name as input (1 mark) and returns the matching IP address as output (1 mark).`
+      },
+      {
+        id: `eq4`,
+        question: `4. Which of the following is a valid IPv4 address?`,
+        options: [
+          `192.168.260.1`,
+          `10.45.128`,
+          `172.16.254.18`,
+          `192.168.1F.0`
+        ],
+        correctIndex: 2,
+        rationale: `Mark point: 172.16.254.18 has 4 dot-separated denary octets, each within 0–255. The others exceed 255 (260), have only 3 octets, or use hex (1F).`
+      }
+    ];
+
+    /* =========================================================================
+       APPLICATION STATE (Persisted via window.notebookAppApi)
+       ========================================================================= */
+
+    let appState = {
+      selectedQuestion: 1,
+      tcpDirection: `send`,
+      selectedProtocol: null,
+      protocolPlacements: {}, // { HTTP: 'application', ... }
+      protocolsChecked: false,
+      dnsDomain: `pearson`,
+      dnsStep: 1,
+      spotAnswers: {}, // { spot1: false, ... }
+      selectedTier: `g56`,
+      checkedActions: {}, // { g56_1: true, ... }
+      exitAnswers: {}, // { eq1: 2, ... }
+      exitSubmitted: false
+    };
+
+    let assessmentChartInstance = null;
+
+    async function saveAppState() {
+      updateProgressPill();
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(appState);
+        }
+      } catch (err) {
+        console.warn(`State save skipped:`, err);
+      }
+    }
+
+    function restoreFromState(saved) {
+      if (!saved || typeof saved !== `object`) return;
+      if (typeof saved.selectedQuestion === `number`) appState.selectedQuestion = saved.selectedQuestion;
+      if (saved.tcpDirection === `send` || saved.tcpDirection === `receive`) appState.tcpDirection = saved.tcpDirection;
+      if (saved.protocolPlacements && typeof saved.protocolPlacements === `object`) appState.protocolPlacements = saved.protocolPlacements;
+      if (typeof saved.protocolsChecked === `boolean`) appState.protocolsChecked = saved.protocolsChecked;
+      if (saved.dnsDomain && DNS_DOMAINS[saved.dnsDomain]) appState.dnsDomain = saved.dnsDomain;
+      if (typeof saved.dnsStep === `number` && saved.dnsStep >= 1 && saved.dnsStep <= 4) appState.dnsStep = saved.dnsStep;
+      if (saved.spotAnswers && typeof saved.spotAnswers === `object`) appState.spotAnswers = saved.spotAnswers;
+      if (typeof saved.selectedTier === `string`) appState.selectedTier = saved.selectedTier;
+      if (saved.checkedActions && typeof saved.checkedActions === `object`) appState.checkedActions = saved.checkedActions;
+      if (saved.exitAnswers && typeof saved.exitAnswers === `object`) appState.exitAnswers = saved.exitAnswers;
+      if (typeof saved.exitSubmitted === `boolean`) appState.exitSubmitted = saved.exitSubmitted;
+    }
+
+    function updateProgressPill() {
+      const pill = document.getElementById(`live-progress-pill`);
+      if (!pill) return;
+      const protoCorrect = PROTOCOLS_LIST.filter(p => appState.protocolPlacements[p.id] === p.layer).length;
+      const spotDone = Object.keys(appState.spotAnswers).length;
+      const exitDone = Object.keys(appState.exitAnswers).length;
+      const totalDone = protoCorrect + spotDone + exitDone;
+      const maxChecks = PROTOCOLS_LIST.length + SPOT_ERROR_ITEMS.length + EXIT_QUIZ.length; // 11 + 6 + 4 = 21
+      pill.textContent = `${totalDone} / ${maxChecks} Interactive Checks Completed`;
+      pill.className = totalDone === maxChecks ? `tag tag-green` : `tag tag-blue`;
+    }
+
+    /* =========================================================================
+       SECTION 1: EXECUTIVE DASHBOARD & CHART.JS
+       ========================================================================= */
+
+    function getCssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function renderAssessmentChart() {
+      const canvas = document.getElementById(`assessmentChart`);
+      if (!canvas || typeof Chart === `undefined`) return;
+
+      const cPositive = getCssVar(`--positive`) || `#198038`;
+      const cPrimary = getCssVar(`--primary`) || `#0f62fe`;
+      const cInk = getCssVar(`--on-surface`) || `#161616`;
+      const cVariant = getCssVar(`--on-surface-variant`) || `#525252`;
+      const cGrid = getCssVar(`--outline-variant`) || `#e0e0e0`;
+      const cBg = getCssVar(`--background`) || `#ffffff`;
+      const fontLabel = getCssVar(`--font-label`) || `IBM Plex Mono, monospace`;
+
+      const meanLinePlugin = {
+        id: `meanLinePlugin`,
+        afterDatasetsDraw(chart) {
+          const { ctx, chartArea, scales } = chart;
+          if (!chartArea || !scales.x) return;
+          const xPos = scales.x.getPixelForValue(60.0);
+          ctx.save();
+          ctx.beginPath();
+          ctx.strokeStyle = cInk;
+          ctx.lineWidth = 2;
+          ctx.setLineDash([5, 4]);
+          ctx.moveTo(xPos, chartArea.top);
+          ctx.lineTo(xPos, chartArea.bottom);
+          ctx.stroke();
+
+          ctx.setLineDash([]);
+          ctx.fillStyle = cInk;
+          ctx.font = `500 11px ${fontLabel}`;
+          ctx.textAlign = `left`;
+          ctx.fillText(`60.0% MEAN`, xPos + 6, chartArea.top + 12);
+          ctx.restore();
+        }
+      };
+
+      const directValuePlugin = {
+        id: `directValuePlugin`,
+        afterDatasetsDraw(chart) {
+          const { ctx, data } = chart;
+          const meta = chart.getDatasetMeta(0);
+          if (!meta || !meta.data) return;
+          ctx.save();
+          ctx.font = `500 12px ${fontLabel}`;
+          ctx.fillStyle = cInk;
+          ctx.textBaseline = `middle`;
+          meta.data.forEach((bar, idx) => {
+            const val = data.datasets[0].data[idx];
+            const rawMarks = [`5.7 / 8`, `5.7 / 8`, `3.4 / 7`, `3.1 / 7`][idx];
+            ctx.fillText(`${val.toFixed(1)}% (${rawMarks})`, bar.x + 8, bar.y);
+          });
+          ctx.restore();
+        }
+      };
+
+      if (assessmentChartInstance) {
+        assessmentChartInstance.destroy();
+      }
+
+      assessmentChartInstance = new Chart(canvas, {
+        type: `bar`,
+        data: {
+          labels: [
+            `Q1: Network Topologies`,
+            `Q2: Hardware & Media`,
+            `Q3: Protocols & TCP/IP`,
+            `Q4: DNS & IP Addressing`
+          ],
+          datasets: [{
+            label: `Class Average (%)`,
+            data: [71.3, 71.3, 48.6, 44.3],
+            backgroundColor: [cPositive, cPositive, cPrimary, cPrimary],
+            borderRadius: 0,
+            barPercentage: 0.62
+          }]
+        },
+        options: {
+          indexAxis: `y`,
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { right: 120, top: 20 }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: cBg,
+              titleColor: cInk,
+              bodyColor: cInk,
+              borderColor: cGrid,
+              borderWidth: 1,
+              cornerRadius: 0,
+              titleFont: { family: fontLabel, size: 12 },
+              bodyFont: { family: fontLabel, size: 12 },
+              callbacks: {
+                label(ctx) {
+                  const marks = [`5.7 / 8`, `5.7 / 8`, `3.4 / 7`, `3.1 / 7`][ctx.dataIndex];
+                  const tag = ctx.parsed.x >= 70 ? `STRONG` : `MAIN FOCUS`;
+                  return ` ${ctx.parsed.x.toFixed(1)}% (${marks}) — ${tag}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 100,
+              grid: { color: cGrid },
+              border: { color: cInk },
+              ticks: {
+                color: cVariant,
+                font: { family: fontLabel, size: 11 },
+                callback(v) { return `${v}%`; }
+              }
+            },
+            y: {
+              grid: { display: false },
+              border: { color: cInk },
+              ticks: {
+                color: cInk,
+                font: { family: fontLabel, size: 11 }
+              }
+            }
+          }
+        },
+        plugins: [meanLinePlugin, directValuePlugin]
+      });
+    }
+
+    function selectQuestion(qNum) {
+      appState.selectedQuestion = qNum;
+      renderQuestionDetail();
+      saveAppState();
+    }
+
+    function renderQuestionDetail() {
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`qbtn-${i}`);
+        if (btn) {
+          btn.classList.toggle(`is-active`, appState.selectedQuestion === i);
+        }
+      }
+      const panel = document.getElementById(`question-detail-panel`);
+      const q = QUESTION_DETAILS[appState.selectedQuestion];
+      if (!panel || !q) return;
+
+      panel.innerHTML = `
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+          <span class="mono-label">${q.spec}</span>
+          <span class="tag ${q.statusClass}">${q.status} · ${q.score}</span>
+        </div>
+        <h4 class="subhead" style="margin-bottom: 0;">${q.title}</h4>
+        <div class="www-ebi-grid">
+          <div class="callout-strip is-positive">
+            <span class="mono-label">What Went Well (WWW)</span>
+            <p class="helper-text" style="margin-bottom: 0; color: var(--on-surface);">${q.www}</p>
+          </div>
+          <div class="callout-strip ${q.status === `STRONG` ? `is-warning` : `is-error`}">
+            <span class="mono-label">Even Better If (EBI) / Target Action</span>
+            <p class="helper-text" style="margin-bottom: 0; color: var(--on-surface);">${q.ebi}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* =========================================================================
+       SECTION 2: TCP/IP 4-LAYER STACK & PROTOCOL MATCHING
+       ========================================================================= */
+
+    function setTcpDirection(dir) {
+      appState.tcpDirection = dir;
+      renderTcpDirection();
+      saveAppState();
+    }
+
+    function renderTcpDirection() {
+      const sendBtn = document.getElementById(`dir-send`);
+      const recvBtn = document.getElementById(`dir-recv`);
+      const summary = document.getElementById(`encap-summary`);
+      const list = document.getElementById(`tcpip-stack-list`);
+
+      if (sendBtn) sendBtn.classList.toggle(`is-active`, appState.tcpDirection === `send`);
+      if (recvBtn) recvBtn.classList.toggle(`is-active`, appState.tcpDirection === `receive`);
+
+      if (summary) {
+        summary.textContent = appState.tcpDirection === `send`
+          ? `Sending device: Data moves down from Application to Data Link, adding a header at each layer (encapsulation).`
+          : `Receiving device: Signals enter at Data Link and move up to Application, stripping headers at each layer (decapsulation).`;
+      }
+
+      if (!list) return;
+      const ordered = appState.tcpDirection === `send`
+        ? TCPIP_LAYERS_DATA
+        : [...TCPIP_LAYERS_DATA].reverse();
+
+      list.innerHTML = ordered.map(layer => {
+        const actionText = appState.tcpDirection === `send` ? layer.sendAction : layer.recvAction;
+        const pills = layer.protocols.map(pr => `<span class="proto-pill">${pr}</span>`).join(``);
+        return `
+          <div class="tcpip-layer-row" data-layer="${layer.id}">
+            <div>
+              <span class="mono-label">${layer.orderNum}</span>
+              <div class="subhead" style="margin-bottom: var(--space-xs);">${layer.name}</div>
+              <div class="protocol-chips-static">${pills}</div>
+            </div>
+            <div>
+              <span class="mono-label">Layer Responsibility</span>
+              <p class="helper-text" style="color: var(--on-surface); margin-bottom: 0;">${layer.role}</p>
+            </div>
+            <div class="pdu-box">
+              <span class="mono-label" style="display: block; margin-bottom: var(--space-xs);">
+                ${appState.tcpDirection === `send` ? `Encapsulation Step ↓` : `Decapsulation Step ↑`}
+              </span>
+              ${actionText}
+            </div>
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function selectProtocolChip(protoId, ev) {
+      if (ev) ev.stopPropagation();
+      if (appState.selectedProtocol === protoId) {
+        appState.selectedProtocol = null;
+      } else {
+        appState.selectedProtocol = protoId;
+      }
+      renderProtocolMatcher();
+    }
+
+    function placeIntoLayer(layerId) {
+      if (!appState.selectedProtocol) {
+        const fb = document.getElementById(`match-feedback-bar`);
+        if (fb) {
+          fb.className = `feedback-banner is-warning`;
+          fb.textContent = `First click a protocol chip from the bank (or an existing layer), then click a target layer box.`;
+        }
+        return;
+      }
+      appState.protocolPlacements[appState.selectedProtocol] = layerId;
+      const placedId = appState.selectedProtocol;
+      appState.selectedProtocol = null;
+      appState.protocolsChecked = false;
+      renderProtocolMatcher();
+
+      const fb = document.getElementById(`match-feedback-bar`);
+      if (fb) {
+        fb.className = `feedback-banner`;
+        fb.textContent = `Placed ${placedId} into the ${formatLayerName(layerId)}. Continue placing protocols or click "Check Placements".`;
+      }
+      saveAppState();
+    }
+
+    function returnProtocolToBank(protoId, ev) {
+      if (ev) ev.stopPropagation();
+      if (appState.selectedProtocol === protoId) {
+        appState.selectedProtocol = null;
+      }
+      delete appState.protocolPlacements[protoId];
+      appState.protocolsChecked = false;
+      renderProtocolMatcher();
+      saveAppState();
+    }
+
+    function formatLayerName(layerId) {
+      const map = {
+        application: `Application Layer`,
+        transport: `Transport Layer`,
+        network: `Network Layer`,
+        datalink: `Data Link Layer`
+      };
+      return map[layerId] || layerId;
+    }
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function dragProtocol(ev, protoId) {
+      if (ev.dataTransfer) {
+        ev.dataTransfer.setData(`text/plain`, protoId);
+      }
+      appState.selectedProtocol = protoId;
+    }
+
+    function dropToLayer(ev, layerId) {
+      ev.preventDefault();
+      const protoId = ev.dataTransfer ? ev.dataTransfer.getData(`text/plain`) : appState.selectedProtocol;
+      if (!protoId) return;
+      appState.protocolPlacements[protoId] = layerId;
+      appState.selectedProtocol = null;
+      appState.protocolsChecked = false;
+      renderProtocolMatcher();
+      saveAppState();
+    }
+
+    function dropToBank(ev) {
+      ev.preventDefault();
+      const protoId = ev.dataTransfer ? ev.dataTransfer.getData(`text/plain`) : appState.selectedProtocol;
+      if (!protoId) return;
+      delete appState.protocolPlacements[protoId];
+      appState.selectedProtocol = null;
+      appState.protocolsChecked = false;
+      renderProtocolMatcher();
+      saveAppState();
+    }
+
+    function checkProtocolMatches() {
+      const placedCount = Object.keys(appState.protocolPlacements).length;
+      const fb = document.getElementById(`match-feedback-bar`);
+      if (placedCount === 0) {
+        if (fb) {
+          fb.className = `feedback-banner is-warning`;
+          fb.textContent = `No protocols have been placed yet. Click a protocol chip, then click a TCP/IP layer box.`;
+        }
+        return;
+      }
+      appState.protocolsChecked = true;
+      renderProtocolMatcher();
+      saveAppState();
+
+      const correctCount = PROTOCOLS_LIST.filter(p => appState.protocolPlacements[p.id] === p.layer).length;
+      if (fb) {
+        if (correctCount === PROTOCOLS_LIST.length) {
+          fb.className = `feedback-banner is-positive`;
+          fb.textContent = `Full marks (${correctCount} / ${PROTOCOLS_LIST.length})! Every protocol is mapped to its correct Pearson 4CP0 TCP/IP layer.`;
+        } else {
+          const wrongPlaced = PROTOCOLS_LIST.filter(p => appState.protocolPlacements[p.id] && appState.protocolPlacements[p.id] !== p.layer);
+          const hintMsg = wrongPlaced.length > 0
+            ? ` Hint for ${wrongPlaced[0].id}: ${wrongPlaced[0].hint}`
+            : ` Place the remaining unplaced protocols to score 11 / 11.`;
+          fb.className = `feedback-banner is-error`;
+          fb.textContent = `${correctCount} / ${PROTOCOLS_LIST.length} correct so far.${hintMsg} Click any red chip to return it to the bank.`;
+        }
+      }
+    }
+
+    function showProtocolHint() {
+      const fb = document.getElementById(`match-feedback-bar`);
+      if (!fb) return;
+      const unplacedOrWrong = PROTOCOLS_LIST.find(p => appState.protocolPlacements[p.id] !== p.layer);
+      if (!unplacedOrWrong) {
+        fb.className = `feedback-banner is-positive`;
+        fb.textContent = `All 11 protocols are already placed accurately!`;
+        return;
+      }
+      fb.className = `feedback-banner`;
+      fb.textContent = `Clue for ${unplacedOrWrong.id}: ${unplacedOrWrong.hint}`;
+    }
+
+    function resetProtocolMatches(btn) {
+      if (btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to reset`;
+        return;
+      }
+      if (btn) {
+        btn.dataset.armed = `false`;
+        btn.textContent = `Reset`;
+      }
+      appState.protocolPlacements = {};
+      appState.selectedProtocol = null;
+      appState.protocolsChecked = false;
+      const fb = document.getElementById(`match-feedback-bar`);
+      if (fb) {
+        fb.className = `feedback-banner`;
+        fb.textContent = `Select a protocol from the bank below and click one of the four layers to place it.`;
+      }
+      renderProtocolMatcher();
+      saveAppState();
+    }
+
+    function renderProtocolMatcher() {
+      const bank = document.getElementById(`protocol-bank`);
+      const layers = [`application`, `transport`, `network`, `datalink`];
+      const badge = document.getElementById(`match-score-badge`);
+
+      if (bank) {
+        const unplaced = PROTOCOLS_LIST.filter(p => !appState.protocolPlacements[p.id]);
+        if (unplaced.length === 0) {
+          bank.innerHTML = `<span class="helper-text">All 11 protocols placed into layers. Click any placed chip below to move it back.</span>`;
+        } else {
+          bank.innerHTML = unplaced.map(p => {
+            const selClass = appState.selectedProtocol === p.id ? `is-selected` : ``;
+            return `<button type="button" class="proto-token ${selClass}" draggable="true" ondragstart="dragProtocol(event, '${p.id}')" onclick="selectProtocolChip('${p.id}', event)">${p.id}</button>`;
+          }).join(``);
+        }
+      }
+
+      layers.forEach(layerId => {
+        const zone = document.getElementById(`zone-${layerId}`);
+        const container = document.getElementById(`tokens-${layerId}`);
+        if (zone) {
+          zone.classList.toggle(`is-ready-target`, Boolean(appState.selectedProtocol));
+        }
+        if (container) {
+          const inLayer = PROTOCOLS_LIST.filter(p => appState.protocolPlacements[p.id] === layerId);
+          if (inLayer.length === 0) {
+            container.innerHTML = `<span class="helper-text">Drop or click here to place</span>`;
+          } else {
+            container.innerHTML = inLayer.map(p => {
+              let stateClass = ``;
+              if (appState.protocolsChecked) {
+                stateClass = p.layer === layerId ? `is-correct` : `is-wrong`;
+              }
+              return `<button type="button" class="proto-token ${stateClass}" title="Click to return ${p.id} to bank" onclick="returnProtocolToBank('${p.id}', event)">${p.id} ×</button>`;
+            }).join(``);
+          }
+        }
+      });
+
+      if (badge) {
+        const correctCount = PROTOCOLS_LIST.filter(p => appState.protocolPlacements[p.id] === p.layer).length;
+        const placedCount = Object.keys(appState.protocolPlacements).length;
+        if (appState.protocolsChecked) {
+          badge.textContent = `${correctCount} / ${PROTOCOLS_LIST.length} Correct`;
+          badge.className = correctCount === PROTOCOLS_LIST.length ? `tag tag-green` : `tag tag-amber`;
+        } else {
+          badge.textContent = `${placedCount} / ${PROTOCOLS_LIST.length} Placed`;
+          badge.className = `tag tag-neutral`;
+        }
+      }
+    }
+
+    /* =========================================================================
+       SECTION 3: DNS LOOKUP SEQUENCER & SPOT-THE-ERROR
+       ========================================================================= */
+
+    function changeDnsDomain(domainKey) {
+      if (!DNS_DOMAINS[domainKey]) return;
+      appState.dnsDomain = domainKey;
+      renderDnsSequencer();
+      saveAppState();
+    }
+
+    function setDnsStep(stepNum) {
+      appState.dnsStep = stepNum;
+      renderDnsSequencer();
+      saveAppState();
+    }
+
+    function stepDns(delta) {
+      const next = Math.max(1, Math.min(4, appState.dnsStep + delta));
+      appState.dnsStep = next;
+      renderDnsSequencer();
+      saveAppState();
+    }
+
+    function renderDnsSequencer() {
+      const sel = document.getElementById(`dns-domain-select`);
+      if (sel) sel.value = appState.dnsDomain;
+
+      const domain = DNS_DOMAINS[appState.dnsDomain];
+      const step = appState.dnsStep;
+
+      for (let i = 1; i <= 4; i++) {
+        const b = document.getElementById(`dns-step-${i}`);
+        if (b) {
+          b.className = i === step ? `btn btn-primary` : `btn btn-ghost`;
+          b.style.padding = `var(--space-sm) var(--space-md)`;
+        }
+      }
+      const prevBtn = document.getElementById(`dns-prev-btn`);
+      const nextBtn = document.getElementById(`dns-next-btn`);
+      if (prevBtn) prevBtn.disabled = step === 1;
+      if (nextBtn) nextBtn.disabled = step === 4;
+
+      const cPrimary = getCssVar(`--primary`) || `#0f62fe`;
+      const cPositive = getCssVar(`--positive`) || `#198038`;
+      const cOutline = getCssVar(`--outline`) || `#8d8d8d`;
+      const cBlueBg = getCssVar(`--primary-container`) || `#d0e2ff`;
+      const cGreenBg = getCssVar(`--positive-container`) || `#defbe6`;
+
+      const nodeBrowser = document.getElementById(`node-browser`);
+      const nodeDns = document.getElementById(`node-dns`);
+      const nodeWeb = document.getElementById(`node-web`);
+      const activePath = document.getElementById(`dns-active-path`);
+      const arrowHead = document.getElementById(`dns-arrow-head`);
+      const packetBg = document.getElementById(`dns-packet-bg`);
+      const packetLabel = document.getElementById(`dns-packet-label`);
+
+      const browserSub = document.getElementById(`svg-browser-sub`);
+      const dnsSub = document.getElementById(`svg-dns-sub`);
+      const webSub = document.getElementById(`svg-web-sub`);
+
+      const kicker = document.getElementById(`dns-step-kicker`);
+      const title = document.getElementById(`dns-step-title`);
+      const desc = document.getElementById(`dns-step-desc`);
+      const io = document.getElementById(`dns-io-readout`);
+
+      if (browserSub) browserSub.textContent = domain.url;
+      if (dnsSub) dnsSub.textContent = `${domain.label} Lookup`;
+      if (webSub) webSub.textContent = domain.ip.length > 18 ? `${domain.ip.slice(0, 17)}…` : domain.ip;
+
+      const stepConfigs = {
+        1: {
+          kicker: `Step 1 of 4 · URL Entry & Local Cache Check`,
+          title: `Browser checks cache for ${domain.url}`,
+          desc: `The user enters ${domain.url} into the browser. First, the browser checks its own local DNS cache and OS hosts file to see if an IP address was recently stored. If not found, it prepares a DNS query.`,
+          io: `<strong>Status:</strong> Cache miss — preparing query<br><strong>Next Input to DNS:</strong> <code class="mono-code">${domain.url}</code>`,
+          path: `M 110 40 L 110 22`,
+          arrow: `104,24 110,12 116,24`,
+          pktX: 35, pktW: 150, pktText: `1. CHECK CACHE`,
+          pktFill: cBlueBg, stroke: cPrimary,
+          bStroke: cPrimary, dStroke: cOutline, wStroke: cOutline
+        },
+        2: {
+          kicker: `Step 2 of 4 · DNS Request (Input to DNS)`,
+          title: `Browser sends the URL / domain name to the DNS Server`,
+          desc: `Because the IP address is not cached locally, the client sends a DNS lookup request across the ISP network to a Domain Name Server (DNS). The input sent into the DNS is the domain name (${domain.url}).`,
+          io: `<strong>Input to DNS (1 mark):</strong> <code class="mono-code">${domain.url}</code><br><strong>Protocol note:</strong> DNS query typically uses UDP port 53.`,
+          path: `M 190 90 L 350 90`,
+          arrow: `348,84 360,90 348,96`,
+          pktX: 198, pktW: 154, pktText: `2. INPUT: DOMAIN NAME`,
+          pktFill: cBlueBg, stroke: cPrimary,
+          bStroke: cPrimary, dStroke: cPrimary, wStroke: cOutline
+        },
+        3: {
+          kicker: `Step 3 of 4 · DNS Resolution (Output from DNS)`,
+          title: `DNS Server returns the matching ${domain.label} address`,
+          desc: `The DNS server looks up ${domain.url} in its distributed database (querying root/TLD/authoritative name servers if required) and returns the numerical ${domain.label} address (${domain.ip}) back to the browser.`,
+          io: `<strong>Output from DNS (1 mark):</strong> <code class="mono-code">${domain.ip}</code><br><strong>Why it matters:</strong> Routers need numerical IP addresses, not text names.`,
+          path: `M 360 115 L 200 115`,
+          arrow: `202,109 190,115 202,121`,
+          pktX: 202, pktW: 148, pktText: `3. OUTPUT: ${domain.label} IP`,
+          pktFill: cGreenBg, stroke: cPositive,
+          bStroke: cPositive, dStroke: cPositive, wStroke: cOutline
+        },
+        4: {
+          kicker: `Step 4 of 4 · HTTP / HTTPS Connection to Web Server`,
+          title: `Browser connects directly to Web Server at ${domain.ip}`,
+          desc: `Armed with the IP address ${domain.ip}, the browser opens a TCP connection and sends an HTTP/HTTPS GET request to the web server. The web server responds with HTML, CSS, and media so the browser renders the page.`,
+          io: `<strong>Destination IP:</strong> <code class="mono-code">${domain.ip}</code><br><strong>Protocol:</strong> HTTP / HTTPS (Application) over TCP/IP.`,
+          path: `M 115 140 L 115 195 L 745 195 L 745 150`,
+          arrow: `739,152 745,140 751,152`,
+          pktX: 335, pktW: 190, pktText: `4. HTTPS GET → WEB SERVER`,
+          pktFill: cGreenBg, stroke: cPositive,
+          bStroke: cPositive, dStroke: cOutline, wStroke: cPositive
+        }
+      };
+
+      const cfg = stepConfigs[step];
+      if (kicker) kicker.textContent = cfg.kicker;
+      if (title) title.textContent = cfg.title;
+      if (desc) desc.textContent = cfg.desc;
+      if (io) io.innerHTML = cfg.io;
+
+      if (activePath) {
+        activePath.setAttribute(`d`, cfg.path);
+        activePath.setAttribute(`stroke`, cfg.stroke);
+      }
+      if (arrowHead) {
+        arrowHead.setAttribute(`points`, cfg.arrow);
+        arrowHead.setAttribute(`fill`, cfg.stroke);
+      }
+      if (packetBg) {
+        packetBg.setAttribute(`x`, cfg.pktX);
+        packetBg.setAttribute(`width`, cfg.pktW);
+        packetBg.setAttribute(`fill`, cfg.pktFill);
+      }
+      if (packetLabel) {
+        packetLabel.setAttribute(`x`, cfg.pktX + cfg.pktW / 2);
+        packetLabel.textContent = cfg.pktText;
+      }
+      if (nodeBrowser) {
+        nodeBrowser.setAttribute(`stroke`, cfg.bStroke);
+        nodeBrowser.setAttribute(`stroke-width`, cfg.bStroke === cOutline ? `1` : `2`);
+      }
+      if (nodeDns) {
+        nodeDns.setAttribute(`stroke`, cfg.dStroke);
+        nodeDns.setAttribute(`stroke-width`, cfg.dStroke === cOutline ? `1` : `2`);
+      }
+      if (nodeWeb) {
+        nodeWeb.setAttribute(`stroke`, cfg.wStroke);
+        nodeWeb.setAttribute(`stroke-width`, cfg.wStroke === cOutline ? `1` : `2`);
+      }
+    }
+
+    function answerSpotError(itemId, chosenValid) {
+      appState.spotAnswers[itemId] = chosenValid;
+      renderSpotErrors();
+      saveAppState();
+    }
+
+    function resetSpotErrors(btn) {
+      if (btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to reset`;
+        return;
+      }
+      if (btn) {
+        btn.dataset.armed = `false`;
+        btn.textContent = `Reset Checks`;
+      }
+      appState.spotAnswers = {};
+      renderSpotErrors();
+      saveAppState();
+    }
+
+    function renderSpotErrors() {
+      const grid = document.getElementById(`spot-grid`);
+      const badge = document.getElementById(`spot-score-badge`);
+      if (!grid) return;
+
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      grid.innerHTML = SPOT_ERROR_ITEMS.map((item, idx) => {
+        const hasAnswer = Object.prototype.hasOwnProperty.call(appState.spotAnswers, item.id);
+        const userChoice = appState.spotAnswers[item.id];
+        const isCorrect = hasAnswer && userChoice === item.isValid;
+        if (hasAnswer) answeredCount++;
+        if (isCorrect) correctCount++;
+
+        const cardState = !hasAnswer ? `` : (isCorrect ? `is-resolved-right` : `is-resolved-wrong`);
+        const validBtnClass = hasAnswer && userChoice === true ? `btn-primary` : `btn-secondary`;
+        const errBtnClass = hasAnswer && userChoice === false ? `btn-primary` : `btn-secondary`;
+
+        const feedbackHtml = hasAnswer
+          ? `<div class="feedback-banner ${isCorrect ? `is-positive` : `is-error`}">
+               <strong>${isCorrect ? `Correct diagnosis` : `Check again`}:</strong> ${item.explanation}
+             </div>`
+          : ``;
+
+        return `
+          <div class="spot-card ${cardState}">
+            <div style="display: grid; gap: var(--space-sm);">
+              <span class="mono-label">Item ${idx + 1} of ${SPOT_ERROR_ITEMS.length}</span>
+              <div class="spot-prompt">${item.prompt}</div>
+            </div>
+            <div style="display: grid; gap: var(--space-sm);">
+              <div class="btn-row">
+                <button type="button" class="btn ${validBtnClass}" style="padding: var(--space-xs) var(--space-md);" onclick="answerSpotError('${item.id}', true)">Valid / Accurate</button>
+                <button type="button" class="btn ${errBtnClass}" style="padding: var(--space-xs) var(--space-md);" onclick="answerSpotError('${item.id}', false)">Contains Error</button>
+              </div>
+              ${feedbackHtml}
+            </div>
+          </div>
+        `;
+      }).join(``);
+
+      if (badge) {
+        badge.textContent = `${correctCount} / ${SPOT_ERROR_ITEMS.length} Correct (${answeredCount} Checked)`;
+        badge.className = correctCount === SPOT_ERROR_ITEMS.length ? `tag tag-green` : `tag tag-neutral`;
+      }
+    }
+
+    /* =========================================================================
+       SECTION 4: DIFFERENTIATED ACTION PLAN & EXIT QUIZ
+       ========================================================================= */
+
+    function selectTier(tierId) {
+      appState.selectedTier = tierId;
+      renderActionTiers();
+      saveAppState();
+    }
+
+    function toggleActionCheck(actionId, isChecked) {
+      appState.checkedActions[actionId] = isChecked;
+      renderActionTiers();
+      saveAppState();
+    }
+
+    function renderActionTiers() {
+      const grid = document.getElementById(`tier-grid`);
+      if (!grid) return;
+
+      grid.innerHTML = ACTION_TIERS.map(tier => {
+        const isSelected = appState.selectedTier === tier.id;
+        const doneCount = tier.items.filter(it => Boolean(appState.checkedActions[it.id])).length;
+        const checklistHtml = tier.items.map(it => {
+          const checkedAttr = appState.checkedActions[it.id] ? `checked` : ``;
+          return `
+            <li>
+              <label class="check-label">
+                <input type="checkbox" ${checkedAttr} onchange="toggleActionCheck('${it.id}', this.checked)">
+                <span>${it.text}</span>
+              </label>
+            </li>
+          `;
+        }).join(``);
+
+        return `
+          <article class="tier-card ${isSelected ? `is-selected-tier` : ``}">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs);">
+              <span class="tag ${isSelected ? `tag-blue` : `tag-neutral`}">${tier.badge}</span>
+              <span class="mono-label">${doneCount} / ${tier.items.length} Done</span>
+            </div>
+            <div>
+              <h3 class="subhead" style="margin-bottom: var(--space-xs);">${tier.title}</h3>
+              <p class="helper-text" style="margin-bottom: 0;">${tier.focus}</p>
+            </div>
+            <ul class="checklist-ul">${checklistHtml}</ul>
+            <button type="button" class="btn ${isSelected ? `btn-primary` : `btn-secondary`}" onclick="selectTier('${tier.id}')">
+              <span>${isSelected ? `Active Target Path` : `Set as My Target Path`}</span>
+            </button>
+          </article>
+        `;
+      }).join(``);
+    }
+
+    function chooseExitOption(qId, optIdx) {
+      if (appState.exitSubmitted) {
+        appState.exitSubmitted = false;
+      }
+      appState.exitAnswers[qId] = optIdx;
+      renderExitQuiz();
+      saveAppState();
+    }
+
+    function gradeExitQuiz() {
+      const answeredCount = Object.keys(appState.exitAnswers).length;
+      const summary = document.getElementById(`exit-summary-banner`);
+      if (answeredCount < EXIT_QUIZ.length) {
+        if (summary) {
+          summary.style.display = `block`;
+          summary.className = `feedback-banner is-warning`;
+          summary.textContent = `Please answer all 4 questions before marking (${answeredCount} / 4 selected).`;
+        }
+        return;
+      }
+      appState.exitSubmitted = true;
+      renderExitQuiz();
+      saveAppState();
+    }
+
+    function resetExitQuiz(btn) {
+      if (btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to reset`;
+        return;
+      }
+      if (btn) {
+        btn.dataset.armed = `false`;
+        btn.textContent = `Reset Quiz`;
+      }
+      appState.exitAnswers = {};
+      appState.exitSubmitted = false;
+      renderExitQuiz();
+      saveAppState();
+    }
+
+    function renderExitQuiz() {
+      const grid = document.getElementById(`exit-quiz-grid`);
+      const badge = document.getElementById(`exit-score-badge`);
+      const summary = document.getElementById(`exit-summary-banner`);
+      if (!grid) return;
+
+      let score = 0;
+
+      grid.innerHTML = EXIT_QUIZ.map(q => {
+        const chosen = appState.exitAnswers[q.id];
+        const hasChosen = typeof chosen === `number`;
+        const isCorrect = appState.exitSubmitted && chosen === q.correctIndex;
+        if (isCorrect) score++;
+
+        const optionsHtml = q.options.map((opt, idx) => {
+          let optClass = ``;
+          if (appState.exitSubmitted) {
+            if (idx === q.correctIndex) optClass = `is-correct`;
+            else if (idx === chosen) optClass = `is-wrong`;
+          } else if (idx === chosen) {
+            optClass = `is-chosen`;
+          }
+          const letter = [`A`, `B`, `C`, `D`][idx];
+          return `
+            <button type="button" class="quiz-opt-btn ${optClass}" onclick="chooseExitOption('${q.id}', ${idx})">
+              <span class="mono-code" style="font-weight: 600;">${letter}.</span>
+              <span>${opt}</span>
+            </button>
+          `;
+        }).join(``);
+
+        const rationaleHtml = appState.exitSubmitted
+          ? `<div class="feedback-banner ${isCorrect ? `is-positive` : `is-error`}">
+               <strong>${isCorrect ? `1 / 1 Mark` : `0 / 1 Mark`}:</strong> ${q.rationale}
+             </div>`
+          : ``;
+
+        return `
+          <div class="quiz-card">
+            <div style="font-weight: 600; color: var(--on-surface);">${q.question}</div>
+            <div class="quiz-options">${optionsHtml}</div>
+            ${rationaleHtml}
+          </div>
+        `;
+      }).join(``);
+
+      if (badge) {
+        if (appState.exitSubmitted) {
+          badge.textContent = `${score} / ${EXIT_QUIZ.length} Marks`;
+          badge.className = score >= 3 ? `tag tag-green` : `tag tag-red`;
+        } else {
+          const count = Object.keys(appState.exitAnswers).length;
+          badge.textContent = `${count} / ${EXIT_QUIZ.length} Answered`;
+          badge.className = `tag tag-neutral`;
+        }
+      }
+
+      if (summary) {
+        if (appState.exitSubmitted) {
+          summary.style.display = `block`;
+          if (score === 4) {
+            summary.className = `feedback-banner is-positive`;
+            summary.textContent = `Exit Score: 4 / 4 — Strong mastery of the TCP/IP stack, IMAP justification, DNS input/output, and IPv4 validation.`;
+          } else if (score >= 2) {
+            summary.className = `feedback-banner is-warning`;
+            summary.textContent = `Exit Score: ${score} / 4 — Good progress. Review the red mark-scheme rationales below and complete your target checklist above.`;
+          } else {
+            summary.className = `feedback-banner is-error`;
+            summary.textContent = `Exit Score: ${score} / 4 — Focus on Deep-Dive 1 (TCP/IP) and Deep-Dive 2 (DNS/IP) before the next checkpoint.`;
+          }
+        } else {
+          summary.style.display = `none`;
+        }
+      }
+    }
+
+    /* =========================================================================
+       INITIALIZATION
+       ========================================================================= */
+
+    function renderAll() {
+      renderQuestionDetail();
+      renderTcpDirection();
+      renderProtocolMatcher();
+      renderDnsSequencer();
+      renderSpotErrors();
+      renderActionTiers();
+      renderExitQuiz();
+      updateProgressPill();
+      renderAssessmentChart();
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    async function initApp() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) {
+            restoreFromState(saved);
+          }
+        }
+      } catch (err) {
+        console.warn(`Could not restore state:`, err);
+      }
+
+      renderAll();
+
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+          window.notebookAppApi.notifyAppReady();
+        }
+      } catch (err) {
+        console.warn(`notifyAppReady skipped:`, err);
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
